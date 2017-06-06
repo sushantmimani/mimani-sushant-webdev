@@ -1,7 +1,21 @@
-input.form-control {
+input.form-control, textarea.form-control {
     margin-bottom: 5px;
 }
 
 body {
-    padding-top: 36px;
+    margin-top: 75px;
+    margin-bottom: 80px;
+}
+
+.navbar-default {
+    background-color: #337ab7;
+}
+
+.navbar-default .navbar-brand {
+    color: white;
+    margin: auto;
+}
+
+.list-group-item{
+    border: none;
 }
