@@ -1,4 +1,4 @@
-input.form-control, textarea.form-control {
+input.form-control, textarea.form-control, select.form-control {
     margin-bottom: 5px;
 }
 
@@ -19,3 +19,4 @@ body {
 .list-group-item{
     /*border: none;*/
 }
+
