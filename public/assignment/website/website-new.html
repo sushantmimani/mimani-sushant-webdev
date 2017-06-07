@@ -8,41 +8,39 @@
 </head>
 <body>
 
+
 <nav class="navbar navbar-default navbar-fixed-top ">
+<div class="row">
+<div class="col-sm-1">
     <a href="website-list.html">
-        <span class="glyphicon glyphicon-chevron-left pull-left navbar-brand"></span>
+    <span class="glyphicon glyphicon-chevron-left navbar-brand"></span>
     </a>
-    <div class="navbar-brand">New Website</div>
+</div>
+<div class="col-sm-2 hidden-xs navbar-brand">
+Websites
+</div>
+<div class="col-sm-1 hidden-xs">
+<span class="glyphicon glyphicon-plus navbar-brand"></span>
+</div>
+<div class="col-sm-6  navbar-brand">
+New Website
+</div>
+<div class="col-sm-2">
     <a href="website-list.html">
-        <span class="glyphicon glyphicon-ok pull-right navbar-brand"></span>
+    <span class="glyphicon glyphicon-ok pull-right navbar-brand"></span>
     </a>
+</div>
+</div>
+
 </nav>
-
-<!--<nav class="navbar navbar-default navbar-fixed-top ">-->
-<!--<div class="row">-->
-<!--<div class="col-lg-1">-->
-<!--<span class="glyphicon glyphicon-chevron-left navbar-brand"></span>-->
-<!--</div>-->
-<!--<div class="col-lg-3 navbar-brand">-->
-<!--Websites-->
-<!--</div>-->
-<!--<div class="col-lg-1">-->
-<!--<span class="glyphicon glyphicon-plus navbar-brand"></span>-->
-<!--</div>-->
-<!--<div class="col-lg-6 navbar-brand">-->
-<!--New Website-->
-<!--</div>-->
-<!--<div class="col-lg-1">-->
-<!--<span class="glyphicon glyphicon-ok pull-right navbar-brand"></span>-->
-<!--</div>-->
-<!--</div>-->
-
-<!--</nav>-->
 
 <div class="container-fluid">
     <div class="row">
         <div class="col-sm-4 hidden-xs scrollable-left">
             <ul class="list-group">
+                <li class="list-group-item active">
+                    Website Names
+                </li>
                 <li class="list-group-item">
                     <a href="#">
                         Blogging App
@@ -85,12 +83,18 @@
                 </li>
             </ul>
         </div>
-        <div class="col-sm-8 col-xs-12">
+        <div class="col-sm-8 col-xs-12 wd-formadjust">
             <label for="name">Website Name</label>
-            <input id="name" class="form-control" value="Name"/>
+
+            <input id="name"
+                   class="form-control"
+                   value="Name"/>
 
             <label for="description">Website Description</label>
-            <textarea id="description"rows="5" class="form-control">Description</textarea>
+
+            <textarea id="description"
+                      rows="5"
+                      class="form-control">Description</textarea>
         </div>
     </div>
 </div>

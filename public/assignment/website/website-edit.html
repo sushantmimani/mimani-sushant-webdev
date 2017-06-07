@@ -9,35 +9,28 @@
 <body>
 
 <nav class="navbar navbar-default navbar-fixed-top ">
-    <a href="website-list.html">
-        <span class="glyphicon glyphicon-chevron-left pull-left navbar-brand"></span>
-    </a>
-    <div class="navbar-brand">Website</div>
-    <a href="website-list.html">
-        <span class="glyphicon glyphicon-ok pull-right navbar-brand"></span>
-    </a>
+    <div class="row">
+        <div class="col-sm-1">
+            <a href="website-list.html">
+                <span class="glyphicon glyphicon-chevron-left navbar-brand"></span>
+            </a>
+        </div>
+        <div class="col-sm-2 hidden-xs navbar-brand">
+            Websites
+        </div>
+        <div class="col-sm-1 hidden-xs">
+            <span class="glyphicon glyphicon-plus navbar-brand"></span>
+        </div>
+        <div class="col-sm-6  navbar-brand">
+            Edit Website
+        </div>
+        <div class="col-sm-2">
+            <a href="website-list.html">
+                <span class="glyphicon glyphicon-ok pull-right navbar-brand"></span>
+            </a>
+        </div>
+    </div>
 </nav>
-
-<!--<nav class="navbar navbar-default navbar-fixed-top ">-->
-    <!--<div class="row">-->
-        <!--<div class="col-lg-1">-->
-            <!--<span class="glyphicon glyphicon-chevron-left navbar-brand"></span>-->
-        <!--</div>-->
-        <!--<div class="col-lg-3 navbar-brand">-->
-            <!--Websites-->
-        <!--</div>-->
-        <!--<div class="col-lg-1">-->
-            <!--<span class="glyphicon glyphicon-plus navbar-brand"></span>-->
-        <!--</div>-->
-        <!--<div class="col-lg-6 navbar-brand">-->
-            <!--Edit Website-->
-        <!--</div>-->
-        <!--<div class="col-lg-1">-->
-            <!--<span class="glyphicon glyphicon-ok pull-right navbar-brand"></span>-->
-        <!--</div>-->
-    <!--</div>-->
-
-<!--</nav>-->
 
 <div class="container-fluid">
     <div class="row">
@@ -92,14 +85,21 @@
 
             </ul>
         </div>
-        <div class="col-sm-8 col-xs-12">
+        <div class="col-sm-8 col-xs-12 wd-formadjust">
             <label for="name">Website Name</label>
-            <input id="name" class="form-control" value="Blogger"/>
+
+            <input id="name"
+                   class="form-control"
+                   value="Blogger"/>
 
             <label for="description">Website Description</label>
-            <textarea id="description"rows="5" class="form-control">Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum </textarea>
+            <textarea id="description"
+                      rows="5"
+                      class="form-control">Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum </textarea>
 
-            <a href="../website/website-list.html" class="btn btn-block btn-danger">Delete</a>
+            <a href="../website/website-list.html"
+               class="btn btn-block btn-danger">Delete</a>
+
         </div>
     </div>
 </div>
