@@ -4,6 +4,10 @@ select.form-control {
     margin-bottom: 5px;
 }
 
+.navbar-fixed-top {
+    border-width: 0px 0px 3px;
+}
+
 body {
     padding-top: 50px;
 }
@@ -14,7 +18,7 @@ body {
 
 .navbar-default {
     background-color: #337ab7;
-    margin-bottom: 5px;
+    border-color: #337ab7;
 }
 
 .navbar-default
@@ -61,7 +65,7 @@ body {
 
 .wd-toolbar {
     position: absolute;
-    background-color: white;
+    bacckground-color: white;
     top: 0px;
     right: 0px;
     padding-left: 5px;
