@@ -3,12 +3,17 @@ input.form-control, textarea.form-control, select.form-control {
 }
 
 body {
-    margin-top: 75px;
+    padding-top: 50px;
     margin-bottom: 80px;
+}
+
+.wd-editpadding {
+    padding-top: 25px;
 }
 
 .navbar-default {
     background-color: #337ab7;
+    margin-bottom: 5px;
 }
 
 .navbar-default .navbar-brand {
@@ -17,7 +22,7 @@ body {
 }
 
 .list-group-item{
-    /*border: none;*/
+    border: none;
 }
 
 .scrollable-left {
@@ -33,6 +38,18 @@ body {
     width: 66.66666667%;
     margin-left: 33%;
 }
+}
+
+/*@media (min-width: 992px) {*/
+    /*.col-md-1 {*/
+        /*padding-left: 25px;*/
+    /*}*/
+/*}*/
+
+@media (min-width: 1200px) {
+    .col-lg-1 {
+        padding-left: 50px;
+    }
 }
 
 .wd-widget {
@@ -70,5 +87,11 @@ body {
 }
 
 .wd-formadjust {
-    margin-top: -25px;
+    margin-top: -15px;
+    padding-left: 20px;
+}
+
+.border {
+    padding-left: 10px;
+    border-right: 1px solid gray;
 }
