@@ -1,22 +1,17 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <link href="../vendor/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet"/>
-    <link href="../css/style.css" rel="stylesheet"/>
-    <meta charset="UTF-8">
-    <title>Login</title>
-</head>
-
-<body>
 <div class="container-fluid">
 
     <h1>Login</h1>
+
+    <div ng-show="model.message" class="alert alert-danger">
+        {{model.message}}
+    </div>
 
     <label for="username">
         Username
     </label>
 
     <input id="username"
+           ng-model="username"
            class="form-control"
            placeholder="username"/>
 
@@ -25,16 +20,15 @@
     </label>
 
     <input id="password"
+           ng-model="password"
            type="password"
            class="form-control"
            placeholder="password"/>
 
-    <a href="profile.html"
+    <a ng-click="model.login(username,password)"
        class="btn btn-block btn-primary">Login</a>
 
-    <a href="register.html"
+    <a href="#!/register"
        class="btn btn-block btn-success">Register</a>
 
 </div>
-</body>
-</html>

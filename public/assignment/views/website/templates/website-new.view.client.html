@@ -4,44 +4,45 @@
     <link href="../vendor/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet"/>
     <link href="../css/style.css" rel="stylesheet"/>
     <meta charset="UTF-8">
-    <title>Website List</title>
+    <title>New Website</title>
 </head>
 <body>
+
 
 <nav class="navbar navbar-default navbar-fixed-top ">
     <div class="row">
         <div class="col-sm-4 hidden-xs">
-            <a href="website-list.html" class="navbar-brand">
+            <a href="website-list.view.client.html" class="navbar-brand">
                 <span class="glyphicon glyphicon-chevron-left">
                 </span>
             </a>
             <a class="navbar-brand" href="#">
                 Websites
             </a>
-            <a href="website-new.html" class="navbar-brand pull-right">
+            <a href="website-new.view.client.html" class="navbar-brand pull-right">
               <span class="glyphicon glyphicon-plus">
               </span>
             </a>
         </div>
         <div class="col-sm-4 hidden-xs">
-            <a class="navbar-brand" href="website-edit.html">
-                Edit Websites
+            <a class="navbar-brand" href="website-new.view.client.html">
+                New Website
             </a>
         </div>
         <div class="col-sm-4 hidden-xs">
-        <a href="website-list.html">
+            <a href="website-list.view.client.html">
                 <span class="glyphicon glyphicon-ok pull-right navbar-brand"></span>
             </a>
         </div>
         <div class="col-xs-12 visible-xs">
-            <a href="website-list.html" class="navbar-brand">
+            <a href="website-list.view.client.html" class="navbar-brand">
                 <span class="glyphicon glyphicon-chevron-left">
                 </span>
             </a>
-            <a class="navbar-brand" href="website-edit.html">
-                Edit Websites
+            <a class="navbar-brand" href="website-new.view.client.html">
+                New Website
             </a>
-            <a href="website-list.html">
+            <a href="website-list.view.client.html">
                 <span class="glyphicon glyphicon-ok pull-right navbar-brand"></span>
             </a>
         </div>
@@ -92,17 +93,20 @@
                         <span class="glyphicon glyphicon-cog pull-right"/>
                     </a>
                 </li>
-
             </ul>
         </div>
-        <div class="col-sm-8 col-xs-12 wd-formadjust wd-editpadding">
+        <div class="col-sm-8 col-xs-12 wd-formadjust wd-editpadding ">
             <label for="name">Website Name</label>
-            <input id="name" class="form-control" value="Blogger"/>
+
+            <input id="name"
+                   class="form-control"
+                   value="Name"/>
 
             <label for="description">Website Description</label>
-            <textarea id="description"rows="5" class="form-control">Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum </textarea>
 
-            <a href="../website/website-list.html" class="btn btn-block btn-danger">Delete</a>
+            <textarea id="description"
+                      rows="5"
+                      class="form-control">Description</textarea>
         </div>
     </div>
 </div>

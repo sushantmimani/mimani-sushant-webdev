@@ -1,15 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <link href="../vendor/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet"/>
-    <link href="../css/style.css" rel="stylesheet"/>
-    <meta charset="UTF-8">
-    <title>Profile</title>
-</head>
-<body>
 <nav class="navbar navbar-default navbar-fixed-top ">
     <div class="navbar-brand">Profile</div>
-    <a href="profile.html">
+    <a href="profile.view.client.html">
         <span class="glyphicon glyphicon-ok pull-right navbar-brand"></span>
     </a>
 
@@ -19,12 +10,13 @@
 
     <input id="username"
            class="form-control"
-           readonly value="sushant"/>
+           readonly ng-model="model.user.username"/>
 
     <label for="email">Email</label>
     <input id="email"
            type="email"
            class="form-control"
+           ng-model="model.user.email"
            placeholder="sushant@gmail.com"/>
 
     <label for="password">Password</label>
@@ -39,24 +31,27 @@
     <input id="verifypassword"
            type="password"
            class="form-control"
-           placeholder="verify password"/>
+           placeholder="verify password"
+           />
 
     <label for="fname">First Name</label>
 
     <input id="fname"
            class="form-control"
-           placeholder="Sushant"/>
+           placeholder="Sushant"
+           ng-model="model.user.firstName"/>
 
     <label for="lname">Last Name</label>
 
     <input id="lname"
            class="form-control"
-           placeholder="Mimani"/>
+           placeholder="Mimani"
+           ng-model="model.user.lastName"/>
 
     <a href="../website/website-list.html"
        class="btn btn-block btn-primary">Websites</a>
 
-    <a href="login.html"
+    <a href="#!/login"
        class="btn btn-block btn-danger">Logout</a>
 
 </div>

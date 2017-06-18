@@ -4,6 +4,7 @@
   "description": "Web Dev at Northeastern University",
   "main": "server.js",
   "dependencies": {
+    "angular": "^1.6.4",
     "body-parser": "^1.15.1",
     "express": "^4.13.4",
     "mongoose": ""
