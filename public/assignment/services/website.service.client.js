@@ -54,11 +54,10 @@
             return found;
         }
 
-        function createWebsite(user) {
-            user._id = (new Date()).getTime() + "";
-            users.push(user);
-            console.log(users);
-
+        function createWebsite(userId, website) {
+            website.developerId  = userId;
+            website._id = (new Date()).getTime() + "";
+            websites.push(website);
         }
 
         function findWebsiteByWebsitename(username) {
