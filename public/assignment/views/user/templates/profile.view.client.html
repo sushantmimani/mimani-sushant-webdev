@@ -17,7 +17,7 @@
            type="email"
            class="form-control"
            ng-model="model.user.email"
-           placeholder="sushant@gmail.com"/>
+           placeholder="email@domain.com"/>
 
     <label for="password">Password</label>
 
@@ -26,9 +26,9 @@
            class="form-control"
            placeholder="password"/>
 
-    <label for="verifypassword">Verify Password</label>
+    <label for="password2">Verify Password</label>
 
-    <input id="verifypassword"
+    <input id="password2"
            type="password"
            class="form-control"
            placeholder="verify password"
@@ -38,18 +38,21 @@
 
     <input id="fname"
            class="form-control"
-           placeholder="Sushant"
+           placeholder="First Name"
            ng-model="model.user.firstName"/>
 
     <label for="lname">Last Name</label>
 
     <input id="lname"
            class="form-control"
-           placeholder="Mimani"
+           placeholder="Last Name"
            ng-model="model.user.lastName"/>
 
     <a href="../website/website-list.html"
        class="btn btn-block btn-primary">Websites</a>
+
+    <a ng-click="model.updateUser(model.user)"
+       class="btn btn-block btn-info">Update</a>
 
     <a href="#!/login"
        class="btn btn-block btn-danger">Logout</a>

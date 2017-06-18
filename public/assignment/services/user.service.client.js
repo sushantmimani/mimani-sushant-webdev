@@ -28,6 +28,7 @@
 
         return api;
 
+
         function findUserById(userId) {
             for(var u in users) {
                 if (users[u]._id === userId) {
@@ -52,6 +53,8 @@
         function createUser(user) {
             user._id = (new Date()).getTime() + "";
             users.push(user);
+            console.log(users);
+
         }
 
         function findUserByUsername(username) {
@@ -63,8 +66,11 @@
             return user;
         }
 
-        function updateUser(userId, user) {
-
+        function updateUser(userId, userDetails) {
+            var user = findUserById(userId);
+            var index = users.indexOf(user);
+            users.splice(index, 1);
+            users.push(userDetails);
         }
 
         function deleteUser(userId) {

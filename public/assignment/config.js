@@ -2,10 +2,9 @@
  * Created by sushantmimani on 6/16/17.
  */
 
-
 (function () {
     angular
-        .module('WAM',['ngRoute'])
+        .module('WAM')
         .config(configuration);
 
     function configuration($routeProvider) {
@@ -24,7 +23,9 @@
                 controllerAs: 'model'
         })
             .when('/register', {
-                templateUrl: 'views/user/templates/register.view.client.html'
+                templateUrl: 'views/user/templates/register.view.client.html',
+                controller: 'registerController',
+                controllerAs: 'model'
             })
     }
 })();

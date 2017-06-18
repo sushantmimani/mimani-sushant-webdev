@@ -8,28 +8,29 @@
         var model = this;
 
         // event handlers
-        model.register = register;
+        model.registerUser = registerUser;
 
         // implementation
-        function register(username, password, password2) {
+        function registerUser(username, password, password2) {
 
-            if(password !== password2) {
-                model.error = "Passwords must match";
-                return;
-            }
+            console.log(username, password, password2);
 
             var found = userService.findUserByUsername(username);
 
             if(found !== null) {
                 model.error = "Username is not available";
             } else {
-                var user = {
-                    username: username,
-                    password: password
-                };
-                // model.message = user;
-                userService.createUser(user);
-                $location.url('/user/' + user._id);
+                if(password !== password2) {
+                    model.error = "Passwords must match";
+                    return;
+                } else {
+                    var user = {
+                        username: username,
+                        password: password
+                    };
+                    userService.createUser(user);
+                    $location.url('/user/' + user._id);
+                }
             }
         }
     }

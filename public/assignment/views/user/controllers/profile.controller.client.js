@@ -15,6 +15,13 @@
 
         model.user = userService.findUserById(userId);
 
-    }
+        model.updateUser = updateUser;
+
+        function updateUser(userDetails) {
+            console.log(userDetails);
+            userService.updateUser(userId,userDetails)
+        }
+
+        }
 
 })();

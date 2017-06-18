@@ -1,9 +1,14 @@
 <div class="container-fluid">
     <h1>Register</h1>
 
+    <div ng-show="model.error" class="alert alert-danger">
+        {{model.error}}
+    </div>
+
     <label for="username">Username</label>
 
     <input id="username"
+           ng-model="username"
            class="form-control"
            placeholder="username"/>
 
@@ -11,17 +16,19 @@
 
     <input id="password"
            type="password"
+           ng-model="password"
            class="form-control"
            placeholder="password"/>
 
-    <label for="verifypassword">Verify Password</label>
+    <label for="password2">Verify Password</label>
 
-    <input id="verifypassword"
+    <input id="password2"
+           ng-model="password2"
            type="password"
            class="form-control"
            placeholder="verify password"/>
 
-    <a href="#!/profile"
+    <a ng-click="model.registerUser(username, password, password2)"
        class="btn btn-block btn-primary">Register</a>
 
     <a href="#!/login"
