@@ -1,67 +1,30 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <link href="../vendor/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet"/>
-    <link href="../css/style.css" rel="stylesheet"/>
-    <meta charset="UTF-8">
-    <title>Website List</title>
-</head>
-<body>
-
 <nav class="navbar navbar-default navbar-fixed-top ">
     <a href="../user/profile.html">
         <span class="glyphicon glyphicon-chevron-left pull-left navbar-brand"></span>
     </a>
     <div class="navbar-brand">Website</div>
-    <a href="website-new.view.client.html">
+    <a href="#!/user/{{model.userId}}/website/new">
         <span class="glyphicon glyphicon-plus pull-right navbar-brand"></span>
     </a>
 </nav>
+
+
+
 <div class="container-fluid">
     <ul class="list-group">
-
-        <li class="list-group-item">
+        <li ng-repeat="website in model.websites" class="list-group-item">
             <a href="../page/page-list.html">
-                Blogging App
-            </a>
-            <a href="website-edit.view.client.html">
-                <span class="glyphicon glyphicon-cog pull-right"/>
-            </a>
-        </li>
-        <li class="list-group-item">
-            <a href="../page/page-list.html">
-                Address Book App
-            </a>
-            <a href="website-edit.view.client.html">
-                <span class="glyphicon glyphicon-cog pull-right"/>
-            </a>
-        </li>
-        <li class="list-group-item">
-            <a href="../page/page-list.html">
-                Script Testing App
-            </a>
-            <a href="website-edit.view.client.html">
-                <span class="glyphicon glyphicon-cog pull-right"/>
-            </a>
-        </li>
-        <li class="list-group-item">
-            <a href="../page/page-list.html">
-                Blogger
-            </a>
-            <a href="website-edit.view.client.html">
-
-                <span class="glyphicon glyphicon-cog pull-right"/>
-            </a>
-        </li>
-        <li class="list-group-item">
-            <a href="../page/page-list.html">
-                Messaging App
+               {{website.name}}
             </a>
             <a href="website-edit.view.client.html">
                 <span class="glyphicon glyphicon-cog pull-right"/>
             </a>
         </li>
     </ul>
+</div>
+
+<div class="container-fluid" ng-if="!model.hasWebsite">
+    <h2>No Websites</h2>
 </div>
 
 
@@ -71,5 +34,3 @@
         <span class="glyphicon glyphicon-user pull-right navbar-brand"></span>
     </a>
 </nav>
-</body>
-</html>
