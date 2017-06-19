@@ -22,10 +22,9 @@
         var api = {
             findWebsiteById: findWebsiteById,
             createWebsite: createWebsite,
-            findWebsiteByWebsiteName: findWebsiteByWebsiteName,
             updateWebsite: updateWebsite,
             deleteWebsite: deleteWebsite,
-            getWebsiteByUser: getWebsiteByUser
+            findWebsiteByUser: findWebsiteByUser
 
         };
 
@@ -46,14 +45,6 @@
             console.log(websites);
         }
 
-        function findWebsiteByWebsiteName(username) {
-            var user = users.find(function (user) {
-                return user.username === username;
-            });
-            if(typeof user === 'undefined')
-                return null;
-            return user;
-        }
 
         function updateWebsite(website) {
             console.log(website);
@@ -71,7 +62,7 @@
             websites.splice(index, 1);
         }
 
-        function getWebsiteByUser(userId) {
+        function findWebsiteByUser(userId) {
             var websiteList = [];
             for (var index in websites) {
                 if (websites[index].developerId === userId) {

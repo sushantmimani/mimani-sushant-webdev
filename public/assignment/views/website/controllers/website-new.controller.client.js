@@ -16,7 +16,6 @@
         model.createWebsite = createWebsite;
 
         function createWebsite(website){
-            console.log("blaaa",website, typeof website);
             website['developerId'] = model.userId;
             websiteService.createWebsite( website);
             $location.url('/user/'+model.userId+'/website');
@@ -25,7 +24,7 @@
 
         function init() {
 
-            model.websites = websiteService.getWebsiteByUser(model.userId);
+            model.websites = websiteService.findWebsiteByUser(model.userId);
             if (model.websites.length > 0) {
                 model.hasWebsite = true;
             }

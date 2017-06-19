@@ -18,7 +18,7 @@
 
         function init() {
 
-            model.websites = websiteService.getWebsiteByUser(model.userId);
+            model.websites = websiteService.findWebsiteByUser(model.userId);
             if (model.websites.length > 0) {
                 model.hasWebsite = true;
             }
