@@ -13,6 +13,8 @@
         var model = this;
         model.userId = $routeParams['userId'];
         model.websiteId = $routeParams['websiteId']
+        console.log(model.websiteId)
+        model.hasWebsite = false;
 
         function init() {
 
@@ -27,12 +29,17 @@
         init();
 
         model.deleteWebsite = deleteWebsite;
+        model.updateWebsite  = updateWebsite;
 
         function deleteWebsite() {
             websiteService.deleteWebsite(model.websiteId);
             $location.url('/user/'+model.userId+'/website');
         }
 
+        function updateWebsite(website) {
+           websiteService.updateWebsite(website);
+            $location.url('/user/'+model.userId+'/website');
+        }
 
 
     }

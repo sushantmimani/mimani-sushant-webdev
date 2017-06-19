@@ -57,10 +57,10 @@
 
         function updateWebsite(website) {
             console.log(website);
-            // var user = findWebsiteById(userId);
-            // var index = users.indexOf(user);
-            // users.splice(index, 1);
-            // users.push(userDetails);
+            var oldWebsite = findWebsiteById(website._id);
+            var index = websites.indexOf(oldWebsite);
+            websites.splice(index, 1);
+            websites.push(website);
         }
 
         function deleteWebsite(websiteId) {
