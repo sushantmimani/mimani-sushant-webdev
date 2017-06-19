@@ -15,14 +15,10 @@
         model.hasWebsite = false;
         model.createWebsite = createWebsite;
 
-        function createWebsite(name, description){
-
-            var website = {
-                name: name,
-                desc: description
-            }
-            websiteService.createWebsite(model.userId, website);
-            console.log('/user/'+model.userId+'/website')
+        function createWebsite(website){
+            console.log("blaaa",website, typeof website);
+            website['developerId'] = model.userId;
+            websiteService.createWebsite( website);
             $location.url('/user/'+model.userId+'/website');
         };
 

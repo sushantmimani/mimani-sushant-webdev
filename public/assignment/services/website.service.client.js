@@ -21,9 +21,8 @@
 
         var api = {
             findWebsiteById: findWebsiteById,
-            findWebsiteByCredentials: findWebsiteByCredentials,
             createWebsite: createWebsite,
-            findWebsiteByWebsitename: findWebsiteByWebsitename,
+            findWebsiteByWebsiteName: findWebsiteByWebsiteName,
             updateWebsite: updateWebsite,
             deleteWebsite: deleteWebsite,
             getWebsiteByUser: getWebsiteByUser
@@ -33,34 +32,21 @@
         return api;
 
 
-        function findWebsiteById(userId) {
-            for(var u in users) {
-                if (users[u]._id === userId) {
-                    return users[u];
+        function findWebsiteById(websiteId) {
+            for(var index in websites) {
+                if (websites[index]._id === websiteId) {
+                    return websites[index];
                 }
             }
         }
 
-        function findWebsiteByCredentials(username, password) {
-
-            var found = null
-            for (var u in users) {
-                var user = users[u];
-                if (user.username === username && user.password === password) {
-                    found = user;
-                    break;
-                }
-            }
-            return found;
-        }
-
-        function createWebsite(userId, website) {
-            website.developerId  = userId;
+        function createWebsite(website) {
             website._id = (new Date()).getTime() + "";
             websites.push(website);
+            console.log(websites);
         }
 
-        function findWebsiteByWebsitename(username) {
+        function findWebsiteByWebsiteName(username) {
             var user = users.find(function (user) {
                 return user.username === username;
             });
@@ -69,19 +55,20 @@
             return user;
         }
 
-        function updateWebsite(userId, userDetails) {
-            var user = findWebsiteById(userId);
-            var index = users.indexOf(user);
-            users.splice(index, 1);
-            users.push(userDetails);
+        function updateWebsite(website) {
+            console.log(website);
+            // var user = findWebsiteById(userId);
+            // var index = users.indexOf(user);
+            // users.splice(index, 1);
+            // users.push(userDetails);
         }
 
-        function deleteWebsite(userId) {
-            var user = users.find(function (user) {
-                return user._id === userId;
+        function deleteWebsite(websiteId) {
+            var website = websites.find(function (website) {
+                return website._id === websiteId;
             });
-            var index = users.indexOf(user);
-            users.splice(index, 1);
+            var index = websites.indexOf(website);
+            websites.splice(index, 1);
         }
 
         function getWebsiteByUser(userId) {

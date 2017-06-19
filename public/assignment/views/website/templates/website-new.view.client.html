@@ -19,7 +19,7 @@
             </a>
         </div>
         <div class="col-sm-4 hidden-xs">
-            <a ng-click="model.createWebsite(name,description)" >>
+            <a ng-click="model.createWebsite(website)" >>
                 <span class="glyphicon glyphicon-ok pull-right navbar-brand"></span>
             </a>
         </div>
@@ -31,7 +31,7 @@
             <a class="navbar-brand" href="website-new.view.client.html">
                 New Website
             </a>
-            <a ng-click="model.createWebsite(name,description)" >
+            <a ng-click="model.createWebsite(website)" >
                 <span class="glyphicon glyphicon-ok pull-right navbar-brand"></span>
             </a>
         </div>
@@ -56,14 +56,14 @@
             <label for="name">Website Name</label>
 
             <input id="name"
-                   ng-model="name"
+                   ng-model="website.name"
                    class="form-control"
                    value="Name"/>
 
             <label for="description">Website Description</label>
 
             <textarea id="description"
-                      ng-model="description"
+                      ng-model="website.description"
                       rows="5"
                       class="form-control">Description</textarea>
         </div>
