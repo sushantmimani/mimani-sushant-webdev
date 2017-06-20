@@ -1,49 +1,37 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <link href="../vendor/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet"/>
-    <link href="../css/style.css" rel="stylesheet"/>
-    <meta charset="UTF-8">
-    <title>Edit Page</title>
-</head>
-
-<body>
-
 <nav class="navbar navbar-default navbar-fixed-top ">
     <div class="row">
         <div class="col-sm-4 hidden-xs">
-            <a href="page-list.view.client.html" class="navbar-brand">
+            <a href="#!/user/{{model.userId}}/website/{{model.websiteId}}/page" class="navbar-brand">
                 <span class="glyphicon glyphicon-chevron-left">
                 </span>
             </a>
-            <a class="navbar-brand" href="#">
+            <a class="navbar-brand">
                 Pages
             </a>
-            <a href="page-new.view.client.html" class="navbar-brand pull-right">
+            <a href="#!/user/{{model.userId}}/website/{{model.websiteId}}/page/new" class="navbar-brand pull-right">
               <span class="glyphicon glyphicon-plus">
               </span>
             </a>
         </div>
         <div class="col-sm-4 hidden-xs">
-            <a class="navbar-brand" href="website-new.html">
+            <a class="navbar-brand">
                 Edit Page
             </a>
         </div>
         <div class="col-sm-4 hidden-xs">
-            <a href="page-list.view.client.html">
+            <a ng-click="model.updatePage(model.page)">
                 <span class="glyphicon glyphicon-ok pull-right navbar-brand"></span>
             </a>
         </div>
         <div class="col-xs-12 visible-xs">
-            <a href="page-list.view.client.html" class="navbar-brand">
+            <a href="#!/user/{{model.userId}}/website/{{model.websiteId}}/page" class="navbar-brand">
                 <span class="glyphicon glyphicon-chevron-left">
                 </span>
             </a>
-            <a class="navbar-brand" href="website-new.html">
+            <a class="navbar-brand">
                 Edit Page
             </a>
-            <a href="page-list.view.client.html">
+            <a ng-click="model.updatePage(model.page)">
                 <span class="glyphicon glyphicon-ok pull-right navbar-brand"></span>
             </a>
         </div>
@@ -54,44 +42,11 @@
     <div class="row">
         <div class="col-sm-4 hidden-xs scrollable-left border ">
             <ul class="list-group">
-                <li class="list-group-item">
-                    <a href="../widget/widget-list.html">
-                        Home
+                <li ng-repeat="page in model.pages" class="list-group-item">
+                    <a href="#!/user/{{model.userId}}/website/{{model.websiteId}}/page/{{page._id}}/widget">
+                        {{page.name}}
                     </a>
-                    <a href="page-edit.view.client.html">
-                        <span class="glyphicon glyphicon-cog pull-right"/>
-                    </a>
-                </li>
-                <li class="list-group-item">
-                    <a href="../widget/widget-list.html">
-                        Blogs
-                    </a>
-                    <a href="page-edit.view.client.html">
-                        <span class="glyphicon glyphicon-cog pull-right"/>
-                    </a>
-                </li>
-                <li class="list-group-item">
-                    <a href="../widget/widget-list.html">
-                        Posts
-                    </a>
-                    <a href="page-edit.view.client.html">
-                        <span class="glyphicon glyphicon-cog pull-right"/>
-                    </a>
-                </li>
-                <li class="list-group-item">
-                    <a href="../widget/widget-list.html">
-                        About Us
-                    </a>
-                    <a href="page-edit.view.client.html">
-
-                        <span class="glyphicon glyphicon-cog pull-right"/>
-                    </a>
-                </li>
-                <li class="list-group-item">
-                    <a href="../widget/widget-list.html">
-                        Contact
-                    </a>
-                    <a href="page-edit.view.client.html">
+                    <a href="#!/user/{{model.userId}}/website/{{model.websiteId}}/page/{{page._id}}">
                         <span class="glyphicon glyphicon-cog pull-right"/>
                     </a>
                 </li>
@@ -102,24 +57,22 @@
             <label for="name">Page Name</label>
             <input id="name"
                    class="form-control"
-                   value="Blogger"/>
+                   ng-model="model.page.name"/>
 
             <label for="description">Title</label>
             <input id="description"
                    class="form-control"
-                   value="Story of a blogger"/>
+                   ng-model="model.page.description"/>
 
-            <a href="page-list.view.client.html"
+            <a ng-click="model.deletePage()"
                class="btn btn-block btn-danger">Delete</a>
         </div>
     </div>
 </div>
 
 <nav class="navbar navbar-default navbar-fixed-bottom ">
-    <a href="../user/profile.html">
+    <a href="#!/user/{{model.userId}}">
         <span class="glyphicon glyphicon-user pull-right navbar-brand"></span>
     </a>
 
 </nav>
-</body>
-</html>

@@ -1,34 +1,34 @@
 <nav class="navbar navbar-default navbar-fixed-top ">
     <div class="row">
         <div class="col-sm-4 hidden-xs">
-            <a href="website-list.view.client.html" class="navbar-brand">
+            <a href="#!/user/{{model.userId}}/website" class="navbar-brand">
                 <span class="glyphicon glyphicon-chevron-left">
                 </span>
             </a>
-            <a class="navbar-brand" href="#">
+            <a class="navbar-brand">
                 Websites
             </a>
-            <a href="website-new.view.client.html" class="navbar-brand pull-right">
+            <a href="#!/user/{{model.userId}}/website/new" class="navbar-brand pull-right">
               <span class="glyphicon glyphicon-plus">
               </span>
             </a>
         </div>
         <div class="col-sm-4 hidden-xs">
-            <a class="navbar-brand" href="website-new.view.client.html">
+            <a class="navbar-brand">
                 New Website
             </a>
         </div>
         <div class="col-sm-4 hidden-xs">
-            <a ng-click="model.createWebsite(website)" >>
+            <a ng-click="model.createWebsite(website)" >
                 <span class="glyphicon glyphicon-ok pull-right navbar-brand"></span>
             </a>
         </div>
         <div class="col-xs-12 visible-xs">
-            <a href="website-list.view.client.html" class="navbar-brand">
+            <a href="#!/user/{{model.userId}}/website" class="navbar-brand">
                 <span class="glyphicon glyphicon-chevron-left">
                 </span>
             </a>
-            <a class="navbar-brand" href="website-new.view.client.html">
+            <a class="navbar-brand">
                 New Website
             </a>
             <a ng-click="model.createWebsite(website)" >
@@ -43,10 +43,10 @@
         <div class="col-sm-4 hidden-xs scrollable-left border">
             <ul class="list-group">
                 <li ng-repeat="website in model.websites" class="list-group-item">
-                    <a href="../page/page-list.html">
+                    <a href="#!/user/{{model.userId}}/website/{{website._id}}/page">
                         {{website.name}}
                     </a>
-                    <a href="website-edit.view.client.html">
+                    <a href="#!/user/{{model.userId}}/website/{{website._id}}">
                         <span class="glyphicon glyphicon-cog pull-right"/>
                     </a>
                 </li>
@@ -72,7 +72,7 @@
 
 
 <nav class="navbar navbar-default navbar-fixed-bottom ">
-    <a href="../user/profile.html">
+    <a href="#!/user/{{model.userId}}">
         <span class="glyphicon glyphicon-user pull-right navbar-brand"></span>
     </a>
 </nav>

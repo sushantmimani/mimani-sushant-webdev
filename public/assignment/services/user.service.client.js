@@ -53,7 +53,6 @@
         function createUser(user) {
             user._id = (new Date()).getTime() + "";
             users.push(user);
-            console.log(users);
 
         }
 
