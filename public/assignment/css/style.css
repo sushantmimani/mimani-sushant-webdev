@@ -26,7 +26,9 @@ select.form-control {
 .list-group-item{
     border: none;
 }
-
+ .container-fluid{
+     padding-bottom: 20px;
+ }
 .scrollable-left {
     position: absolute;
     top: 52px;

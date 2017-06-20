@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href="../vendor/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="../css/style.css" rel="stylesheet"/>
+    <meta charset="UTF-8">
+    <title>Widget Edit</title>
+</head>
+<body>
+
+<nav class="navbar navbar-default navbar-fixed-top ">
+    <a href="widget-list.view.client.html">
+        <span class="glyphicon glyphicon-chevron-left pull-left navbar-brand"></span>
+    </a>
+    <div class="navbar-brand">Widget Edit</div>
+    <a href="widget-list.view.client.html">
+        <span class="glyphicon glyphicon-ok pull-right navbar-brand"></span>
+    </a>
+
+</nav>
+
+<div class="container-fluid">
+
+    <label for="name">Name</label>
+    <input id="name"
+           class="form-control"/>
+
+    <label for="text">Text</label>
+    <input id="text"
+           class="form-control"/>
+
+    <label for="url">URL</label>
+    <input id="url"
+           value="https://i.kinja-img.com/gawker-media/image/upload/s--SeBY-9Vx--/c_scale,fl_progressive,q_80,w_800/s5zou0amnooi0jdrvezl.png"
+           class="form-control"/>
+
+    <label for="width">Width</label>
+    <select id="width" class="form-control">
+        <option value="100">100%</option>
+        <option value="90">90%</option>
+        <option value="80">80%</option>
+        <option value="75">75%</option>
+        <option value="50">50%</option>
+        <option value="25">25%</option>
+    </select>
+
+    <label for="file">File Upload</label>
+    <input id="file"
+           multiple
+           type="file"
+           class="form-control"/>
+
+    <a class="btn btn-primary btn-block">Upload Image</a>
+    <a href="widget-list.view.client.html" class="btn btn-danger btn-block">Delete</a>
+
+
+</div>
+
+<nav class="navbar navbar-default navbar-fixed-bottom ">
+    <a href="../user/profile.html">
+        <span class="glyphicon glyphicon-user pull-right navbar-brand"></span>
+    </a>
+</nav>
+</body>
+</html>

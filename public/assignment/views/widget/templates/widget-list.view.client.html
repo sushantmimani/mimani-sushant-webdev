@@ -27,14 +27,22 @@
                 <h6 ng-switch-when="6">{{widget.text}}</h6>
 
             </div>
-            <div ng-switch-when="HTML">
-                {{widget.text}}
+            <div ng-switch-when="HTML"
+                 ng-bind-html="model.trustThisContent(widget.text)">
             </div>
             <div ng-switch-when="IMAGE">
-                {{widget.url}}
+                <img ng-src="{{widget.url}}" width="{{widget.width}}">
             </div>
             <div ng-switch-when="YOUTUBE">
-                {{widget.url}}
+                <div class="videoWrapper">
+                <iframe width="100%" ng-src="{{model.getYouTubeEmbedUrl(widget.url)}}" frameborder="0" allowfullscreen></iframe>
+                </div>
+                <div class="wd-toolbar">
+                    <a href="widget-youtube.view.client.html">
+                        <span class="glyphicon glyphicon-cog"/>
+                    </a>
+                    <span class="glyphicon glyphicon-align-justify"/>
+                </div>
             </div>
         </div>
     </div>
