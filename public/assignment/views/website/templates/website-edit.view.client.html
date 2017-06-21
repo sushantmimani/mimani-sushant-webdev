@@ -43,7 +43,7 @@
         <div class="col-sm-4 hidden-xs scrollable-left border">
             <ul class="list-group">
                 <li ng-repeat="website in model.websites" class="list-group-item">
-                    <a href="#">
+                    <a href="#!/user/{{model.userId}}/website/{{website._id}}/page">
                         {{website.name}}
                     </a>
                     <a href="#!/user/{{model.userId}}/website/{{website._id}}">
