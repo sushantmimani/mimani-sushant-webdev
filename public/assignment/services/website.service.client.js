@@ -47,11 +47,9 @@
 
 
         function updateWebsite(website) {
-            console.log(website);
             var oldWebsite = findWebsiteById(website._id);
             var index = websites.indexOf(oldWebsite);
-            websites.splice(index, 1);
-            websites.push(website);
+            websites[index] = website;
         }
 
         function deleteWebsite(websiteId) {

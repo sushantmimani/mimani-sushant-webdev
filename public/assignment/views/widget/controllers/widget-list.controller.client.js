@@ -21,6 +21,7 @@
 
         function init() {
             model.widgets = widgetService.findWidgetsByPageId(model.pageId);
+            console.log(model.widgets)
         }
         init();
 

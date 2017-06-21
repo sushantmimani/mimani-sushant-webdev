@@ -1,5 +1,6 @@
 <nav class="navbar navbar-default navbar-fixed-top ">
     <a href="#!user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget">
+
     <span class="glyphicon glyphicon-chevron-left pull-left navbar-brand"></span>
     </a>
     <div class="navbar-brand">Widget Edit</div>
@@ -11,27 +12,23 @@
 
 <div class="container-fluid">
 
-    <label for="name">Name</label>
-    <input id="name"
-           class="form-control"/>
-
-    <label for="text">Text</label>
-    <input id="text"
-           class="form-control"/>
-
     <label for="url">URL</label>
     <input id="url"
-           ng-model="model.widget.url"
+            ng-model="model.widget.url"
            class="form-control"/>
 
     <label for="width">Width</label>
     <input id="width"
            ng-model="model.widget.width"
            class="form-control"/>
-    </select>
 
+    <label for="file">File Upload</label>
+    <input id="file"
+           multiple
+           type="file"
+           class="form-control"/>
 
-
+    <a class="btn btn-primary btn-block">Upload Image</a>
 
 </div>
 

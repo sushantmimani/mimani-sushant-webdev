@@ -8,20 +8,36 @@
         .module('WAM')
         .controller('widgetNewController', widgetNewController);
 
-    function widgetNewController($routeParams, websiteService, $location) {
+    function widgetNewController($routeParams, widgetService, $location) {
 
         var model = this;
         model.userId = $routeParams['userId'];
         model.websiteId = $routeParams['websiteId'];
-        model.pageId = $routeParams['websiteId'];
-        model.createWebsite = createWebsite;
-
+        model.pageId = $routeParams['pageId'];
+        model.createWidget = createWidget;
+        model.getWidgetUrlForType = getWidgetUrlForType;
+        model.isSelected = isSelected;
         model.widget = {};
+        model.selected = false;
 
-        function createWebsite(website){
-            website['developerId'] = model.userId;
-            websiteService.createWebsite( website);
-            $location.url('/user/'+model.userId+'/website');
+        function isSelected(type) {
+            if( typeof type == "string" && type !=='')
+                return true;
+            else
+                return false;
+
+        }
+        function getWidgetUrlForType(type) {
+            model.selected = true;
+            return 'views/widget/templates/editors/widget-'+type.toLowerCase()+'-edit.view.client.html';
+        }
+
+        function createWidget(widget, type){
+            widget.widgetType = type
+            console.log(widget);
+            widget['pageId'] = model.pageId;
+            widgetService.createWidget(widget);
+            $location.url('/user/'+model.userId+'/website/'+model.websiteId+'/page/'+model.pageId+'/widget');
         };
 
     }

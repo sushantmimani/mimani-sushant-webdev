@@ -54,10 +54,10 @@
         }
 
         function updatePage(pageId, pageDetails) {
-            var page = findPageById(pageId);
-            var index = pages.indexOf(page);
-            pages.splice(index, 1);
-            pages.push(pageDetails);
+            var oldPage = findPageById(pageId);
+            var index = pages.indexOf(oldPage);
+            pages[index] = pageDetails;
+            console.log(pages)
         }
 
         function deletePage(pageId) {

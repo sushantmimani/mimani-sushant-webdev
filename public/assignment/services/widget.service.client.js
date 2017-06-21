@@ -44,6 +44,7 @@
         function createWidget(widget) {
             widget._id = (new Date()).getTime() + "";
             widgets.push(widget);
+            console.log(widgets);
         }
 
 

@@ -5,74 +5,32 @@
     <div class="navbar-brand">Choose Widget</div>
 </nav>
 
-<div class="container-fluid">
-    <ul class="list-group">
-        <li class="list-group-item">
-            <a href="widget-heading.view.client.html">
-                Header
-            </a>
+<div  class="container-fluid">
+    <select id="type" class="form-control" ng-model="widget.widgetType">
+        <option value=''>---Please select widget type---</option> <!-- not selected / blank option -->
+        <option value='HEADING'>Header</option>
+        <option value='IMAGE'>Image</option>
+        <option value=YOUTUBE>Youtube</option>
+    </select>
 
+    <div ng-switch="widget.widgetType">
+        <div ng-switch-when="HEADING">
+            <h2>Add Heading Widget</h2>
+        </div>
+        <div ng-switch-when="IMAGE">
+            <h2>Add Image Widget</h2>
+        </div>
+        <div ng-switch-when="YOUTUBE">
+            <h2>Add Youtube Widget</h2>
+        </div>
+    </div>
 
-        <li class="list-group-item">
-            <a href="">
-                Label
-            </a>
-
-
-
-        <li class="list-group-item">
-            <a href="">
-                HTML
-            </a>
-
-
-        <li class="list-group-item">
-            <a href="">
-                Text Input
-            </a>
-
-
-        <li class="list-group-item">
-            <a href="">
-                Link
-            </a>
-
-
-        <li class="list-group-item">
-            <a href="">
-                Button
-            </a>
-
-
-        <li class="list-group-item">
-            <a href="widget-image.view.client.html">
-                Image
-            </a>
-
-
-        <li class="list-group-item">
-            <a href="widget-youtube.view.client.html">
-                YouTube
-            </a>
-
-
-        <li class="list-group-item">
-            <a href="">
-                Data Table
-            </a>
-
-
-        <li class="list-group-item">
-            <a href="">
-                Repeater
-            </a>
-
-
-
-    </ul>
+<div ng-if="model.isSelected(widget.widgetType)" ng-include="model.getWidgetUrlForType(widget.widgetType)">
 
 </div>
 
-
+<a  ng-if="model.isSelected(widget.widgetType)" ng-click="model.createWidget(model.widget, widget.widgetType)" class="btn btn-success btn-block">Save</a>
 
 <div ng-include="'views/common/footer.view.client.html'"></div>
+
+</div>

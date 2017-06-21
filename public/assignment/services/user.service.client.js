@@ -68,8 +68,7 @@
         function updateUser(userId, userDetails) {
             var user = findUserById(userId);
             var index = users.indexOf(user);
-            users.splice(index, 1);
-            users.push(userDetails);
+            users[index]= userDetails;
         }
 
         function deleteUser(userId) {
