@@ -1,5 +1,5 @@
 <div class="videoWrapper">
-    <iframe width="50%" ng-src="{{model.getYouTubeEmbedUrl(widget.url)}}" frameborder="0" allowfullscreen></iframe>
+    <iframe width={{widget.width}} ng-src="{{model.getYouTubeEmbedUrl(widget.url)}}" frameborder="0" allowfullscreen></iframe>
 </div>
 <div class="wd-toolbar">
     <a href="#!user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget/{{widget._id}}">

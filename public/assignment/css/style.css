@@ -4,10 +4,21 @@ select.form-control {
     margin-bottom: 5px;
 }
 
+
 .navbar-fixed-top {
     border-width: 0px 0px 3px;
 }
 
+.large-text {
+    font-size: 35px;
+}
+
+.jumbotron {
+    padding-top: 20px;
+    padding-bottom: 30px;
+    padding-left: 20px;
+    background-color: antiquewhite;
+}
 .wd-editpadding {
     padding-top: 25px;
 }
@@ -15,6 +26,11 @@ select.form-control {
 .navbar-default {
     background-color: #337ab7;
     border-color: #337ab7;
+}
+
+.wd-child {
+    background-color: darkgray;
+    border-color: darkgray;
 }
 
 .navbar-default
