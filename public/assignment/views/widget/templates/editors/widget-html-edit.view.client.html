@@ -1,0 +1,20 @@
+<nav class="navbar navbar-default navbar-fixed-top wd-child">
+    <a href="#!user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget">
+        <span class="glyphicon glyphicon-chevron-left pull-left navbar-brand"></span>
+    </a>
+    <div class="navbar-brand">Widget Edit</div>
+    <a ng-click="model.updateWidget(model.widget)">
+        <span class="glyphicon glyphicon-ok pull-right navbar-brand"></span>
+    </a>
+
+</nav>
+
+<div class="container-fluid">
+
+    <label for="text">Text</label>
+    <input id="text"
+           ng-model="model.widget.text"
+           class="form-control"/>
+</div>
+
+<div ng-include="'views/common/footer-child.view.client.html'"></div>

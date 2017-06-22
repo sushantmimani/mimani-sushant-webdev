@@ -11,6 +11,7 @@
         <option value='HEADING'>Header</option>
         <option value='IMAGE'>Image</option>
         <option value=YOUTUBE>Youtube</option>
+        <option value=HTML>HTML</option>
     </select>
 
     <div ng-switch="widget.widgetType">
@@ -22,6 +23,9 @@
         </div>
         <div ng-switch-when="YOUTUBE">
             <h2>Add Youtube Widget</h2>
+        </div>
+        <div ng-switch-when="HTML">
+            <h2>Add HTML Widget</h2>
         </div>
     </div>
 
