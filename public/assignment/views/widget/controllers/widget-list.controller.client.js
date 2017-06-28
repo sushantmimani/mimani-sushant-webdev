@@ -20,8 +20,14 @@
         model.getWidgetUrlForType = getWidgetUrlForType;
 
         function init() {
-            model.widgets = widgetService.findWidgetsByPageId(model.pageId);
-            console.log(model.widgets)
+             widgetService
+                 .findAllWidgetsForPage(model.pageId)
+                 .then(displayWidgets)
+
+            function displayWidgets(widgets) {
+                 model.widgets = widgets;
+
+            }
         }
         init();
 
@@ -34,7 +40,6 @@
             var youTubeLinkParts = youTubeLink.split('/');
             var id = youTubeLinkParts[youTubeLinkParts.length - 1];
             embedUrl += id;
-            console.log(embedUrl);
             return $sce.trustAsResourceUrl(embedUrl);
 
         }

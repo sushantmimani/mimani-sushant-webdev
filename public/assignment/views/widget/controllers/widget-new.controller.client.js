@@ -34,10 +34,12 @@
 
         function createWidget(widget, type){
             widget.widgetType = type
-            console.log(widget);
             widget['pageId'] = model.pageId;
-            widgetService.createWidget(widget);
-            $location.url('/user/'+model.userId+'/website/'+model.websiteId+'/page/'+model.pageId+'/widget');
+            widgetService
+                .createWidget(widget, model.pageId)
+                .then(function (response) {
+                    $location.url('/user/'+model.userId+'/website/'+model.websiteId+'/page/'+model.pageId+'/widget');
+                })
         };
 
     }

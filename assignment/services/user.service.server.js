@@ -56,9 +56,11 @@ function findUserById(req, res) {
     var userId = req.params.userId;
     for(var u in users) {
         if (users[u]._id === userId) {
-            res.send(users[u]);
+            res.status(200).send(users[u]);
+            return;
         }
     }
+    res.sendStatus(404);
 }
 
 function findUserByCredentials(req,res) {
@@ -69,7 +71,7 @@ function findUserByCredentials(req,res) {
         var user = users[u];
         if (user.username === username && user.password === password) {
             found = user;
-            res.send(found);
+            res.status(200).send(found);
             return;
         }
     }
@@ -87,7 +89,7 @@ function findUserByUsername(req,res, next){
             var user = users[u];
             if (user.username === username) {
                 found = user;
-                res.send(found);
+                res.status(200).send(found);
                 return;
             }
         }
