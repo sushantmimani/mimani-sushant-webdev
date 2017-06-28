@@ -4,40 +4,49 @@
 
 var app = require('../../express');
 
-app.get ('/api/user', findUserByUsername, findUserByCredentials);
-app.get ('/api/user/:userId',findUserById );
-app.get ('/api/user',findUserByUsername);
-app.post ('/api/user', createUser);
-app.put  ('/api/user/:userId', updateUser);
-app.delete ('/api/user/:userId', deleteUser);
+app.post ('/api/website/:websiteId/page',createPage );
+app.get ('/api/website/:websiteId/page',findAllPagesForWebsite);
+app.get ('/api/page/:pageId', findPageById);
+app.put  ('/api/page/:pageId', updatePage);
+app.delete ('/api/page/:pageId', deletePage);
 
 
 
-var users = [
-    {_id: "123", username: "alice", password: "alice", firstName: "Alice", lastName: "Wonder", email: "test1@gmail.com"},
-    {_id: "234", username: "bob", password: "bob", firstName: "Bob", lastName: "Marley", email: "test2@gmail.com"},
-    {_id: "345", username: "charly", password: "charly", firstName: "Charly", lastName: "Garcia", email: "test3@gmail.com"},
-    {_id: "456", username: "jannunzi", password: "jannunzi", firstName: "Jose", lastName: "Annunzi", email: "test4@gmail.com"}
-];
+var pages = [
+    { "_id": "321", "name": "Post 1", "websiteId": "456", "description": "Lorem" },
+    { "_id": "432", "name": "Post 2", "websiteId": "456", "description": "Lorem" },
+    { "_id": "543", "name": "Post 3", "websiteId": "456", "description": "Lorem" }
+]
 
+function findAllPagesForWebsite(req, res) {
 
+    var websiteId = req.params.websiteId;
+    var pageList = [];
+    for (var index in pages) {
+        if (pages[index].websiteId === websiteId) {
+            pageList.push(pages[index]);
+        }
+    }
+    res.status(200).json(pageList);
 
-function deleteUser(req, res) {
-    var userId = req.params.userId;
-    var user = users.find(function (user) {
-        return user._id === userId;
+}
+
+function deletePage(req, res) {
+    var pageId = req.params.pageId;
+    var page = pages.find(function (page) {
+        return page._id === pageId;
     });
-    var index = users.indexOf(user);
-    users.splice(index, 1);
+    var index = pages.indexOf(page);
+    pages.splice(index, 1);
     res.sendStatus(200);
 }
 
-function updateUser(req, res) {
-    var userId = req.params.userId;
-    var user = req.body;
-    for(var u in users) {
-        if(userId === users[u]._id) {
-            users[u] = user;
+function updatePage(req, res) {
+    var pageId = req.params.pageId;
+    var page = req.body;
+    for(var u in pages) {
+        if(pageId === pages[u]._id) {
+            pages[u] = page;
             res.sendStatus(200);
             return;
         }
@@ -45,53 +54,22 @@ function updateUser(req, res) {
     res.sendStatus(404);
 }
 
-function createUser(req, res) {
-    var user = req.body;
-    user._id = (new Date()).getTime() + "";
-    users.push(user);
-    res.send(user);
+function createPage(req, res) {
+    var page = req.body;
+    page._id = (new Date()).getTime() + "";
+    pages.push(page);
+    res.json(pages);
 }
 
-function findUserById(req, res) {
-    var userId = req.params.userId;
-    for(var u in users) {
-        if (users[u]._id === userId) {
-            res.send(users[u]);
-        }
-    }
-}
-
-function findUserByCredentials(req,res) {
-    var username = req.query.username;
-    var password = req.query.password;
-    var found = null
-    for (var u in users) {
-        var user = users[u];
-        if (user.username === username && user.password === password) {
-            found = user;
-            res.send(found);
+function findPageById(req, res) {
+    var pageId = req.params.pageId;
+    for(var u in pages) {
+        if (pages[u]._id === pageId) {
+            res.status(200).json(pages[u]);
             return;
         }
     }
-        res.sendStatus(404);
+    res.sendStatus(404);
 }
 
-function findUserByUsername(req,res, next){
-    if(req.query.password){
-        next();
-    }
-    else {
-        var found = null
-        var username = req.query.username;
-        for (var u in users) {
-            var user = users[u];
-            if (user.username === username) {
-                found = user;
-                res.send(found);
-                return;
-            }
-        }
-        res.sendStatus(404);
-    }
 
-}

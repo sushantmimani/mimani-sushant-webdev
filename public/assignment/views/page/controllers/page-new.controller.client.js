@@ -18,15 +18,24 @@
 
         function createPage(page){
             page.websiteId = model.websiteId;
-            pageService.createPage(page);
-            $location.url('/user/'+model.userId+'/website/'+model.websiteId+'/page');
+            pageService
+                .createPage(page, model.websiteId )
+                .then(function (pages) {
+                    $location.url('/user/'+model.userId+'/website/'+model.websiteId+'/page');
+
+
+                })
         };
 
 
         function init() {
+            pageService
+                .findAllPagesForWebsite(model.websiteId)
+                .then(displayPages)
 
-            model.pages = pageService.findPageByWebsiteId(model.websiteId);
-
+            function displayPages(pages) {
+                model.pages = pages;
+            }
         }
 
         init();
