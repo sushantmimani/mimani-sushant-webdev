@@ -16,9 +16,15 @@
 
         function init() {
 
-            model.websites = websiteService.findWebsiteByUser(model.userId);
-            if (model.websites.length > 0) {
-                model.hasWebsite = true;
+            websiteService
+                .findAllWebsitesForUser(model.userId)
+                .then(displayWebsites);
+
+            function displayWebsites(websites){
+                model.websites = websites;
+                if (model.websites.length > 0) {
+                    model.hasWebsite = true;
+                }
             }
         }
 

@@ -13,17 +13,29 @@
         var model = this;
         model.userId = $routeParams['userId'];
         model.websiteId = $routeParams['websiteId']
-        console.log(model.websiteId)
         model.hasWebsite = false;
 
         function init() {
 
-            model.websites = websiteService.findWebsiteByUser(model.userId);
-            if (model.websites.length > 0) {
-                model.hasWebsite = true;
+            websiteService
+                .findAllWebsitesForUser(model.userId)
+                .then(displayWebsites);
+
+            function displayWebsites(websites){
+                model.websites = websites;
+                if (model.websites.length > 0) {
+                    model.hasWebsite = true;
+                }
             }
 
-            model.website = websiteService.findWebsiteById(model.websiteId);
+            websiteService
+                .findWebsiteById(model.websiteId)
+                .then(displayWebsite)
+
+            function displayWebsite(website) {
+                model.website = website;
+
+            }
         }
 
         init();
@@ -32,13 +44,19 @@
         model.updateWebsite  = updateWebsite;
 
         function deleteWebsite() {
-            websiteService.deleteWebsite(model.websiteId);
-            $location.url('/user/'+model.userId+'/website');
+            websiteService
+                .deleteWebsite(model.websiteId)
+                .then(function (response) {
+                    $location.url('/user/'+model.userId+'/website');
+                });
         }
 
         function updateWebsite(website) {
-           websiteService.updateWebsite(website);
-            $location.url('/user/'+model.userId+'/website');
+           websiteService
+               .updateWebsite(website, model.websiteId)
+               .then(function (response) {
+                   $location.url('/user/'+model.userId+'/website');
+               });
         }
 
 

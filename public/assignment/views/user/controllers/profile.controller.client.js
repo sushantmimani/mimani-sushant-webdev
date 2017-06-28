@@ -8,19 +8,39 @@
         .module('WAM')
         .controller('profileController', profileController);
 
-    function profileController ($routeParams, userService ) {
+    function profileController ($location, $routeParams, userService ) {
 
         var model = this;
         var userId = $routeParams['userId'];
-
-        model.user = userService.findUserById(userId);
-
         model.updateUser = updateUser;
+        model.deleteUser = deleteUser;
+
+        userService
+            .findUserById(userId)
+            .then(renderUser);
+
+        function renderUser(user){
+            model.user = user;
+        }
+
 
         function updateUser(userDetails) {
-            userService.updateUser(userId,userDetails)
+            userService
+                .updateUser(userId, userDetails)
+                .then(function () {
+                    model.message = "User updated successfully"
+                });
         }
 
-        }
+    function deleteUser(userDetails) {
+        userService
+            .deleteUser(userId, userDetails)
+            .then(function () {
+                model.message = "User deleted successfully"
+                $location.url('/login')
+
+            });
+    }
+}
 
 })();
