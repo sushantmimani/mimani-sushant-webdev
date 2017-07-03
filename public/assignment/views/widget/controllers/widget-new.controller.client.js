@@ -38,6 +38,7 @@
             widgetService
                 .createWidget(widget, model.pageId)
                 .then(function (response) {
+                    console.log(response)
                     $location.url('/user/'+model.userId+'/website/'+model.websiteId+'/page/'+model.pageId+'/widget');
                 })
         };

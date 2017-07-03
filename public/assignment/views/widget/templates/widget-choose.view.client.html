@@ -12,6 +12,7 @@
         <option value='IMAGE'>Image</option>
         <option value=YOUTUBE>Youtube</option>
         <option value=HTML>HTML</option>
+        <option value=TEXT>Text</option>
     </select>
 
     <div ng-switch="widget.widgetType">
@@ -26,6 +27,9 @@
         </div>
         <div ng-switch-when="HTML">
             <h2>Add HTML Widget</h2>
+        </div>
+        <div ng-switch-when="TEXT">
+            <h2>Add Text Widget</h2>
         </div>
     </div>
 
