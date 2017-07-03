@@ -26,7 +26,6 @@
                     widgetService
                         .sortWidgets(pageId, oldIndex, newIndex)
                         .then(function (response) {
-                            console.log(response);
                         })
                 }
             })

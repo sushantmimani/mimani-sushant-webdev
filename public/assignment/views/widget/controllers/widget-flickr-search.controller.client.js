@@ -19,8 +19,6 @@
         model.selectPhoto = selectPhoto;
 
         function selectPhoto(photo) {
-            console.log(photo);
-            console.log(model.widgetId)
             widgetService
                 .findWidgetById(model.widgetId)
                 .then(function (widget) {

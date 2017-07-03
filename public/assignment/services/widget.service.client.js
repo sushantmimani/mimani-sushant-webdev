@@ -36,7 +36,7 @@
 
         function sortWidgets(pageId, oldIndex, newIndex) {
             var url = '/page/'+pageId+'/widget?initial='+oldIndex+'&final='+newIndex;
-            return $http.put(url)
+            return $http.put(url,{})
                 .then(function(response){
                     return response.data;
                 });

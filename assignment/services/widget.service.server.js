@@ -13,7 +13,7 @@ app.get ('/api/widget/:widgetId', findWidgetById);
 app.put  ('/api/widget/:widgetId', updateWidget);
 app.delete ('/api/widget/:widgetId', deleteWidget);
 app.post ("/api/upload", upload.single('myFile'), uploadImage);
-app.put ("/page/:pageId/widget", updateWidgetArray)
+app.put ("/page/:pageId/widget", sortWidgets)
 
 
 
@@ -30,28 +30,14 @@ var widgets = [
 ];
 
 
-function updateWidgetArray(req, res) {
+function sortWidgets(req, res) {
     var oldIndex = req.query.initial;
     var newIndex = req.query.final;
     var pageId = req.params.pageId;
-    var widgetList = [];
-    for (var index in widgets) {
-        if (widgets[index].pageId === pageId) {
-            widgetList.push(widgets[index]);
-        }
-    }
-    if(oldIndex <= newIndex){
-        while (oldIndex > newIndex){
+    var widget = widgets.splice(oldIndex,1)[0];
+    widgets.splice(newIndex,0, widget);
+    res.json(widgets);
 
-        }
-    } else {
-        var start = newIndex;
-        var stop = oldIndex;
-    }
-    while (start < stop){
-
-    }
-    res.send(oldIndex+" "+ newIndex+" "+pageId);
 }
 
 function uploadImage(req, res) {
