@@ -115,3 +115,8 @@ select.form-control {
     padding-left: 10px;
     border-right: 1px solid gray;
 }
+
+.doNotDisplay {
+    display: none;
+}
+

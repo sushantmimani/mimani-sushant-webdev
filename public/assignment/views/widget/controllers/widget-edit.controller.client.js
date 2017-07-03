@@ -44,7 +44,6 @@
            widgetService
                .updateWidget(widget, model.widgetId)
                .then(function (response) {
-
                    $location.url('/user/'+model.userId+'/website/'+model.websiteId+'/page/'+model.pageId+'/widget');
 
                })
