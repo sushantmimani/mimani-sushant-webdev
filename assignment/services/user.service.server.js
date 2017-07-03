@@ -4,9 +4,9 @@
 
 var app = require('../../express');
 
-app.get ('/api/user', findUserByUsername, findUserByCredentials);
+app.get ('/api/user', findUserByCredentials);
 app.get ('/api/user/:userId',findUserById );
-app.get ('/api/user',findUserByUsername);
+app.get ('/api/username',findUserByUsername);
 app.post ('/api/user', createUser);
 app.put  ('/api/user/:userId', updateUser);
 app.delete ('/api/user/:userId', deleteUser);
@@ -79,10 +79,6 @@ function findUserByCredentials(req,res) {
 }
 
 function findUserByUsername(req,res, next){
-    if(req.query.password){
-        next();
-    }
-    else {
         var found = null
         var username = req.query.username;
         for (var u in users) {
@@ -94,6 +90,4 @@ function findUserByUsername(req,res, next){
             }
         }
         res.sendStatus(404);
-    }
-
 }

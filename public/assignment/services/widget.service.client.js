@@ -26,13 +26,22 @@
             createWidget: createWidget,
             updateWidget: updateWidget,
             deleteWidget: deleteWidget,
-            findAllWidgetsForPage: findAllWidgetsForPage
+            findAllWidgetsForPage: findAllWidgetsForPage,
+            sortWidgets: sortWidgets
 
         };
 
         return api;
 
 
+        function sortWidgets(pageId, oldIndex, newIndex) {
+            var url = '/page/'+pageId+'/widget?initial='+oldIndex+'&final='+newIndex;
+            return $http.put(url)
+                .then(function(response){
+                    return response.data;
+                });
+
+        }
         function findWidgetById(widgetId) {
             var url = '/api/widget/'+widgetId;
             return $http.get(url)

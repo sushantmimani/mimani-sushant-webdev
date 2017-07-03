@@ -50,7 +50,7 @@
 
         function findUserByUsername(username) {
 
-            var url = '/api/user?username=' + username;
+            var url = '/api/username?username=' + username;
             return $http.get(url)
                 .then(function (response) {
                     return response.data;
