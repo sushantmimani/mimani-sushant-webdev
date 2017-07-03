@@ -70,10 +70,8 @@ function findWebsiteById(req, res) {
     for(var u in websites) {
         if (websites[u]._id === websiteId) {
             res.status(200).json(websites[u]);
-            return;
         }
     }
-    res.sendStatus(404);
 }
 
 

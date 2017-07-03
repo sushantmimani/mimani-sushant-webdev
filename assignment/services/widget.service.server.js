@@ -4,11 +4,15 @@
 
 var app = require('../../express');
 
+var multer = require('multer'); // npm install multer --save
+var upload = multer({ dest: __dirname+'/../../public/uploads' });
+
 app.post ('/api/page/:pageId/widget',createWidget );
 app.get ('/api/page/:pageId/widget',findAllWidgetsForPage);
 app.get ('/api/widget/:widgetId', findWidgetById);
 app.put  ('/api/widget/:widgetId', updateWidget);
 app.delete ('/api/widget/:widgetId', deleteWidget);
+app.post ("/api/upload", upload.single('myFile'), uploadImage);
 
 
 
@@ -23,6 +27,43 @@ var widgets = [
         "url": "https://www.youtube.com/tnBQmEqBCY0" },
     { "_id": "789", "widgetType": "HTML", "pageId": "321", "text": "<p>Lorem ipsum</p>"}
 ];
+
+
+function uploadImage(req, res) {
+
+    var widgetId      = req.body.widgetId;
+    var width         = req.body.width;
+    var myFile        = req.file;
+
+    var userId = req.body.userId;
+    var websiteId = req.body.websiteId;
+    var pageId = req.body.pageId;
+
+    var originalname  = myFile.originalname; // file name on user's computer
+    var filename      = myFile.filename;     // new file name in upload folder
+    var path          = myFile.path;         // full path of uploaded file
+    var destination   = myFile.destination;  // folder where file is saved to
+    var size          = myFile.size;
+    var mimetype      = myFile.mimetype;
+
+    widget = findWidgetById(widgetId);
+
+    function findWidgetById(widgetId) {
+        for(var u in widgets) {
+            if (widgets[u]._id === widgetId) {
+                return widgets[u];
+            }
+        }
+        return null;
+    }
+
+    widget.url = '/uploads/'+filename;
+    widget.width = width;
+
+    var callbackUrl   = "/assignment/#!/user/"+userId+"/website/"+websiteId+"/page/"+pageId+"/widget";
+
+    res.redirect(callbackUrl);
+}
 
 function findAllWidgetsForPage(req, res) {
 
