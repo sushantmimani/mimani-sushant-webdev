@@ -1,17 +1,15 @@
-var express = require('express');
-var app = express();
-
+var app = require('./express');
 var bodyParser = require('body-parser');
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
 
-// configure a public directory to host static content
-app.use(express.static(__dirname + '/public'));
+app.use(bodyParser.json()); // for parsing application/json
+app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
 
-require ("./test/app.js")(app);
+// app.set('view engine', 'ejs');
+// require('./utilities/filelist');
 
-var port = process.env.PORT || 3000;
+app.use(app.express.static(__dirname + '/public'));
 
-app.listen(port, function () {
-    console.log("Server running on 3000");
-});
+
+require('./assignment/app');
+
+app.listen(process.env.PORT || 3000);

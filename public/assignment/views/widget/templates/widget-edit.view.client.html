@@ -1,4 +1,5 @@
 <div class="container-fluid">
+    {{model.widget.widgetType}}
     <div ng-switch="model.widget.widgetType">
         <div ng-switch-when="HEADING">
             <ng-include src="'views/widget/templates/editors/widget-heading-edit.view.client.html'">
@@ -11,6 +12,9 @@
         </div>
         <div ng-switch-when="HTML">
             <ng-include src="'views/widget/templates/editors/widget-html-edit.view.client.html'">
+        </div>
+        <div ng-switch-when="TEXT">
+            <ng-include src="'views/widget/templates/editors/widget-text-edit.view.client.html'">
         </div>
     </div>
 </div>

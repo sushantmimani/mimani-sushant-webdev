@@ -10,6 +10,7 @@
 
     <div class="container-fluid">
 
+        <wbdv-sortable>
         <div ng-repeat="widget in model.widgets"
              class="wd-widget">
             <div class="wd-toolbar">
@@ -20,6 +21,7 @@
             </div>
             <div ng-include="model.getWidgetUrlForType(widget.widgetType)"></div>
         </div>
+        </wbdv-sortable>
     </div>
 
     <div ng-include="'views/common/footer-child.view.client.html'"></div>

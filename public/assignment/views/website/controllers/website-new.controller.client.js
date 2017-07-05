@@ -16,17 +16,25 @@
         model.createWebsite = createWebsite;
 
         function createWebsite(website){
-            website['developerId'] = model.userId;
-            websiteService.createWebsite( website);
-            $location.url('/user/'+model.userId+'/website');
+            websiteService
+                .createWebsite(website, model.userId)
+                .then(function (response){
+                    $location.url('/user/'+model.userId+'/website');
+                })
         };
 
 
         function init() {
 
-            model.websites = websiteService.findWebsiteByUser(model.userId);
-            if (model.websites.length > 0) {
-                model.hasWebsite = true;
+            websiteService
+                .findAllWebsitesForUser(model.userId)
+                .then(displayWebsites);
+
+            function displayWebsites(websites){
+                model.websites = websites;
+                if (model.websites.length > 0) {
+                    model.hasWebsite = true;
+                }
             }
         }
 

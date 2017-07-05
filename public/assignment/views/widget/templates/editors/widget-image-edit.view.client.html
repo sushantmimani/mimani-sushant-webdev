@@ -22,13 +22,20 @@
            ng-model="model.widget.width"
            class="form-control"/>
 
-    <label for="file">File Upload</label>
-    <input id="file"
-           multiple
-           type="file"
-           class="form-control"/>
+    <form action="/api/upload"   method="post" enctype="multipart/form-data">
+        <input  name="myFile"    type="file" class="form-control"/>
+        <input  name="width"     value="{{model.widget.width}}" class="doNotDisplay"/>
+        <input  name="userId"    value="{{model.userId}}"   class="doNotDisplay"/>
+        <input  name="websiteId" value="{{model.websiteId}}"   class="doNotDisplay"/>
+        <input  name="pageId"    value="{{model.pageId}}"   class="doNotDisplay"/>
+        <input  name="widgetId"  value="{{model.widget._id}}"   class="doNotDisplay"/>
+        <button type="submit"    class="btn btn-block btn-primary">Upload Image</button>
+    </form>
+    <br/>
 
-    <a class="btn btn-primary btn-block">Upload Image</a>
+    <a class="btn btn-info btn-block" href="#!/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget/{{model.widgetId}}/search">
+        Search
+    </a>
 
 </div>
 

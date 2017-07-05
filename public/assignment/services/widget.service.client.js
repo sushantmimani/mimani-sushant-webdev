@@ -7,7 +7,7 @@
         .module('WAM')
         .factory('widgetService', widgetService);
 
-    function widgetService() {
+    function widgetService($http) {
 
         var widgets = [
             { "_id": "123", "widgetType": "HEADING", "pageId": "321", "size": 2, "text": "GIZMODO"},
@@ -26,51 +26,61 @@
             createWidget: createWidget,
             updateWidget: updateWidget,
             deleteWidget: deleteWidget,
-            findWidgetsByPageId: findWidgetsByPageId
+            findAllWidgetsForPage: findAllWidgetsForPage,
+            sortWidgets: sortWidgets
 
         };
 
         return api;
 
 
+        function sortWidgets(pageId, oldIndex, newIndex) {
+            var url = '/page/'+pageId+'/widget?initial='+oldIndex+'&final='+newIndex;
+            return $http.put(url,{})
+                .then(function(response){
+                    return response.data;
+                });
+
+        }
         function findWidgetById(widgetId) {
-            for(var index in widgets) {
-                if (widgets[index]._id === widgetId) {
-                    return widgets[index];
-                }
-            }
+            var url = '/api/widget/'+widgetId;
+            return $http.get(url)
+                .then(function (response) {
+                    return response.data;
+                })
         }
 
-        function createWidget(widget) {
-            widget._id = (new Date()).getTime() + "";
-            widgets.push(widget);
-            console.log(widgets);
+        function createWidget(widget, pageId) {
+            var url = '/api/page/'+pageId+'/widget';
+            return $http.post(url, widget)
+                .then(function (response) {
+                    return response.data;
+                })
         }
 
 
-        function updateWidget(widget) {
-            var oldWidget = findWidgetById(widget._id);
-            var index = widgets.indexOf(oldWidget);
-            widgets[index] = widget;
-            console.log(widgets)
+        function updateWidget(widget, widgetId) {
+            var url = '/api/widget/'+widgetId;
+            return $http.put(url, widget)
+                .then(function (response) {
+                    return response.data;
+                })
         }
 
         function deleteWidget(widgetId) {
-            var widget = widgets.find(function (widget) {
-                return widget._id === widgetId;
-            });
-            var index = widgets.indexOf(widget);
-            widgets.splice(index, 1);
+            var url = '/api/widget/'+widgetId;
+            return $http.delete(url)
+                .then(function (response) {
+                    return response.data;
+                })
         }
 
-        function findWidgetsByPageId(pageId) {
-            var widgetList = [];
-            for (var index in widgets) {
-                if (widgets[index].pageId === pageId) {
-                    widgetList.push(widgets[index]);
-                }
-            }
-            return widgetList;
+        function findAllWidgetsForPage(pageId) {
+            var url = '/api/page/'+pageId+'/widget';
+            return $http.get(url)
+                .then( function (response) {
+                    return response.data;
+                })
         }
     }
 })();

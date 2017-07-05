@@ -17,9 +17,22 @@
 
         function init() {
 
-            model.pages = pageService.findPageByWebsiteId(model.websiteId);
+            pageService
+                .findAllPagesForWebsite(model.websiteId)
+                .then(displayPages)
 
-            model.page = pageService.findPageById(model.pageId);
+            function displayPages(pages) {
+                model.pages = pages;
+            }
+
+            pageService
+                .findPageById(model.pageId)
+                .then(displayPage)
+
+            function displayPage(page) {
+                model.page = page
+            }
+
         }
 
         init();
@@ -28,13 +41,19 @@
         model.updatePage  = updatePage;
 
         function deletePage() {
-            pageService.deletePage(model.pageId);
-            $location.url('/user/'+model.userId+'/website/'+model.websiteId+'/page/');
+            pageService
+                .deletePage(model.pageId)
+                .then(function (response) {
+                    $location.url('/user/'+model.userId+'/website/'+model.websiteId+'/page/');
+                })
         }
 
         function updatePage(page) {
-           pageService.updatePage(model.pageId, page);
-            $location.url('/user/'+model.userId+'/website/'+model.websiteId+'/page/');
+           pageService
+               .updatePage(model.pageId, page)
+               .then(function (response) {
+                   $location.url('/user/'+model.userId+'/website/'+model.websiteId+'/page/');
+               })
 
         }
 
