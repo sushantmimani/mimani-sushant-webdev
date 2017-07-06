@@ -89,5 +89,5 @@ function findUserByUsername(req,res, next){
                 return;
             }
         }
-        res.sendStatus(404);
+        res.send("available");
 }
