@@ -15,14 +15,17 @@
         model.updateUser = updateUser;
         model.deleteUser = deleteUser;
 
-        userService
-            .findUserById(userId)
-            .then(renderUser);
+        function init() {
 
-        function renderUser(user){
-            model.user = user;
+            userService
+                .findUserById(userId)
+                .then(renderUser);
+
+            function renderUser(user) {
+                model.user = user;
+            }
         }
-
+        init();
 
         function updateUser(userDetails) {
             userService

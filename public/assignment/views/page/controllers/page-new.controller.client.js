@@ -16,17 +16,6 @@
 
         model.createPage = createPage;
 
-        function createPage(page){
-            page.websiteId = model.websiteId;
-            pageService
-                .createPage(page, model.websiteId )
-                .then(function (pages) {
-                    $location.url('/user/'+model.userId+'/website/'+model.websiteId+'/page');
-
-
-                })
-        };
-
 
         function init() {
             pageService
@@ -39,5 +28,18 @@
         }
 
         init();
+
+        function createPage(page){
+            page.websiteId = model.websiteId;
+            pageService
+                .createPage(page, model.websiteId )
+                .then(function (pages) {
+                    $location.url('/user/'+model.userId+'/website/'+model.websiteId+'/page');
+
+
+                })
+        };
+
+
     }
 })();
