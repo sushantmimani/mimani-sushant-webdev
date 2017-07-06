@@ -10,9 +10,9 @@
             </a>
         </span>
     </div>
-
+<br/>
     <div class="row">
-        <div class="col-xs-4" ng-repeat="photo in model.photos.photo">
+        <div class="col-md-3 col-xs-2 col-lg-2 wbdv-photo-padding" ng-repeat="photo in model.photos.photo">
             <img ng-click="model.selectPhoto(photo)"
                  ng-src="https://farm{{photo.farm}}.staticflickr.com/{{photo.server}}/{{photo.id}}_{{photo.secret}}_s.jpg"/>
         </div>
