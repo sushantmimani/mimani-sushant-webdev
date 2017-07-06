@@ -18,7 +18,6 @@
 
             function login(found) {
 
-                console.log(">>>>>>",found);
                 if(found !== 'available') {
                     model.error = "Username is not available";
                 } else {
