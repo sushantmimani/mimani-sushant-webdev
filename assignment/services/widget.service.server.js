@@ -42,7 +42,7 @@ function sortWidgets(req, res) {
 
 function uploadImage(req, res) {
 
-    var widgetId      = req.body.widgetId;
+    var widgetId      = req.body.widgetId
     var width         = req.body.width;
     var myFile        = req.file;
 
@@ -68,8 +68,17 @@ function uploadImage(req, res) {
         return null;
     }
 
-    widget.url = '/uploads/'+filename;
-    widget.width = width;
+    if(widget === null){
+        widget = { "_id": new Date(), "widgetType": "IMAGE", "pageId": pageId, "width": width};
+        widget.url = '/uploads/'+filename;
+        widgets.push(widget)
+        console.log(widgets);
+    }
+    else {
+        widget.url = '/uploads/'+filename;
+        widget.width = width;
+    }
+
 
     var callbackUrl   = "/assignment/#!/user/"+userId+"/website/"+websiteId+"/page/"+pageId+"/widget";
 
