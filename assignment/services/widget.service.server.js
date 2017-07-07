@@ -69,7 +69,7 @@ function uploadImage(req, res) {
     }
 
     if(widget === null){
-        widget = { "_id": new Date()).getTime() + "", "widgetType": "IMAGE", "pageId": pageId, "width": width};
+        widget = { "_id": new Date().getTime() + "", "widgetType": "IMAGE", "pageId": pageId, "width": width};
         widget.url = '/uploads/'+filename;
         widgets.push(widget)
         console.log(widgets);
