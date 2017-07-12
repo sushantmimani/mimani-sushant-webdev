@@ -1,23 +1,11 @@
 var mongoose = require('mongoose');
 
-var widgetSchema = mongoose.Schema({
-
-    _page: {type: mongoose.Schema.Types.ObjectId, ref: "WebsiteModel"},
-    type: {type: String, enum:['HEADING', 'IMAGE', 'YOUTUBE', 'HTML', 'INPUT']},
+var websiteSchema = mongoose.Schema({
+    _user: {type: mongoose.Schema.Types.ObjectId, ref: "UserModel"},
     name: String,
-    text: String,
-    placeholder: String,
     description: String,
-    url: String,
-    width: String,
-    height: String,
-    rows: Number,
-    size: Number,
-    class: String,
-    icon: String,
-    deletable: Boolean,
-    formatted:Boolean,
+    pages: [{type: mongoose.Schema.Types.ObjectId, ref: "PageModel"}],
     dateCreated: {type: Date, default: Date.now}
-}, {collection: 'widget'});
+}, {collection: 'website'});
 
-module.exports = widgetSchema;
+module.exports = websiteSchema;

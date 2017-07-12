@@ -10,9 +10,31 @@ websiteModel.findAllWebsitesForUser = findAllWebsitesForUser;
 websiteModel.deleteWebsiteFromUser = deleteWebsiteFromUser;
 websiteModel.findWebsiteById = findWebsiteById;
 websiteModel.updateWebsite = updateWebsite;
+websiteModel.addPageForWebsite = addPageForWebsite;
+websiteModel.deletePage = deletePage;
 
 module.exports = websiteModel;
 
+function deletePage(pageId, websiteId) {
+    return websiteModel
+        .findById(websiteId)
+        .then(function (website) {
+            var index = website.pages.indexOf(pageId);
+            website.pages.splice(index, 1);
+            return website.save();
+        });
+
+}
+
+function addPageForWebsite(websiteId, pageId) {
+    return websiteModel
+        .findById(websiteId)
+        .then(function (website) {
+            website.pages.push(pageId);
+            return website.save();
+        });
+
+}
 
 function updateWebsite(websiteId, website) {
     return websiteModel.update({_id: websiteId}, {$set: website});
