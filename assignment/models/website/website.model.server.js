@@ -8,8 +8,15 @@ websiteModel.findAllWebsites = findAllWebsites;
 websiteModel.createWebsiteForUser = createWebsiteForUser;
 websiteModel.findAllWebsitesForUser = findAllWebsitesForUser;
 websiteModel.deleteWebsiteFromUser = deleteWebsiteFromUser;
+websiteModel.findWebsiteById = findWebsiteById;
+websiteModel.updateWebsite = updateWebsite;
 
 module.exports = websiteModel;
+
+
+function updateWebsite(websiteId, website) {
+    return websiteModel.update({_id: websiteId}, {$set: website});
+}
 
 function deleteWebsiteFromUser(userId, websiteId) {
     return websiteModel
@@ -25,6 +32,11 @@ function findAllWebsitesForUser(userId) {
         .find({_user: userId})
         .populate('_user')
         .exec();
+ }
+
+function findWebsiteById(websiteId) {
+    return websiteModel
+        .findById(websiteId);
 }
 
 function createWebsiteForUser(userId, website) {

@@ -13,16 +13,6 @@ app.put  ('/api/user/:userId', updateUser);
 app.delete ('/api/user/:userId', deleteUser);
 
 
-
-var users = [
-    {_id: "123", username: "alice", password: "alice", firstName: "Alice", lastName: "Wonder", email: "test1@gmail.com"},
-    {_id: "234", username: "bob", password: "bob", firstName: "Bob", lastName: "Marley", email: "test2@gmail.com"},
-    {_id: "345", username: "charly", password: "charly", firstName: "Charly", lastName: "Garcia", email: "test3@gmail.com"},
-    {_id: "456", username: "jannunzi", password: "jannunzi", firstName: "Jose", lastName: "Annunzi", email: "test4@gmail.com"}
-];
-
-
-
 function deleteUser(req, res) {
     var userId = req.params.userId;
     userModel

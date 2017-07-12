@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
 var userSchema = require('./user.schema.server');
-var userModel = mongoose.model('GraduateUserModel', userSchema);
+var userModel = mongoose.model('UserModel', userSchema);
 
 userModel.createUser = createUser;
 userModel.findUserById = findUserById;
