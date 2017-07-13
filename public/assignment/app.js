@@ -4,5 +4,5 @@
 
 (function () {
     angular
-        .module('WAM', ['ngRoute','wbdvDirectives', 'textAngular']);
+        .module('WAM', ['ngRoute','wamDirectives', 'textAngular']);
 })();
