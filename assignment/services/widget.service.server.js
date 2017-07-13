@@ -48,47 +48,46 @@ function sortWidgets(req, res) {
 
 function uploadImage(req, res) {
 
-    var widgetId      = req.body.widgetId
-    var width         = req.body.width;
-    var myFile        = req.file;
+    var widgetId = req.body.widgetId
+    var width = req.body.width;
+    var myFile = req.file;
 
     var userId = req.body.userId;
     var websiteId = req.body.websiteId;
     var pageId = req.body.pageId;
 
-    var originalname  = myFile.originalname; // file name on user's computer
-    var filename      = myFile.filename;     // new file name in upload folder
-    var path          = myFile.path;         // full path of uploaded file
-    var destination   = myFile.destination;  // folder where file is saved to
-    var size          = myFile.size;
-    var mimetype      = myFile.mimetype;
+    var originalname = myFile.originalname; // file name on user's computer
+    var filename = myFile.filename;     // new file name in upload folder
+    var path = myFile.path;         // full path of uploaded file
+    var destination = myFile.destination;  // folder where file is saved to
+    var size = myFile.size;
+    var mimetype = myFile.mimetype;
 
-    widget = findWidgetById(widgetId);
+    var callbackUrl = "/assignment/#!/user/" + userId + "/website/" + websiteId + "/page/" + pageId + "/widget";
 
-    function findWidgetById(widgetId) {
-        for(var u in widgets) {
-            if (widgets[u]._id === widgetId) {
-                return widgets[u];
-            }
-        }
-        return null;
-    }
-
-    if(widget === null){
-        widget = { "_id": new Date().getTime() + "", "widgetType": "IMAGE", "pageId": pageId, "width": width};
-        widget.url = '/uploads/'+filename;
-        widgets.push(widget)
-        console.log(widgets);
+    if (widgetId) {
+        widgetModel.findWidgetById(widgetId)
+            .then(function (widget) {
+                widget.url = '/uploads/' + filename;
+                widget.width = width;
+                widgetModel
+                    .updateWidget(widgetId, widget)
+                    .then(function (status) {
+                        res.redirect(callbackUrl);
+                    })
+            })
     }
     else {
-        widget.url = '/uploads/'+filename;
-        widget.width = width;
+        console.log("in else")
+        widget = {"widgetType": "IMAGE", "pageId": pageId, "width": width};
+        widget.url = '/uploads/' + filename;
+        widgetModel
+            .createWidget(pageId, widget)
+            .then(function (status) {
+                res.redirect(callbackUrl)
+            })
+
     }
-
-
-    var callbackUrl   = "/assignment/#!/user/"+userId+"/website/"+websiteId+"/page/"+pageId+"/widget";
-
-    res.redirect(callbackUrl);
 }
 
 function findAllWidgetsForPage(req, res) {
