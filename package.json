@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "Web Dev at Northeastern University",
   "main": "server.js",
+  "engines": {
+    "node": "6.11.1"
+  },
   "dependencies": {
     "angular": "^1.6.4",
     "body-parser": "^1.17.2",
