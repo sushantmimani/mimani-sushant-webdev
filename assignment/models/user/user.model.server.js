@@ -2,13 +2,17 @@ var mongoose = require('mongoose');
 var userSchema = require('./user.schema.server');
 var userModel = mongoose.model('UserModel', userSchema);
 
+// methods required as per the assignment
 userModel.createUser = createUser;
 userModel.findUserById = findUserById;
-userModel.findAllUsers = findAllUsers;
 userModel.findUserByUsername = findUserByUsername;
 userModel.findUserByCredentials = findUserByCredentials;
 userModel.updateUser = updateUser;
 userModel.deleteUser = deleteUser;
+
+
+//additional methods
+userModel.findAllUsers = findAllUsers;
 userModel.addWebsite = addWebsite;
 userModel.deleteWebsite = deleteWebsite;
 

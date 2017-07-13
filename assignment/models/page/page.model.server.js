@@ -3,12 +3,14 @@ var pageSchema = require('./page.schema.server');
 var pageModel = mongoose.model('PageModel', pageSchema);
 var websiteModel = require('../../models/website/website.model.server')
 
-
+// methods required as per the assignment
 pageModel.createPage = createPage;
 pageModel.findAllPagesForWebsite = findAllPagesForWebsite;
 pageModel.findPageById = findPageById;
 pageModel.updatePage = updatePage;
 pageModel.deletePage = deletePage;
+
+// additional methods
 pageModel.addWidgetForPage = addWidgetForPage;
 pageModel.deleteWidget = deleteWidget;
 pageModel.getAllWidgetsForPage = getAllWidgetsForPage;

@@ -3,13 +3,15 @@ var websiteSchema = require('./website.schema.server');
 var websiteModel = mongoose.model('WebsiteModel', websiteSchema);
 var userModel = require('../user/user.model.server');
 
-// api
-websiteModel.findAllWebsites = findAllWebsites;
+// methods required as per the assignment
 websiteModel.createWebsiteForUser = createWebsiteForUser;
-websiteModel.findAllWebsitesForUser = findAllWebsitesForUser;
-websiteModel.deleteWebsiteFromUser = deleteWebsiteFromUser;
 websiteModel.findWebsiteById = findWebsiteById;
+websiteModel.findAllWebsitesForUser = findAllWebsitesForUser;
 websiteModel.updateWebsite = updateWebsite;
+websiteModel.deleteWebsite = deleteWebsite;
+
+// additional methods
+websiteModel.findAllWebsites = findAllWebsites;
 websiteModel.addPageForWebsite = addPageForWebsite;
 websiteModel.deletePage = deletePage;
 
@@ -40,7 +42,7 @@ function updateWebsite(websiteId, website) {
     return websiteModel.update({_id: websiteId}, {$set: website});
 }
 
-function deleteWebsiteFromUser(userId, websiteId) {
+function deleteWebsite(userId, websiteId) {
     return websiteModel
         .remove({_id: websiteId})
         .then(function (status) {

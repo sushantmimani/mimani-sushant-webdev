@@ -78,7 +78,6 @@ function uploadImage(req, res) {
             })
     }
     else {
-        console.log("in else")
         widget = {"widgetType": "IMAGE", "pageId": pageId, "width": width};
         widget.url = '/uploads/' + filename;
         widgetModel

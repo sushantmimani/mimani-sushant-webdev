@@ -21,5 +21,3 @@ var widgetSchema = mongoose.Schema({
 }, {collection: 'widget'});
 
 module.exports = widgetSchema;
-
-module.exports = widgetSchema;

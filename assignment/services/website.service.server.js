@@ -29,7 +29,7 @@ function deleteWebsite(req, res) {
         .then(function (website) {
             var userId = website._user;
             return websiteModel
-            .deleteWebsiteFromUser(userId, websiteId)
+            .deleteWebsite(userId, websiteId)
                 .then(function (status) {
                     res.sendStatus(200).json(status);
                 })
