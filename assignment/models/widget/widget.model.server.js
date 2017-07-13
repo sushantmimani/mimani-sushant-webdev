@@ -1,56 +1,70 @@
 var mongoose = require('mongoose');
-var widgetSchema = require('./widget.model.server.schema.server');
+var widgetSchema = require('./widget.schema.server');
 var widgetModel = mongoose.model('WidgetModel', widgetSchema);
+var pageModel = require('../page/page.model.server');
 
 
+widgetModel.createWidget = createWidget;
+widgetModel.findAllWidgetsForPage = findAllWidgetsForPage;
+widgetModel.findWidgetById = findWidgetById;
+widgetModel.updateWidget = updateWidget;
+widgetModel.deleteWidget = deleteWidget;
+widgetModel.reorderWidget = reorderWidget;
 
 module.exports = widgetModel;
 
-function deleteWebsite(userId, websiteId) {
-    return userModel
-        .findById(userId)
-        .then(function (user) {
-            var index = user.websites.indexOf(websiteId);
-            user.websites.splice(index, 1);
-            return user.save();
+function deleteWidget(widgetId, pageId) {
+    return widgetModel
+        .remove({_id:widgetId})
+        .then(function (status) {
+            return pageModel
+                .deleteWidget(widgetId, pageId);
         });
 }
 
-function addWebsite(userId, websiteId) {
-    return userModel
-        .findById(userId)
-        .then(function (user) {
-            user.websites.push(websiteId);
-            return user.save();
-        });
+
+function createWidget(pageId, widget) {
+    widget._page = pageId;
+    return widgetModel
+        .create(widget)
+        .then(function (widget) {
+            return pageModel
+                .addWidgetForPage(pageId, widget._id)
+        })
 }
 
-function createUser(user) {
-    return userModel.create(user);
+
+function reorderWidget(pageId, start, end) {
+    return widgetModel
+        .findAllWidgetsForPage(pageId)
+        .then(function (widgetList) {
+            var widget = widgetList.splice(start,1)[0];
+            widgetList.splice(end,0, widget);
+            return widgetList.save()
+        })
+    // return pageModel
+    //     .getAllWidgetsForPage(pageId)
+    //     .then(function (widgets) {
+    //         var widgetList = widgets[0].widgets;
+    //         console.log(widgets[0].widgets);
+    //         var widget = widgetList.splice(start,1)[0];
+    //         widgetList.splice(end,0, widget);
+    //         return pageModel
+    //             .reorderWidget(pageId, widgetList)
+    //     })
 }
 
-function findUserById(userId) {
-    return userModel.findById(userId);
+
+
+function findWidgetById(widgetId) {
+    return widgetModel.findById(widgetId);
 }
 
-function findAllUsers() {
-    return userModel.find();
+
+function findAllWidgetsForPage(pageId) {
+    return widgetModel.find({_page: pageId});
 }
 
-function findUserByUsername(username) {
-    return userModel.findOne({username: username});
-}
-
-function findUserByCredentials(username, password) {
-    return userModel.findOne({username: username, password: password});
-}
-
-function updateUser(userId, newUser) {
-    delete newUser.username;
-    delete newUser.password;
-    return userModel.update({_id: userId}, {$set: newUser});
-}
-
-function deleteUser(userId) {
-    return userModel.remove({_id: userId});
+function updateWidget(widgetId, widget) {
+    return widgetModel.update({_id: widgetId}, {$set: widget});
 }

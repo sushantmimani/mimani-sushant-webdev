@@ -3,6 +3,7 @@
  */
 
 var app = require('../../express');
+var widgetModel = require('../models/widget/widget.model.server');
 
 var multer = require('multer'); // npm install multer --save
 var upload = multer({ dest: __dirname+'/../../public/uploads' });
@@ -31,12 +32,17 @@ var widgets = [
 
 
 function sortWidgets(req, res) {
-    var oldIndex = req.query.initial;
-    var newIndex = req.query.final;
+    var initial = req.query.initial;
+    var final = req.query.final;
     var pageId = req.params.pageId;
-    var widget = widgets.splice(oldIndex,1)[0];
-    widgets.splice(newIndex,0, widget);
-    res.json(widgets);
+    widgetModel
+        .reorderWidget(pageId, initial, final)
+        .then(function (widgets) {
+            // var widget = widgets.splice(oldIndex,1)[0];
+            // widgets.splice(newIndex,0, widget);
+            res.json(widgets);
+
+        })
 
 }
 
@@ -88,55 +94,56 @@ function uploadImage(req, res) {
 function findAllWidgetsForPage(req, res) {
 
     var pageId = req.params.pageId;
-    var widgetList = [];
-    for (var index in widgets) {
-        if (widgets[index].pageId === pageId) {
-            widgetList.push(widgets[index]);
-        }
-    }
-    res.status(200).json(widgetList);
+   widgetModel
+       .findAllWidgetsForPage(pageId)
+       .then(function (widgetList) {
+           res.status(200).json(widgetList);
+       })
 
 }
 
 function deleteWidget(req, res) {
     var widgetId = req.params.widgetId;
-    var widget = widgets.find(function (widget) {
-        return widget._id === widgetId;
-    });
-    var index = widgets.indexOf(widget);
-    widgets.splice(index, 1);
-    res.sendStatus(200);
+    return widgetModel
+        .findWidgetById(widgetId)
+        .then(function (widget) {
+            var pageId = widget._page;
+            return widgetModel
+                .deleteWidget(widgetId, pageId)
+                .then(function (status) {
+                    res.sendStatus(200).json(status);
+                })
+        });
 }
 
 function updateWidget(req, res) {
     var widgetId = req.params.widgetId;
     var widget = req.body;
-    for(var u in widgets) {
-        if(widgetId === widgets[u]._id) {
-            widgets[u] = widget;
-            res.sendStatus(200);
-            return;
-        }
-    }
-    res.sendStatus(404);
+    widgetModel
+        .updateWidget(widgetId, widget)
+        .then(function (status) {
+            res.status(200).json(status);
+        })
 }
 
 function createWidget(req, res) {
     var widget = req.body;
-    widget._id = (new Date()).getTime() + "";
-    widgets.push(widget);
-    res.status(200).json(widgets);
+    var pageId = req.params.pageId;
+    widgetModel
+        .createWidget(pageId, widget)
+        .then(function (widget) {
+            res.status(200).json(widget);
+
+        })
 }
 
 function findWidgetById(req, res) {
     var widgetId = req.params.widgetId;
-    for(var u in widgets) {
-        if (widgets[u]._id === widgetId) {
-            res.status(200).json(widgets[u]);
-            return;
-        }
-    }
-    res.sendStatus(404);
+    widgetModel
+        .findWidgetById(widgetId)
+        .then(function (widget) {
+            res.status(200).json(widget);
+        })
 }
 
 
