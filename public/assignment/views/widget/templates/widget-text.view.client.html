@@ -1,3 +1,11 @@
 <div>
-    <textarea rows={{widget.rows}} class="form-control" ng-model="widget.name" ></textarea>
+    <div ng-if="widget.formatted" ng-model="widget.text"
+         text-angular ta-toolbar="[['h1','h2','h3'],['h4','h5','h6']]">
+
+    </div>
+    <input ng-if="!widget.formatted && (!widget.rows || widget.rows===1)"
+           value="{{widget.text}}" class="form-control"/>
+    <textarea ng-if="!widget.formatted && (widget.rows > 1)"
+              rows="{{widget.rows}}" placeholder="{{widget.placeholder}}"
+              class="form-control">{{widget.text}}</textarea>
 </div>

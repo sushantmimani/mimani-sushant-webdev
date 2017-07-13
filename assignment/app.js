@@ -19,5 +19,5 @@ if(process.env.MLAB_USERNAME_WEBDEV) { // check if running remotely
     connectionString += '@ds143231.mlab.com:43231/heroku_9cw06v5g'; // user yours
 }
 
-mongoose.connect(connectionString);
+mongoose.connect(connectionString, { useMongoClient: true });
 
