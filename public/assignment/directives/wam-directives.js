@@ -1,11 +1,11 @@
 (function () {
     angular
-        .module('wbdvDirectives', [])
-        .directive('wbdvSortable', wbdvSortable)
+        .module('wamDirectives', [])
+        .directive('wamSortable', wamSortable)
 
 
 
-    function wbdvSortable(widgetService, $routeParams) {
+    function wamSortable(widgetService, $routeParams) {
 
         var userId = $routeParams['userId'];
         var websiteId = $routeParams['websiteId'];
