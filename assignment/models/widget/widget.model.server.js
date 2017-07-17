@@ -42,7 +42,7 @@ function reorderWidget(pageId, start, end) {
                     var widget = widgetList.splice(start, 1)[0];
                     widgetList.splice(end, 0, widget);
                     return pageModel
-                        .reorderWidget(pageId, widgetList)
+                        .update({_id:pageId},{$set: {widgets: widgetList}})
                 })
 
 }

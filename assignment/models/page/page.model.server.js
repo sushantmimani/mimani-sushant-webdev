@@ -14,14 +14,10 @@ pageModel.deletePage = deletePage;
 pageModel.addWidgetForPage = addWidgetForPage;
 pageModel.deleteWidget = deleteWidget;
 pageModel.getAllWidgetsForPage = getAllWidgetsForPage;
-pageModel.reorderWidget = reorderWidget;
+
 
 module.exports = pageModel;
 
-function reorderWidget(pageId, widgetList) {
-    return pageModel
-        .update({_id: pageId}, {$set: {widgets:widgetList}})
-}
 
 function getAllWidgetsForPage(pageId) {
     return pageModel

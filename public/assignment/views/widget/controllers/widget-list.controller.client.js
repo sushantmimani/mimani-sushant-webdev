@@ -25,7 +25,6 @@
                  .then(displayWidgets)
 
             function displayWidgets(widgets) {
-                 console.log(widgets);
                  model.widgets = widgets;
 
             }

@@ -7,10 +7,7 @@
 
     function wamSortable(widgetService, $routeParams) {
 
-        var userId = $routeParams['userId'];
-        var websiteId = $routeParams['websiteId'];
-        var pageId = $routeParams['pageId'];
-        var widgetId = $routeParams['widgetId'];
+
 
         function linkFunction(scope, element) {
             $(element).sortable({
@@ -22,6 +19,10 @@
                     // gets the new and old index then removes the temporary attribute
                     var newIndex = ui.item.index();
                     var oldIndex = $(this).attr('data-previndex');
+                    var userId = $routeParams['userId'];
+                    var websiteId = $routeParams['websiteId'];
+                    var pageId = $routeParams['pageId'];
+                    var widgetId = $routeParams['widgetId'];
                     $(this).removeAttr('data-previndex');
                     widgetService
                         .sortWidgets(pageId, oldIndex, newIndex)
