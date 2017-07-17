@@ -38,8 +38,6 @@ function sortWidgets(req, res) {
     widgetModel
         .reorderWidget(pageId, initial, final)
         .then(function (widgets) {
-            // var widget = widgets.splice(oldIndex,1)[0];
-            // widgets.splice(newIndex,0, widget);
             res.json(widgets);
 
         })
@@ -94,8 +92,8 @@ function findAllWidgetsForPage(req, res) {
     var pageId = req.params.pageId;
    widgetModel
        .findAllWidgetsForPage(pageId)
-       .then(function (widgetList) {
-           res.status(200).json(widgetList);
+       .then(function (pageDetails) {
+           res.status(200).json(pageDetails.widgets);
        })
 
 }

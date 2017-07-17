@@ -35,23 +35,16 @@ function createWidget(pageId, widget) {
 
 
 function reorderWidget(pageId, start, end) {
-    return widgetModel
-        .findAllWidgetsForPage(pageId)
-        .then(function (widgetList) {
-            var widget = widgetList.splice(start,1)[0];
-            widgetList.splice(end,0, widget);
-            return widgetList.save()
-        })
-    // return pageModel
-    //     .getAllWidgetsForPage(pageId)
-    //     .then(function (widgets) {
-    //         var widgetList = widgets[0].widgets;
-    //         console.log(widgets[0].widgets);
-    //         var widget = widgetList.splice(start,1)[0];
-    //         widgetList.splice(end,0, widget);
-    //         return pageModel
-    //             .reorderWidget(pageId, widgetList)
-    //     })
+            return pageModel
+                .getAllWidgetsForPage(pageId)
+                .then(function (widgets) {
+                    var widgetList = widgets[0].widgets;
+                    var widget = widgetList.splice(start, 1)[0];
+                    widgetList.splice(end, 0, widget);
+                    return pageModel
+                        .reorderWidget(pageId, widgetList)
+                })
+
 }
 
 
@@ -62,7 +55,10 @@ function findWidgetById(widgetId) {
 
 
 function findAllWidgetsForPage(pageId) {
-    return widgetModel.find({_page: pageId});
+    return pageModel
+        .findPageById(pageId)
+        .populate('widgets')
+        .exec();
 }
 
 function updateWidget(widgetId, widget) {
