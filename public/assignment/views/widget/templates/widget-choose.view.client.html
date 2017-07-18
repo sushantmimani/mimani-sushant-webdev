@@ -15,6 +15,7 @@
         <option value=TEXT>Text</option>
     </select>
 
+
     <div ng-switch="widget.widgetType">
         <div ng-switch-when="HEADING">
             <h2>Add Heading Widget</h2>
@@ -33,11 +34,15 @@
         </div>
     </div>
 
+
+    <div ng-show="model.message" class="alert alert-danger">
+        {{model.message}}
+    </div>
 <div ng-if="model.isSelected(widget.widgetType)" ng-include="model.getWidgetUrlForType(widget.widgetType)">
 
 </div>
 
-<a  ng-if="model.isSelected(widget.widgetType)" ng-click="model.createWidget(model.widget, widget.widgetType)" class="btn btn-success btn-block">Save</a>
+<a  ng-if="model.isSelected(widget.widgetType)" ng-click="model.createWidget(model.widget, widget.widgetType)" class="btn btn-success btn-block">Create</a>
 
 <div ng-include="'views/common/footer-child.view.client.html'"></div>
 

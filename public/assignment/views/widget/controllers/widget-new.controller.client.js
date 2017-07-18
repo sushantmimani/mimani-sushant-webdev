@@ -18,7 +18,7 @@
         model.getWidgetUrlForType = getWidgetUrlForType;
         model.isSelected = isSelected;
         model.widget = {};
-        model.selected = false;
+
 
         function isSelected(type) {
             if( typeof type == "string" && type !=='')
@@ -28,19 +28,24 @@
 
         }
         function getWidgetUrlForType(type) {
-            model.selected = true;
+            model.hideSearch = true;
             return 'views/widget/templates/editors/widget-'+type.toLowerCase()+'-edit.view.client.html';
         }
 
         function createWidget(widget, type){
             widget.widgetType = type
+                if(type === "IMAGE" || type === "YOUTUBE") {
+                    if(!widget["url"]) {
+                        model.message = "Enter URL";
+                        return;
+                    }
+                }
             widget['pageId'] = model.pageId;
             widgetService
                 .createWidget(widget, model.pageId)
                 .then(function (response) {
                     $location.url('/user/'+model.userId+'/website/'+model.websiteId+'/page/'+model.pageId+'/widget');
                 })
-        };
-
+        }
     }
 })();

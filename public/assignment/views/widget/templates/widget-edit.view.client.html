@@ -1,5 +1,11 @@
 <div class="container-fluid">
-    {{model.widget.widgetType}}
+
+    <div ng-show="model.message" class="alert alert-danger">
+        {{model.message}}
+    </div>
+
+    <h2>Edit {{model.widget.widgetType}} Widget</h2>
+    <br/>
     <div ng-switch="model.widget.widgetType">
         <div ng-switch-when="HEADING">
             <ng-include src="'views/widget/templates/editors/widget-heading-edit.view.client.html'">

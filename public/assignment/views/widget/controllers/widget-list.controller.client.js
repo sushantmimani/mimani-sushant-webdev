@@ -32,6 +32,7 @@
         init();
 
         function getWidgetUrlForType(type) {
+            model.hideSearch = false;
             return 'views/widget/templates/widget-'+type.toLowerCase()+'.view.client.html';
         }
 
