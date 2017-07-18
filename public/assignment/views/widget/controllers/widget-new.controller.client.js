@@ -14,18 +14,14 @@
         model.userId = $routeParams['userId'];
         model.websiteId = $routeParams['websiteId'];
         model.pageId = $routeParams['pageId'];
+        model.widgets = ["Heading", "Image", "YouTube", "HTML", "Text"]
         model.createWidget = createWidget;
         model.getWidgetUrlForType = getWidgetUrlForType;
-        model.isSelected = isSelected;
-        model.widget = {};
+        model.selectType = selectType;
 
 
-        function isSelected(type) {
-            if( typeof type == "string" && type !=='')
-                return true;
-            else
-                return false;
-
+        function selectType(type) {
+            model.widgetType = type.toUpperCase();
         }
         function getWidgetUrlForType(type) {
             model.hideSearch = true;
@@ -33,19 +29,30 @@
         }
 
         function createWidget(widget, type){
-            widget.widgetType = type
+            console.log(widget);
+            if(widget){
+                console.log("widget exists")
                 if(type === "IMAGE" || type === "YOUTUBE") {
                     if(!widget["url"]) {
                         model.message = "Enter URL";
                         return;
                     }
                 }
-            widget['pageId'] = model.pageId;
-            widgetService
-                .createWidget(widget, model.pageId)
-                .then(function (response) {
-                    $location.url('/user/'+model.userId+'/website/'+model.websiteId+'/page/'+model.pageId+'/widget');
-                })
+                widget.widgetType = type
+                widget['pageId'] = model.pageId;
+                widgetService
+                    .createWidget(widget, model.pageId)
+                    .then(function (response) {
+                        $location.url('/user/'+model.userId+'/website/'+model.websiteId+'/page/'+model.pageId+'/widget');
+                    })
+
+            }
+            else {
+                console.log("blank widget");
+                model.message = "Enter widget details";
+
+            }
+
         }
     }
 })();

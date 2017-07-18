@@ -6,17 +6,22 @@
 </nav>
 
 <div  class="container-fluid">
-    <select id="type" class="form-control" ng-model="widget.widgetType">
-        <option value=''>---Please select widget type---</option> <!-- not selected / blank option -->
-        <option value='HEADING'>Header</option>
-        <option value='IMAGE'>Image</option>
-        <option value=YOUTUBE>Youtube</option>
-        <option value=HTML>HTML</option>
-        <option value=TEXT>Text</option>
-    </select>
+
+    <ul ng-if="!model.widgetType">
+    <li ng-repeat="widget in model.widgets" class="list-group-item">
+        <div class="row">
+            <div class="col-lg-12">
+                <a ng-click="model.selectType(widget)">
+                    {{widget}}
+                </a>
+            </div>
+        </div>
+    </li>
+    </ul>
 
 
-    <div ng-switch="widget.widgetType">
+    <div ng-if="model.widgetType"
+            ng-switch="model.widgetType">
         <div ng-switch-when="HEADING">
             <h2>Add Heading Widget</h2>
         </div>
@@ -38,11 +43,11 @@
     <div ng-show="model.message" class="alert alert-danger">
         {{model.message}}
     </div>
-<div ng-if="model.isSelected(widget.widgetType)" ng-include="model.getWidgetUrlForType(widget.widgetType)">
+<div ng-if="model.widgetType" ng-include="model.getWidgetUrlForType(model.widgetType)">
 
 </div>
 
-<a  ng-if="model.isSelected(widget.widgetType)" ng-click="model.createWidget(model.widget, widget.widgetType)" class="btn btn-success btn-block">Create</a>
+<a  ng-if="model.widgetType" ng-click="model.createWidget(model.widget, model.widgetType)" class="btn btn-success btn-block">Create</a>
 
 <div ng-include="'views/common/footer-child.view.client.html'"></div>
 
