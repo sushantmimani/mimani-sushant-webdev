@@ -29,9 +29,7 @@
         }
 
         function createWidget(widget, type){
-            console.log(widget);
             if(widget){
-                console.log("widget exists")
                 if(type === "IMAGE" || type === "YOUTUBE") {
                     if(!widget["url"]) {
                         model.message = "Enter URL";
@@ -48,7 +46,6 @@
 
             }
             else {
-                console.log("blank widget");
                 model.message = "Enter widget details";
 
             }
