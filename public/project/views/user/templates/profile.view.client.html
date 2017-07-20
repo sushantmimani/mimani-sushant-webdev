@@ -1,0 +1,79 @@
+<nav class="navbar navbar-default navbar-fixed-top ">
+    <div class="navbar-brand">Profile</div>
+    <a ng-click="model.updateUser(model.user)">
+        <span class="glyphicon glyphicon-ok pull-right navbar-brand"></span>
+    </a>
+
+</nav>
+
+
+
+<div class="container-fluid">
+
+    <div ng-show="model.message" class="alert alert-success">
+        {{model.message}}
+    </div>
+    <label for="username">Username</label>
+
+    <input id="username"
+           class="form-control"
+           readonly ng-model="model.user.username"/>
+
+    <label for="email">Email</label>
+    <input id="email"
+           type="email"
+           class="form-control"
+           ng-model="model.user.email"
+           placeholder="email@domain.com"/>
+
+    <!--<label for="password">Password</label>-->
+
+    <!--<input id="password"-->
+           <!--type="password"-->
+           <!--class="form-control"-->
+           <!--placeholder="password"/>-->
+
+    <!--<label for="password2">Verify Password</label>-->
+
+    <!--<input id="password2"-->
+           <!--type="password"-->
+           <!--class="form-control"-->
+           <!--placeholder="verify password"-->
+           <!--/>-->
+
+    <label for="fname">First Name</label>
+
+    <input id="fname"
+           class="form-control"
+           placeholder="First Name"
+           ng-model="model.user.firstName"/>
+
+    <label for="lname">Last Name</label>
+
+    <input id="lname"
+           class="form-control"
+           placeholder="Last Name"
+           ng-model="model.user.lastName"/>
+
+    <label for="lname">Phone</label>
+    <input id="phone"
+           class="form-control"
+           placeholder="Phone Number"
+           ng-model="model.user.phone"/>
+
+    <a href="#!/user/{{model.user._id}}/website"
+       class="btn btn-block btn-primary">Websites</a>
+
+    <a ng-click="model.updateUser(model.user)"
+       class="btn btn-block btn-success">Update</a>
+
+    <a ng-click="model.deleteUser(model.user)"
+       class="btn btn-block btn-info">Delete</a>
+
+    <a href="#!/login"
+       class="btn btn-block btn-danger">Logout</a>
+
+
+</div>
+
+<div ng-include="'views/common/footer.view.client.html'"></div>
