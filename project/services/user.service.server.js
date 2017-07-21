@@ -44,16 +44,27 @@ function localStrategy() {
 }
 
 var googleConfig = {
-    clientID        : "325753145858-pgfuubsu4d78phk7rj1q6om09grdeshc.apps.googleusercontent.com",
-    clientSecret    : "_K8ZO1hiYApx2j3KFsRqxBl_",
-    callbackURL     : "https://mimani-sushant-webdev.herokuapp.com/auth/google/callback"
-};
+    clientID: process.env.GOOGLE_CLIENTID,
+    clientSecret: process.env.GOOGLE_CLIENTSECRET
+}
 
 var facebookConfig = {
-    clientID        : "2375254732699106",
-    clientSecret    : "f3de6e23000094e0eafdcea991572ab0",
-    callbackURL     : "https://mimani-sushant-webdev.herokuapp.com/auth/facebook/callback"
-};
+    clientID: process.env.FACEBOOK_CLIENTID,
+    clientSecret: process.env.FACEBOOK_CLIENTSECRET
+}
+
+if(process.env.MLAB_USERNAME_WEBDEV) {
+       googleConfig.callbackURL = "https://mimani-sushant-webdev.herokuapp.com/auth/google/callback"
+       facebookConfig.callbackURL = "https://mimani-sushant-webdev.herokuapp.com/auth/facebook/callback"
+
+    }
+    else{
+       googleConfig.callbackURL = "http://127.0.0.1:3000/auth/google/callback"
+       facebookConfig.callbackURL = "http://127.0.0.1:3000/auth/facebook/callback"
+    }
+
+
+
 passport.use(new GoogleStrategy(googleConfig, googleStrategy));
 passport.use(new FacebookStrategy(facebookConfig, facebookStrategy));
 
