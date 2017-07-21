@@ -52,7 +52,7 @@ var googleConfig = {
 var facebookConfig = {
     clientID        : "2375254732699106",
     clientSecret    : "f3de6e23000094e0eafdcea991572ab0",
-    callbackURL     : "http://127.0.0.1:3000/auth/facebook/callback"
+    callbackURL     : "https://mimani-sushant-webdev.herokuapp.com/auth/facebook/callback"
 };
 passport.use(new GoogleStrategy(googleConfig, googleStrategy));
 passport.use(new FacebookStrategy(facebookConfig, facebookStrategy));
