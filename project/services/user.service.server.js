@@ -34,7 +34,6 @@ app.get('/auth/facebook/callback',
         successRedirect: '/project/index.html#!/search',
         failureRedirect: '/project/index.html#!/login'
     }), function(req, res){
-        console.log("hereee");
         res.send(200);
     });
 
@@ -66,7 +65,6 @@ function facebookStrategy(token, refreshToken, profile, done) {
         .then(
             function(user) {
                 if(user) {
-                    console.log(user);
                     return done(null, user);
                 } else {
                     var names = profile.displayName.split(" ");
@@ -78,7 +76,6 @@ function facebookStrategy(token, refreshToken, profile, done) {
                             token: token
                         }
                     };
-                    console.log(newFacebookUser);
                     return userModel.createUser(newFacebookUser);
                 }
             },
@@ -127,8 +124,6 @@ function googleStrategy(token, refreshToken, profile, done) {
         )
         .then(
             function(user){
-                //console
-                //req.session.currentUser = user;
                 return done(null, user);
             },
             function(err){
