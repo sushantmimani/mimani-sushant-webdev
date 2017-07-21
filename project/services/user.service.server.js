@@ -46,7 +46,7 @@ function localStrategy() {
 var googleConfig = {
     clientID        : "325753145858-pgfuubsu4d78phk7rj1q6om09grdeshc.apps.googleusercontent.com",
     clientSecret    : "_K8ZO1hiYApx2j3KFsRqxBl_",
-    callbackURL     : "http://127.0.0.1:3000/auth/google/callback"
+    callbackURL     : "https://mimani-sushant-webdev.herokuapp.com/auth/google/callback"
 };
 
 var facebookConfig = {
