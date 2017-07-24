@@ -15,19 +15,60 @@
             createUser: createUser,
             findUserByUsername: findUserByUsername,
             updateUser: updateUser,
-            deleteUser: deleteUser
+            deleteUser: deleteUser,
+            login: login,
+            checkLoggedIn: checkLoggedIn,
+            logout: logout,
+            register: register
 
         };
 
         return api;
 
 
+        function register(user) {
+            var url='/api/register';
+            return $http.post(url, user)
+                .then(function (response) {
+                    return response.data;
+                })
+
+        }
+
+        function login(user) {
+            var credentials = {
+                username: user.username,
+                password: user.password
+            };
+            return $http.post("/api/login", credentials)
+                .then(function (response) {
+                    return response.data;
+                })
+
+        }
+
+        function logout() {
+            var url = '/api/logout';
+            return $http.post(url)
+                .then(function (response) {
+                    return response.data;
+                });
+        }
+
+        function checkLoggedIn() {
+            var url = '/api/checkLoggedIn';
+            return $http.get(url)
+                .then(function (response) {
+                    return response.data;
+                });
+        }
+
         function findUserById(userId) {
             var url = '/api/user/' + userId;
             return $http.get(url)
                 .then(function (response) {
                     return response.data;
-                })
+                });
 
         }
 

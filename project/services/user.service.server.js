@@ -10,7 +10,7 @@ var LocalStrategy = require('passport-local').Strategy;
 var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 var FacebookStrategy = require('passport-facebook').Strategy;
 
-// passport.use(new LocalStrategy({usernameField: 'email', passwordField: 'password'},localStrategy));
+passport.use(new LocalStrategy(localStrategy));
 passport.serializeUser(serializeUser);
 passport.deserializeUser(deserializeUser);
 
@@ -20,6 +20,18 @@ app.get ('/api/username',findUserByUsername);
 app.post ('/api/user', createUser);
 app.put  ('/api/user/:userId', updateUser);
 app.delete ('/api/user/:userId', deleteUser);
+app.post('/api/login', passport.authenticate('local'), login);
+// app.post  ('/api/logout', logout);
+// app.post  ('/api/register', register);
+
+function authorized (req, res, next) {
+    if (!req.isAuthenticated()) {
+        res.send(401);
+    } else {
+        next();
+    }
+};
+
 app.get ('/auth/google', passport.authenticate('google', { scope : ['profile', 'email'] }));
 app.get('/auth/google/callback',
     passport.authenticate('google', {
@@ -39,8 +51,18 @@ app.get('/auth/facebook/callback',
 
 
 
-function localStrategy() {
-    console.log("local")
+function localStrategy(username, password, done) {
+    userModel
+        .findUserByCredentials(username, password)
+        .then(
+            function(user) {
+                if (!user) { return done(null, false); }
+                return done(null, user);
+            },
+            function(err) {
+                if (err) { return done(err); }
+            }
+        );
 }
 
 var googleConfig = {
@@ -54,14 +76,14 @@ var facebookConfig = {
 }
 
 if(process.env.MLAB_USERNAME_WEBDEV) {
-       googleConfig.callbackURL = "https://mimani-sushant-webdev.herokuapp.com/auth/google/callback"
-       facebookConfig.callbackURL = "https://mimani-sushant-webdev.herokuapp.com/auth/facebook/callback"
+    googleConfig.callbackURL = "https://mimani-sushant-webdev.herokuapp.com/auth/google/callback"
+    facebookConfig.callbackURL = "https://mimani-sushant-webdev.herokuapp.com/auth/facebook/callback"
 
-    }
-    else{
-       googleConfig.callbackURL = "http://127.0.0.1:3000/auth/google/callback"
-       facebookConfig.callbackURL = "http://127.0.0.1:3000/auth/facebook/callback"
-    }
+}
+else{
+    googleConfig.callbackURL = "http://127.0.0.1:3000/auth/google/callback"
+    facebookConfig.callbackURL = "http://127.0.0.1:3000/auth/facebook/callback"
+}
 
 
 
@@ -70,7 +92,6 @@ passport.use(new FacebookStrategy(facebookConfig, facebookStrategy));
 
 
 function facebookStrategy(token, refreshToken, profile, done) {
-
     userModel
         .findUserByFacebookId(profile.id)
         .then(
@@ -80,7 +101,9 @@ function facebookStrategy(token, refreshToken, profile, done) {
                 } else {
                     var names = profile.displayName.split(" ");
                     var newFacebookUser = {
-                        name:  names[0]+" "+names[1],
+                        firstName:  names[0],
+                        lastName: names[1],
+                        username: names[0].toLowerCase()+names[1].toLowerCase(),
                         email:     profile.emails ? profile.emails[0].value:"",
                         facebook: {
                             id:    profile.id,
@@ -210,20 +233,34 @@ function findUserByUsername(req,res) {
         });
 }
 
-    function serializeUser(user, done) {
-        done(null, user);
-    }
+function serializeUser(user, done) {
+    done(null, user);
+}
 
-    function deserializeUser(user, done) {
-        userModel
-            .findUserById(user._id)
-            .then(
-                function (user) {
-                    done(null, user);
-                },
-                function (err) {
-                    done(err, null);
-                }
-            );
+function deserializeUser(user, done) {
+    userModel
+        .findUserById(user._id)
+        .then(
+            function (user) {
+                done(null, user);
+            },
+            function (err) {
+                done(err, null);
+            }
+        );
 
+}
+
+function login(req, res) {
+    var user = req.user;
+    res.json(user);
+}
+
+function logout(req, res) {
+    req.logOut();
+    res.send(200);
+}
+
+function loggedin(req, res) {
+    res.send(req.isAuthenticated() ? req.user : '0');
 }

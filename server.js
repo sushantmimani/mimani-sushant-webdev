@@ -1,7 +1,11 @@
 var app = require('./express');
 var bodyParser = require('body-parser');
-var passport = require('passport')
+var passport = require('passport');
+var cookieParser = require('cookie-parser');
+var session      = require('express-session');
 
+app.use(cookieParser());
+app.use(session({ secret: "random text" }));
 app.use(passport.initialize());
 app.use(passport.session());
 

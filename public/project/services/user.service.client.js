@@ -15,13 +15,25 @@
             createUser: createUser,
             findUserByUsername: findUserByUsername,
             updateUser: updateUser,
-            deleteUser: deleteUser
+            deleteUser: deleteUser,
+            login: login
 
         };
 
         return api;
 
 
+        function login(user) {
+            var credentials = {
+                username: user.username,
+                password: user.password
+            };
+            return $http.post("/api/login", credentials)
+                .then(function (response) {
+                    return response.data;
+                })
+
+        }
         function findUserById(userId) {
             var url = '/api/user/' + userId;
             return $http.get(url)
