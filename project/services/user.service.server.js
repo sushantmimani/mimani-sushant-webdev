@@ -14,13 +14,13 @@ passport.use(new LocalStrategy(localStrategy));
 passport.serializeUser(serializeUser);
 passport.deserializeUser(deserializeUser);
 
-app.get ('/api/user', findUserByCredentials);
-app.get ('/api/user/:userId',findUserById );
-app.get ('/api/username',findUserByUsername);
-app.post ('/api/user', createUser);
-app.put  ('/api/user/:userId', updateUser);
-app.delete ('/api/user/:userId', deleteUser);
-app.post('/api/login', passport.authenticate('local'), login);
+app.get ('/api/project/user', findUserByCredentials);
+app.get ('/api/project/user/:userId',findUserById );
+app.get ('/api/project/username',findUserByUsername);
+app.post ('/api/project/user', createUser);
+app.put  ('/api/project/user/:userId', updateUser);
+app.delete ('/api/project/user/:userId', deleteUser);
+app.post('/api/project/login', passport.authenticate('local'), login);
 // app.post  ('/api/logout', logout);
 // app.post  ('/api/register', register);
 
@@ -32,16 +32,16 @@ function authorized (req, res, next) {
     }
 };
 
-app.get ('/auth/google', passport.authenticate('google', { scope : ['profile', 'email'] }));
-app.get('/auth/google/callback',
+app.get ('/auth/project/google', passport.authenticate('google', { scope : ['profile', 'email'] }));
+app.get('/auth/project/google/callback',
     passport.authenticate('google', {
         successRedirect: '/project/index.html#!/search',
         failureRedirect: '/project/index.html#!/login'
     }));
 
 
-app.get ('/auth/facebook', passport.authenticate('facebook', { scope : 'email' }));
-app.get('/auth/facebook/callback',
+app.get ('/auth/project/facebook', passport.authenticate('facebook', { scope : 'email' }));
+app.get('/auth/project/facebook/callback',
     passport.authenticate('facebook', {
         successRedirect: '/project/index.html#!/search',
         failureRedirect: '/project/index.html#!/login'
