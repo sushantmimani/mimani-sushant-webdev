@@ -65,14 +65,24 @@ function localStrategy(username, password, done) {
         );
 }
 
+// var googleConfig = {
+//     clientID: process.env.GOOGLE_CLIENTID,
+//     clientSecret: process.env.GOOGLE_CLIENTSECRET
+// }
+
 var googleConfig = {
-    clientID: process.env.GOOGLE_CLIENTID,
-    clientSecret: process.env.GOOGLE_CLIENTSECRET
-}
+    clientID: "325753145858-pgfuubsu4d78phk7rj1q6om09grdeshc.apps.googleusercontent.com",
+    clientSecret: "_K8ZO1hiYApx2j3KFsRqxBl_"
+};
+
+// var facebookConfig = {
+//     clientID: process.env.FACEBOOK_CLIENTID,
+//     clientSecret: process.env.FACEBOOK_CLIENTSECRET
+// }
 
 var facebookConfig = {
-    clientID: process.env.FACEBOOK_CLIENTID,
-    clientSecret: process.env.FACEBOOK_CLIENTSECRET
+    clientID: "2375254732699106",
+    clientSecret: "f3de6e23000094e0eafdcea991572ab0"
 }
 
 if(process.env.MLAB_USERNAME_WEBDEV) {

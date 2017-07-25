@@ -24,18 +24,19 @@
 
 
         function login(user) {
+            console.log("in user service", user);
             var credentials = {
                 username: user.username,
                 password: user.password
             };
-            return $http.post("/api/project/login", credentials)
+            return $http.post("/api/login", credentials)
                 .then(function (response) {
                     return response.data;
                 })
 
         }
         function findUserById(userId) {
-            var url = '/api/project/user/' + userId;
+            var url = '/api/user/' + userId;
             return $http.get(url)
                 .then(function (response) {
                     return response.data;
@@ -44,7 +45,7 @@
         }
 
         function findUserByCredentials(username, password) {
-            var url = "/api/project/user?username=" + username + "&password=" + password;
+            var url = "/api/user?username=" + username + "&password=" + password;
             return $http.get(url)
                 .then(function (response) {
                     return response.data;
@@ -52,7 +53,7 @@
         }
 
         function createUser(user) {
-            var url = "/api/project/user";
+            var url = "/api/user";
             return $http.post(url, user)
                 .then(function (response) {
 
@@ -62,7 +63,7 @@
 
         function findUserByUsername(username) {
 
-            var url = '/api/project/username?username=' + username;
+            var url = '/api/username?username=' + username;
             return $http.get(url)
                 .then(function (response) {
                     return response.data;
@@ -71,7 +72,7 @@
         }
 
         function updateUser(userId, userDetails) {
-            var url = '/api/project/user/' + userId;
+            var url = '/api/user/' + userId;
             return $http.put(url, userDetails)
                 .then(function (response) {
                     return response.data;
@@ -80,7 +81,7 @@
         }
 
         function deleteUser(userId) {
-            var url = '/api/project/user/' + userId;
+            var url = '/api/user/' + userId;
             return $http.delete(url)
                 .then(function (response) {
                     return response.data;

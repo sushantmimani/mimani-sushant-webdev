@@ -9,6 +9,7 @@ var passport      = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 var FacebookStrategy = require('passport-facebook').Strategy;
+var bcrypt = require("bcrypt-nodejs");
 
 passport.use(new LocalStrategy(localStrategy));
 passport.serializeUser(serializeUser);
@@ -39,6 +40,8 @@ function checkLoggedIn (req, res) {
 
 function register(req, res) {
     var user = req.body;
+    user.password = bcrypt.hashSync(user.password);
+    console.log(user);
     userModel
         .createUser(user)
         .then(function (user) {
@@ -57,10 +60,16 @@ app.get ('/auth/google/callback',
         failureRedirect: '/assignment/index.html#!/login'
     }));
 
+
 var googleConfig = {
-    clientID: process.env.GOOGLE_CLIENTID,
-    clientSecret: process.env.GOOGLE_CLIENTSECRET
+    clientID: "325753145858-pgfuubsu4d78phk7rj1q6om09grdeshc.apps.googleusercontent.com",
+    clientSecret: "_K8ZO1hiYApx2j3KFsRqxBl_"
 };
+
+// var googleConfig = {
+//     clientID: process.env.GOOGLE_CLIENTID,
+//     clientSecret: process.env.GOOGLE_CLIENTSECRET
+// };
 
 function googleStrategy(token, refreshToken, profile, done) {
 
@@ -102,11 +111,14 @@ function googleStrategy(token, refreshToken, profile, done) {
         );
 }
 
-
 var facebookConfig = {
-    clientID: process.env.FACEBOOK_CLIENTID,
-    clientSecret: process.env.FACEBOOK_CLIENTSECRET
+    clientID: "2375254732699106",
+    clientSecret: "f3de6e23000094e0eafdcea991572ab0"
 };
+// var facebookConfig = {
+//     clientID: process.env.FACEBOOK_CLIENTID,
+//     clientSecret: process.env.FACEBOOK_CLIENTSECRET
+// };
 
 app.get ('/auth/facebook', passport.authenticate('facebook', { scope : 'email' }));
 app.get ('/auth/facebook/callback',
@@ -120,6 +132,7 @@ app.get ('/auth/facebook/callback',
 
 
 function localStrategy(username, password, done) {
+    console.log("in local strategy", username)
     userModel
         .findUserByCredentials(username, password)
         .then(
@@ -211,6 +224,8 @@ function updateUser(req, res) {
 
 function createUser(req, res) {
     var user = req.body;
+    user.password = bcrypt.hashSync(user.password);
+    console.log(user);
     userModel
         .createUser(user)
         .then(function (user) {
@@ -276,8 +291,9 @@ function deserializeUser(user, done) {
 }
 
 function login(req, res) {
-    var user = req.user;
-    res.json(user);
+    console.log("in login function",req.user);
+    res.json(req.user);
+
 }
 
 function logout(req, res) {

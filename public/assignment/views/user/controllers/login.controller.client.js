@@ -13,6 +13,7 @@
         var model = this;
 
         model.login = function (user) {
+            console.log("In client controller", user);
             userService
                 .login(user)
                 .then(login, handleError);
