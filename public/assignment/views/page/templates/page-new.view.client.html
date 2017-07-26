@@ -39,6 +39,9 @@
 </nav>
 
 <div class="container-fluid">
+    <div ng-show="model.error" class="alert alert-danger">
+        {{model.error}}
+    </div>
     <div class="row">
         <div class="col-sm-4 hidden-xs scrollable-left border">
             <ul class="list-group">

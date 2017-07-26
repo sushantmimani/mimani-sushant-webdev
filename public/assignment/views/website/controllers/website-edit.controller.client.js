@@ -52,6 +52,10 @@
         }
 
         function updateWebsite(website) {
+            if(website.name===undefined || website.name===""){
+                model.error = "Website must have a name.";
+                return;
+            }
            websiteService
                .updateWebsite(website, model.websiteId)
                .then(function (response) {

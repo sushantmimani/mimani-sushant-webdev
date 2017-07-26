@@ -11,6 +11,12 @@
 
 
 <div class="container-fluid">
+    <div ng-show="model.error" class="alert alert-danger">
+        {{model.error}}
+    </div>
+
+    Name
+    <input id="name" ng-model="model.widget.name" class="form-control"/>
     Text
     <input ng-model="model.widget.text" class="form-control"/>
     Rows

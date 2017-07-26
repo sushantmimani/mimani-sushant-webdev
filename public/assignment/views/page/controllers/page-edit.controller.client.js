@@ -49,6 +49,10 @@
         }
 
         function updatePage(page) {
+            if(page.name===undefined || page.name===""){
+                model.error = "Page must have a name.";
+                return;
+            }
            pageService
                .updatePage(model.pageId, page)
                .then(function (response) {

@@ -11,7 +11,14 @@
 <br/>
 <div class="container-fluid">
 
+    <div ng-show="model.error" class="alert alert-danger">
+        {{model.error}}
+    </div>
 
+    <label for="name">Name</label>
+    <input id="name"
+           ng-model="model.widget.name"
+           class="form-control"/>
     <div text-angular
          ng-model="model.widget.text"
          ta-toolbar="[['h1','h2','h3'],['bold','italics','underline','strikeThrough'],

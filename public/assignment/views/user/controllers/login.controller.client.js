@@ -13,7 +13,11 @@
         var model = this;
 
         model.login = function (user) {
-            console.log("In client controller", user);
+            if(!user || user.username===undefined || user.password===undefined)
+            {
+                model.message = "Please enter Username and Password";
+                return;
+            }
             userService
                 .login(user)
                 .then(login, handleError);

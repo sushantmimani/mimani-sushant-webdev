@@ -12,6 +12,10 @@
 
         // implementation
         function registerUser(username, password, password2) {
+            if(username===undefined || password===undefined || password2===undefined){
+                model.error="All fields are mandatory. Please try again";
+                return;
+            }
             userService
                 .findUserByUsername(username)
                 .then(login)

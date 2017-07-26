@@ -40,7 +40,6 @@
                 username: user.username,
                 password: user.password
             };
-            console.log("credentials",credentials);
             return $http.post("/api/login", credentials)
                 .then(function (response) {
                     return response.data;

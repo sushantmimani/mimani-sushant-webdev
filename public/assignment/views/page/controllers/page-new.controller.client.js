@@ -30,6 +30,10 @@
         init();
 
         function createPage(page){
+            if(page.name===undefined || page.name===""){
+                model.error = "Page must have a name.";
+                return;
+            }
             page.websiteId = model.websiteId;
             pageService
                 .createPage(page, model.websiteId )

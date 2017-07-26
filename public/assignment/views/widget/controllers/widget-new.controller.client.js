@@ -29,6 +29,10 @@
         }
 
         function createWidget(widget, type){
+            if(widget.name===undefined || widget.name===""){
+                model.error = "Widget must have a name.";
+                return;
+            }
             if(widget){
                 if(type === "IMAGE" || type === "YOUTUBE") {
                     if(!widget["url"]) {

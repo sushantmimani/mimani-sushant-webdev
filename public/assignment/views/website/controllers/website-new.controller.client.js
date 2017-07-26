@@ -16,6 +16,10 @@
         model.createWebsite = createWebsite;
 
         function createWebsite(website){
+            if(website.name===undefined){
+                model.error = "Website must have a name.";
+                return;
+            }
             websiteService
                 .createWebsite(website, model.userId)
                 .then(function (response){
