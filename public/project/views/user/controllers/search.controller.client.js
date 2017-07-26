@@ -5,7 +5,7 @@
 
 (function () {
     angular
-        .module('WAM')
+        .module('WebDevProject')
         .controller('searchController', searchController);
 
     function searchController($http, $sce) {

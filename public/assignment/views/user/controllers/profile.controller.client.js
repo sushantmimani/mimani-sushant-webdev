@@ -27,7 +27,7 @@
 
         function updateUser(userDetails) {
             userService
-                .updateUser(userId, userDetails)
+                .updateUser(currentUser._id, userDetails)
                 .then(function () {
                     model.message = "User updated successfully"
                 });

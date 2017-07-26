@@ -4,8 +4,8 @@
 
 (function () {
     angular
-        .module('WAM')
-        .factory('userService', userService);
+        .module('WebDevProject')
+        .factory('userService_project', userService);
 
     function userService($http) {
 
@@ -29,14 +29,14 @@
                 username: user.username,
                 password: user.password
             };
-            return $http.post("/api/login", credentials)
+            return $http.post("/api/project/login", credentials)
                 .then(function (response) {
                     return response.data;
                 })
 
         }
         function findUserById(userId) {
-            var url = '/api/user/' + userId;
+            var url = '/api/project/user/' + userId;
             return $http.get(url)
                 .then(function (response) {
                     return response.data;
@@ -45,7 +45,7 @@
         }
 
         function findUserByCredentials(username, password) {
-            var url = "/api/user?username=" + username + "&password=" + password;
+            var url = "/api/project/user?username=" + username + "&password=" + password;
             return $http.get(url)
                 .then(function (response) {
                     return response.data;
@@ -53,7 +53,7 @@
         }
 
         function createUser(user) {
-            var url = "/api/user";
+            var url = "/api/project/user";
             return $http.post(url, user)
                 .then(function (response) {
 
@@ -63,7 +63,7 @@
 
         function findUserByUsername(username) {
 
-            var url = '/api/username?username=' + username;
+            var url = '/api/project/username?username=' + username;
             return $http.get(url)
                 .then(function (response) {
                     return response.data;
@@ -72,7 +72,7 @@
         }
 
         function updateUser(userId, userDetails) {
-            var url = '/api/user/' + userId;
+            var url = '/api/project/user/' + userId;
             return $http.put(url, userDetails)
                 .then(function (response) {
                     return response.data;
@@ -81,7 +81,7 @@
         }
 
         function deleteUser(userId) {
-            var url = '/api/user/' + userId;
+            var url = '/api/project/user/' + userId;
             return $http.delete(url)
                 .then(function (response) {
                     return response.data;

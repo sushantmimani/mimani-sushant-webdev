@@ -4,7 +4,7 @@
 
 (function () {
     angular
-        .module('WAM')
+        .module('WebDevProject')
         .config(configuration);
 
     function configuration($routeProvider) {

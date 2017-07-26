@@ -4,11 +4,11 @@
 
 var app = require('../../express');
 var userId;
-var userModel = require('../models/user/user.model.server');
+var userModel_project = require('../models/user/user.model.project.server');
 var passport      = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
-var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
-var FacebookStrategy = require('passport-facebook').Strategy;
+var GoogleStrategyProject = require('passport-google-oauth').OAuth2Strategy;
+var FacebookStrategyProject = require('passport-facebook').Strategy;
 
 passport.use(new LocalStrategy(localStrategy));
 passport.serializeUser(serializeUser);
@@ -52,7 +52,7 @@ app.get('/auth/project/facebook/callback',
 
 
 function localStrategy(username, password, done) {
-    userModel
+    userModel_project
         .findUserByCredentials(username, password)
         .then(
             function(user) {
@@ -65,44 +65,36 @@ function localStrategy(username, password, done) {
         );
 }
 
-// var googleConfig = {
-//     clientID: process.env.GOOGLE_CLIENTID,
-//     clientSecret: process.env.GOOGLE_CLIENTSECRET
-// }
-
 var googleConfig = {
-    clientID: "325753145858-pgfuubsu4d78phk7rj1q6om09grdeshc.apps.googleusercontent.com",
-    clientSecret: "_K8ZO1hiYApx2j3KFsRqxBl_"
-};
-
-// var facebookConfig = {
-//     clientID: process.env.FACEBOOK_CLIENTID,
-//     clientSecret: process.env.FACEBOOK_CLIENTSECRET
-// }
-
-var facebookConfig = {
-    clientID: "2375254732699106",
-    clientSecret: "f3de6e23000094e0eafdcea991572ab0"
+    clientID: "325753145858-3c0l0eqqvl1ucpb6mlt4d8uoilfqrcmt.apps.googleusercontent.com",
+    clientSecret: "Hrz8RZxuXD7tT5rdLfFO02CT"
 }
 
+
+var facebookConfig = {
+    clientID: process.env.FACEBOOK_CLIENTID,
+    clientSecret: process.env.FACEBOOK_CLIENTSECRET
+}
+
+
 if(process.env.MLAB_USERNAME_WEBDEV) {
-    googleConfig.callbackURL = "https://mimani-sushant-webdev.herokuapp.com/auth/google/callback"
-    facebookConfig.callbackURL = "https://mimani-sushant-webdev.herokuapp.com/auth/facebook/callback"
+    googleConfig.callbackURL = "https://mimani-sushant-webdev.herokuapp.com/auth/project/google/callback"
+    facebookConfig.callbackURL = "https://mimani-sushant-webdev.herokuapp.com/auth/project/facebook/callback"
 
 }
 else{
-    googleConfig.callbackURL = "http://127.0.0.1:3000/auth/google/callback"
-    facebookConfig.callbackURL = "http://127.0.0.1:3000/auth/facebook/callback"
+    googleConfig.callbackURL = "http://127.0.0.1:3000/auth/project/google/callback"
+    facebookConfig.callbackURL = "http://127.0.0.1:3000/auth/project/facebook/callback"
 }
 
 
 
-passport.use(new GoogleStrategy(googleConfig, googleStrategy));
-passport.use(new FacebookStrategy(facebookConfig, facebookStrategy));
+passport.use(new GoogleStrategyProject(googleConfig, googleStrategyProject));
+passport.use(new FacebookStrategyProject(facebookConfig, facebookStrategyProject));
 
 
-function facebookStrategy(token, refreshToken, profile, done) {
-    userModel
+function facebookStrategyProject(token, refreshToken, profile, done) {
+    userModel_project
         .findUserByFacebookId(profile.id)
         .then(
             function(user) {
@@ -120,7 +112,7 @@ function facebookStrategy(token, refreshToken, profile, done) {
                             token: token
                         }
                     };
-                    return userModel.createUser(newFacebookUser);
+                    return userModel_project.createUser(newFacebookUser);
                 }
             },
             function(err) {
@@ -137,8 +129,8 @@ function facebookStrategy(token, refreshToken, profile, done) {
         );
 }
 
-function googleStrategy(token, refreshToken, profile, done) {
-    userModel
+function googleStrategyProject(token, refreshToken, profile, done) {
+    userModel_project
         .findUserByGoogleId(profile.id)
         .then(
             function(user) {
@@ -158,7 +150,7 @@ function googleStrategy(token, refreshToken, profile, done) {
                         }
                     };
 
-                    return userModel.createUser(newGoogleUser)
+                    return userModel_project.createUser(newGoogleUser)
 
                 }
             },
@@ -179,7 +171,7 @@ function googleStrategy(token, refreshToken, profile, done) {
 
 function deleteUser(req, res) {
     var userId = req.params.userId;
-    userModel
+    userModel_project
         .deleteUser(userId)
         .then(function (status) {
             res.send(status);
@@ -188,7 +180,7 @@ function deleteUser(req, res) {
 
 function updateUser(req, res) {
     var user = req.body;
-    userModel
+    userModel_project
         .updateUser(req.params.userId, user)
         .then(function (status) {
             res.send(status);
@@ -197,7 +189,7 @@ function updateUser(req, res) {
 
 function createUser(req, res) {
     var user = req.body;
-    userModel
+    userModel_project
         .createUser(user)
         .then(function (user) {
             res.json(user);
@@ -208,7 +200,7 @@ function createUser(req, res) {
 
 function findUserById(req, res) {
     var userId = req.params.userId;
-    userModel
+    userModel_project
         .findUserById(userId)
         .then(function (user){
             res.json(user);
@@ -218,7 +210,7 @@ function findUserById(req, res) {
 function findUserByCredentials(req,res) {
     var username = req.query.username;
     var password = req.query.password;
-    userModel
+    userModel_project
         .findUserByCredentials(username, password)
         .then(function (user) {
             if(user){
@@ -232,7 +224,7 @@ function findUserByCredentials(req,res) {
 
 function findUserByUsername(req,res) {
     var username = req.query.username;
-    userModel.findUserByUsername(username)
+    userModel_project.findUserByUsername(username)
         .then(function (user) {
             if (user) {
                 res.json(user);
@@ -248,7 +240,7 @@ function serializeUser(user, done) {
 }
 
 function deserializeUser(user, done) {
-    userModel
+    userModel_project
         .findUserById(user._id)
         .then(
             function (user) {

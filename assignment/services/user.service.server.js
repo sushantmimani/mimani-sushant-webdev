@@ -62,14 +62,9 @@ app.get ('/auth/google/callback',
 
 
 var googleConfig = {
-    clientID: "325753145858-pgfuubsu4d78phk7rj1q6om09grdeshc.apps.googleusercontent.com",
-    clientSecret: "_K8ZO1hiYApx2j3KFsRqxBl_"
+    clientID: process.env.GOOGLE_CLIENTID,
+    clientSecret: process.env.GOOGLE_CLIENTSECRET
 };
-
-// var googleConfig = {
-//     clientID: process.env.GOOGLE_CLIENTID,
-//     clientSecret: process.env.GOOGLE_CLIENTSECRET
-// };
 
 function googleStrategy(token, refreshToken, profile, done) {
 
@@ -112,13 +107,9 @@ function googleStrategy(token, refreshToken, profile, done) {
 }
 
 var facebookConfig = {
-    clientID: "2375254732699106",
-    clientSecret: "f3de6e23000094e0eafdcea991572ab0"
+    clientID: process.env.FACEBOOK_CLIENTID,
+    clientSecret: process.env.FACEBOOK_CLIENTSECRET
 };
-// var facebookConfig = {
-//     clientID: process.env.FACEBOOK_CLIENTID,
-//     clientSecret: process.env.FACEBOOK_CLIENTSECRET
-// };
 
 app.get ('/auth/facebook', passport.authenticate('facebook', { scope : 'email' }));
 app.get ('/auth/facebook/callback',
@@ -132,7 +123,6 @@ app.get ('/auth/facebook/callback',
 
 
 function localStrategy(username, password, done) {
-    console.log("in local strategy", username)
     userModel
         .findUserByCredentials(username, password)
         .then(
@@ -291,7 +281,6 @@ function deserializeUser(user, done) {
 }
 
 function login(req, res) {
-    console.log("in login function",req.user);
     res.json(req.user);
 
 }

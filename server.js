@@ -20,7 +20,7 @@ app.use(app.express.static(__dirname + '/public'));
 
 
 require('./assignment/app');
-require('./project/app');
+// require('./project/app');
 
 
 app.listen(process.env.PORT || 3000, function () {

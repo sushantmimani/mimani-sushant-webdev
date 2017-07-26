@@ -10,6 +10,8 @@ userModel.findUserByUsername = findUserByUsername;
 userModel.findUserByCredentials = findUserByCredentials;
 userModel.updateUser = updateUser;
 userModel.deleteUser = deleteUser;
+userModel.findUserByGoogleId = findUserByGoogleId;
+userModel.findUserByFacebookId = findUserByFacebookId;
 
 
 //additional methods
@@ -18,6 +20,15 @@ userModel.addWebsite = addWebsite;
 userModel.deleteWebsite = deleteWebsite;
 
 module.exports = userModel;
+
+function findUserByFacebookId(facebookId) {
+    return userModel.findOne({'facebook.id': facebookId});
+
+}
+
+function findUserByGoogleId(googleId) {
+    return userModel.findOne({'google.id': googleId});
+}
 
 function deleteWebsite(userId, websiteId) {
     return userModel
@@ -56,7 +67,7 @@ function findUserByUsername(username) {
 
 function findUserByCredentials(username, password) {
     return userModel
-        .findOne({username: username, password: password})
+        .findOne({username: username})
         .then(function (user) {
                 if(user && bcrypt.compareSync(password, user.password)) {
                     return user;

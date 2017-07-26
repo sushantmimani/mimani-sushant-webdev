@@ -5,10 +5,10 @@
 
 (function () {
     angular
-        .module('WAM')
+        .module('WebDevProject')
         .controller('loginController', loginController);
 
-    function loginController($location, userService) {
+    function loginController($location, userService_project) {
 
         var model = this;
 
