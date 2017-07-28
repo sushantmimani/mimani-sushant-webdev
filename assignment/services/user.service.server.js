@@ -3,17 +3,18 @@
  */
 
 var app = require('../../express');
-var userId;
 var userModel = require('../models/user/user.model.server');
-var passport      = require('passport');
+var passport_assignment = require('passport');
+app.use(passport_assignment.initialize());
+app.use(passport_assignment.session());
 var LocalStrategy = require('passport-local').Strategy;
 var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 var FacebookStrategy = require('passport-facebook').Strategy;
 var bcrypt = require("bcrypt-nodejs");
 
-passport.use(new LocalStrategy(localStrategy));
-passport.serializeUser(serializeUser);
-passport.deserializeUser(deserializeUser);
+passport_assignment.use(new LocalStrategy(localStrategy));
+passport_assignment.serializeUser(serializeUser);
+passport_assignment.deserializeUser(deserializeUser);
 
 app.get ('/api/user', findUserByCredentials);
 app.get ('/api/user/:userId',findUserById );
@@ -26,7 +27,7 @@ app.delete ('/api/user/:userId', deleteUser);
 app.post ('/api/user', createUser);
 app.post  ('/api/logout', logout);
 app.post  ('/api/register', register);
-app.post ('/api/login', passport.authenticate('local'), login);
+app.post ('/api/login', passport_assignment.authenticate('local'), login);
 
 
 
@@ -53,9 +54,10 @@ function register(req, res) {
         });
 }
 
-app.get ('/auth/google', passport.authenticate('google', { scope : ['profile', 'email'] }));
+app.get ('/auth/google', passport_assignment.authenticate('google', { scope : ['profile', 'email'] }));
+
 app.get ('/auth/google/callback',
-    passport.authenticate('google', {
+    passport_assignment.authenticate('google', {
         successRedirect: '/assignment/index.html#!/profile',
         failureRedirect: '/assignment/index.html#!/login'
     }));
@@ -111,9 +113,9 @@ var facebookConfig = {
     clientSecret: process.env.FACEBOOK_CLIENTSECRET
 };
 
-app.get ('/auth/facebook', passport.authenticate('facebook', { scope : 'email' }));
+app.get ('/auth/facebook', passport_assignment.authenticate('facebook', { scope : 'email' }));
 app.get ('/auth/facebook/callback',
-    passport.authenticate('facebook', {
+    passport_assignment.authenticate('facebook', {
         successRedirect: '/assignment/index.html#!/profile',
         failureRedirect: '/assignment/index.html#!/login'
     }), function(req, res){
@@ -146,13 +148,13 @@ if(process.env.MLAB_USERNAME_WEBDEV) {
 
 }
 else{
-    googleConfig.callbackURL = "http://127.0.0.1:3000/auth/google/callback"
-    facebookConfig.callbackURL = "http://127.0.0.1:3000/auth/facebook/callback"
+    googleConfig.callbackURL = "http://localhost:3000/auth/google/callback"
+    facebookConfig.callbackURL = "http://localhost:3000/auth/facebook/callback"
 }
 
 
-passport.use(new GoogleStrategy(googleConfig, googleStrategy));
-passport.use(new FacebookStrategy(facebookConfig, facebookStrategy));
+passport_assignment.use(new GoogleStrategy(googleConfig, googleStrategy));
+passport_assignment.use(new FacebookStrategy(facebookConfig, facebookStrategy));
 
 
 function facebookStrategy(token, refreshToken, profile, done) {

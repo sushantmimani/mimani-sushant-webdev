@@ -138,6 +138,10 @@ h1, h2, h3, h4, h5, h6 {
   -o-transition: 0.3s;
   transition: 0.3s;
 }
+
+.icon {
+  color: whitesmoke;
+}
 .fh5co-tab-wrap .fh5co-tab-menu li a .menu-text {
   display: block;
   -webkit-transition: 0.5s;
@@ -148,6 +152,10 @@ h1, h2, h3, h4, h5, h6 {
   .fh5co-tab-wrap .fh5co-tab-menu li a .menu-text {
     display: none;
   }
+}
+
+.menu-text {
+  color: whitesmoke;
 }
 @media screen and (max-width: 768px) {
   .fh5co-tab-wrap .fh5co-tab-menu li a {
