@@ -4,7 +4,7 @@
 
 (function () {
     angular
-        .module('WAM')
+        .module('WebDevProject')
         .config(configuration);
 
     function configuration($routeProvider) {
@@ -17,7 +17,7 @@
                 controller: 'loginController',
                 controllerAs: 'model'
             })
-            .when('/user/:userId', {
+            .when('/profile', {
                 templateUrl: 'views/user/templates/profile.view.client.html',
                 controller: 'profileController',
                 controllerAs: 'model'

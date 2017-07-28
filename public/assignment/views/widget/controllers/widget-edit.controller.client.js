@@ -8,10 +8,10 @@
         .module('WAM')
         .controller('widgetEditController', widgetEditController);
 
-    function widgetEditController($routeParams, widgetService, $location) {
+    function widgetEditController($routeParams, widgetService, $location, currentUser) {
 
         var model = this;
-        model.userId = $routeParams['userId'];
+        model.userId = currentUser._id;
         model.websiteId = $routeParams['websiteId']
         model.pageId = $routeParams['pageId']
         model.widgetId = $routeParams['widgetId']
@@ -35,17 +35,21 @@
             widgetService
                 .deleteWidget(model.widgetId)
                 .then(function (response) {
-                    $location.url('/user/'+model.userId+'/website/'+model.websiteId+'/page/'+model.pageId+'/widget')
+                    $location.url('/profile/website/'+model.websiteId+'/page/'+model.pageId+'/widget')
                 })
 
         }
 
         function updateWidget(widget) {
+            if(widget.name===undefined || widget.name===""){
+                model.error = "Widget must have a name.";
+                return;
+            }
            widgetService
                .updateWidget(widget, model.widgetId)
                .then(function (response) {
 
-                   $location.url('/user/'+model.userId+'/website/'+model.websiteId+'/page/'+model.pageId+'/widget');
+                   $location.url('/profile/website/'+model.websiteId+'/page/'+model.pageId+'/widget');
 
                })
         }

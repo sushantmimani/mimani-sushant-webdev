@@ -1,5 +1,5 @@
 <nav class="navbar navbar-default navbar-fixed-top wd-child">
-    <a href="#!user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget">
+    <a href="#!/profile/website/{{model.websiteId}}/page/{{model.pageId}}/widget">
         <span class="glyphicon glyphicon-chevron-left pull-left navbar-brand"></span>
     </a>
     <div class="navbar-brand">Widget Edit</div>
@@ -11,7 +11,14 @@
 <br/>
 <div class="container-fluid">
 
+    <div ng-show="model.error" class="alert alert-danger">
+        {{model.error}}
+    </div>
 
+    <label for="name">Name</label>
+    <input id="name"
+           ng-model="model.widget.name"
+           class="form-control"/>
     <div text-angular
          ng-model="model.widget.text"
          ta-toolbar="[['h1','h2','h3'],['bold','italics','underline','strikeThrough'],

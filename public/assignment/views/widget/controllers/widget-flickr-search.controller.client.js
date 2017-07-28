@@ -8,10 +8,10 @@
         .module('WAM')
         .controller('FlickrImageSearchController', FlickrImageSearchController);
 
-    function FlickrImageSearchController($routeParams, flickrService, $location, widgetService) {
+    function FlickrImageSearchController($routeParams, flickrService, $location, widgetService, currentUser) {
 
         var model = this;
-        model.userId = $routeParams['userId'];
+        model.userId = currentUser._id;
         model.websiteId = $routeParams['websiteId']
         model.pageId = $routeParams['pageId']
         model.widgetId = $routeParams['widgetId']
@@ -27,7 +27,7 @@
                     widgetService
                         .updateWidget(model.widget, model.widgetId)
                         .then(function (response) {
-                            $location.url('/user/'+model.userId+'/website/'+model.websiteId+'/page/'+model.pageId+"/widget/"+model.widgetId);
+                            $location.url('/profile/website/'+model.websiteId+'/page/'+model.pageId+"/widget/"+model.widgetId);
 
                         })
                 });

@@ -8,10 +8,10 @@
         .module('WAM')
         .controller('websiteEditController', websiteEditController);
 
-    function websiteEditController($routeParams, websiteService, $location) {
+    function websiteEditController($routeParams, websiteService, $location, currentUser) {
 
         var model = this;
-        model.userId = $routeParams['userId'];
+        model.userId = currentUser._id;
         model.websiteId = $routeParams['websiteId']
         model.hasWebsite = false;
 
@@ -47,15 +47,19 @@
             websiteService
                 .deleteWebsite(model.websiteId)
                 .then(function (response) {
-                    $location.url('/user/'+model.userId+'/website');
+                    $location.url('/profile/website');
                 });
         }
 
         function updateWebsite(website) {
+            if(website.name===undefined || website.name===""){
+                model.error = "Website must have a name.";
+                return;
+            }
            websiteService
                .updateWebsite(website, model.websiteId)
                .then(function (response) {
-                   $location.url('/user/'+model.userId+'/website');
+                   $location.url('/profile/website');
                });
         }
 

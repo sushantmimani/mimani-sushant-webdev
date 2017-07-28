@@ -5,10 +5,10 @@
 
 (function () {
     angular
-        .module('WAM')
+        .module('WebDevProject')
         .controller('profileController', profileController);
 
-    function profileController ($location, $routeParams, userService ) {
+    function profileController ($location, $routeParams, userService_project ) {
 
         var model = this;
         var userId = $routeParams['userId'];

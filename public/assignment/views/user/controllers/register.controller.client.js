@@ -12,6 +12,10 @@
 
         // implementation
         function registerUser(username, password, password2) {
+            if(username===undefined || password===undefined || password2===undefined){
+                model.error="All fields are mandatory. Please try again";
+                return;
+            }
             userService
                 .findUserByUsername(username)
                 .then(login)
@@ -30,11 +34,11 @@
                             password: password
                         };
                         userService
-                            .createUser(user)
+                            .register(user)
                             .then(redirectToProfile)
 
                         function redirectToProfile(user) {
-                            $location.url('/user/' + user._id);
+                            $location.url('/profile');
 
                         }
                     }

@@ -1,14 +1,14 @@
 <nav class="navbar navbar-default navbar-fixed-top ">
     <div class="row">
         <div class="col-sm-4 hidden-xs">
-            <a href="#!/user/{{model.userId}}/website" class="navbar-brand">
+            <a href="#!/profile/website" class="navbar-brand">
                 <span class="glyphicon glyphicon-chevron-left">
                 </span>
             </a>
             <a class="navbar-brand">
                 Websites
             </a>
-            <a href="#!/user/{{model.userId}}/website/new" class="navbar-brand pull-right">
+            <a href="#!/profile/website/new" class="navbar-brand pull-right">
               <span class="glyphicon glyphicon-plus">
               </span>
             </a>
@@ -24,7 +24,7 @@
             </a>
         </div>
         <div class="col-xs-12 visible-xs">
-            <a href="#!/user/{{model.userId}}/website" class="navbar-brand">
+            <a href="#!/profile/website" class="navbar-brand">
                 <span class="glyphicon glyphicon-chevron-left">
                 </span>
             </a>
@@ -39,14 +39,18 @@
 </nav>
 
 <div class="container-fluid">
+
+    <div ng-show="model.error" class="alert alert-danger">
+        {{model.error}}
+    </div>
     <div class="row">
         <div class="col-sm-4 hidden-xs scrollable-left border">
             <ul class="list-group">
                 <li ng-repeat="website in model.websites" class="list-group-item">
-                    <a href="#!/user/{{model.userId}}/website/{{website._id}}/page">
+                    <a href="#!/profile/website/{{website._id}}/page">
                         {{website.name}}
                     </a>
-                    <a href="#!/user/{{model.userId}}/website/{{website._id}}">
+                    <a href="#!/profile/website/{{website._id}}">
                         <span class="glyphicon glyphicon-cog pull-right"/>
                     </a>
                 </li>

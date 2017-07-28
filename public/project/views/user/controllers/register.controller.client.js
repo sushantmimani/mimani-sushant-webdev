@@ -1,9 +1,9 @@
 (function () {
     angular
-        .module('WAM')
+        .module('WebDevProject')
         .controller('registerController', registerController);
 
-    function registerController($location, userService) {
+    function registerController($location, userService_project) {
 
         var model = this;
 

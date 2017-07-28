@@ -4,5 +4,5 @@
 
 (function () {
     angular
-        .module('WAM', ['ngRoute']);
+        .module('WebDevProject', ['ngRoute']);
 })();

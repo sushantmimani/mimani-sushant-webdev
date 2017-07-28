@@ -8,18 +8,22 @@
         .module('WAM')
         .controller('websiteNewController', websiteNewController);
 
-    function websiteNewController($routeParams, websiteService, $location) {
+    function websiteNewController($routeParams, websiteService, $location, currentUser) {
 
         var model = this;
-        model.userId = $routeParams['userId'];
+        model.userId = currentUser._id;
         model.hasWebsite = false;
         model.createWebsite = createWebsite;
 
         function createWebsite(website){
+            if(website.name===undefined){
+                model.error = "Website must have a name.";
+                return;
+            }
             websiteService
                 .createWebsite(website, model.userId)
                 .then(function (response){
-                    $location.url('/user/'+model.userId+'/website');
+                    $location.url('/profile/website');
                 })
         };
 
