@@ -26,11 +26,11 @@
                 if (found !== null) {
                     $location.url('/profile');
                 } else {
-                    model.message = "Username " + user.username + " not found, please try again";
+                    model.message = "Incorrect username/password";
                 }
             }
             function handleError(error) {
-                model.message = "Username " + user.username + " not found, please try again";
+                model.message = "Incorrect username/password";
 
             }
         }
