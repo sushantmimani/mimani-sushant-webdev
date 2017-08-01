@@ -5,26 +5,42 @@
 (function () {
     angular
         .module('WebDevProject')
-        .factory('userService_project', userService);
+        .factory('userService', userService);
 
     function userService($http) {
 
         var api = {
-            findUserById: findUserById,
-            findUserByCredentials: findUserByCredentials,
             createUser: createUser,
             findUserByUsername: findUserByUsername,
             updateUser: updateUser,
             deleteUser: deleteUser,
-            login: login
+            login: login,
+            checkLoggedIn: checkLoggedIn,
+            logout: logout,
+            register: register
 
         };
 
         return api;
 
+        function logout() {
+            var url = '/api/project/logout';
+            return $http.post(url)
+                .then(function (response) {
+                    return response.data;
+                });
+        }
+
+        function register(user) {
+            var url='/api/project/register';
+            return $http.post(url, user)
+                .then(function (response) {
+                    return response.data;
+                })
+
+        }
 
         function login(user) {
-            console.log("in user service", user);
             var credentials = {
                 username: user.username,
                 password: user.password
@@ -35,22 +51,7 @@
                 })
 
         }
-        function findUserById(userId) {
-            var url = '/api/project/user/' + userId;
-            return $http.get(url)
-                .then(function (response) {
-                    return response.data;
-                })
 
-        }
-
-        function findUserByCredentials(username, password) {
-            var url = "/api/project/user?username=" + username + "&password=" + password;
-            return $http.get(url)
-                .then(function (response) {
-                    return response.data;
-                });
-        }
 
         function createUser(user) {
             var url = "/api/project/user";
@@ -83,6 +84,14 @@
         function deleteUser(userId) {
             var url = '/api/project/user/' + userId;
             return $http.delete(url)
+                .then(function (response) {
+                    return response.data;
+                });
+        }
+
+        function checkLoggedIn() {
+            var url = '/api/project/checkLoggedIn';
+            return $http.get(url)
                 .then(function (response) {
                     return response.data;
                 });

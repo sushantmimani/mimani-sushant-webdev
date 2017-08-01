@@ -8,7 +8,7 @@
         .module('WebDevProject')
         .controller('loginController', loginController);
 
-    function loginController($location, userService_project) {
+    function loginController($location, userService) {
 
         var model = this;
 
@@ -19,7 +19,7 @@
 
             function login(found) {
                 if (found !== null) {
-                    $location.url('/profile');
+                    $location.url('/search');
                 } else {
                     model.message = "Username " + user.username + " not found, please try again";
                 }

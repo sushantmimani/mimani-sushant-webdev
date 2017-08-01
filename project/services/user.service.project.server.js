@@ -12,22 +12,20 @@ var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 var FacebookStrategy = require('passport-facebook').Strategy;
 var bcrypt = require("bcrypt-nodejs");
 
-passport_project.use(new LocalStrategy(localStrategy));
+passport_project.use('localproject',new LocalStrategy(localStrategy));
 passport_project.serializeUser(serializeUser);
 passport_project.deserializeUser(deserializeUser);
 
-app.get ('/api/user', findUserByCredentials);
-app.get ('/api/user/:userId',findUserById );
-app.get ('/api/username',findUserByUsername);
-app.get ('/api/checkLoggedIn', checkLoggedIn);
+app.get ('/api/project/username',findUserByUsername);
+app.get ('/api/project/checkLoggedIn', checkLoggedIn);
 
 app.put  ('/api/user/:userId', updateUser);
 app.delete ('/api/user/:userId', deleteUser);
 
-app.post ('/api/user', createUser);
-app.post  ('/api/logout', logout);
-app.post  ('/api/register', register);
-app.post ('/api/login', passport_project.authenticate('local'), login);
+app.post ('/api/project/user', createUser);
+app.post  ('/api/project/logout', logout);
+app.post  ('/api//project/register', register);
+app.post ('/api/project/login', passport_project.authenticate('localproject'), login);
 
 
 
@@ -42,7 +40,6 @@ function checkLoggedIn (req, res) {
 function register(req, res) {
     var user = req.body;
     user.password = bcrypt.hashSync(user.password);
-    console.log(user);
     userModel
         .createUser(user)
         .then(function (user) {
@@ -125,6 +122,7 @@ app.get ('/project/auth/facebook/callback',
 
 
 function localStrategy(username, password, done) {
+    console.log(username, password);
     userModel
         .findUserByCredentials(username, password)
         .then(
