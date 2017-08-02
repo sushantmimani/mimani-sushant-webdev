@@ -69,13 +69,11 @@ var googleConfig = {
 };
 
 function googleStrategy(token, refreshToken, profile, done) {
-
     userModel
         .findUserByGoogleId(profile.id)
         .then(
             function(user) {
                 if(user) {
-                    userId = user._id;
                     return done(null, user);
                 } else {
 
