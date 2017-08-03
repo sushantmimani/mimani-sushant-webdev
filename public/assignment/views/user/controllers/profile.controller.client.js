@@ -35,7 +35,7 @@
 
     function deleteUser(userDetails) {
         userService
-            .deleteUser(userId, userDetails)
+            .deleteUser(currentUser._id, userDetails)
             .then(function () {
                 model.message = "User deleted successfully"
                 $location.url('/login')
