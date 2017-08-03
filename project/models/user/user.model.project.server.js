@@ -1,6 +1,7 @@
 var mongoose = require('mongoose');
 var userSchema_project = require('./user.schema.project.server');
 var userModel_project = mongoose.model('userModel_project', userSchema_project);
+var bcrypt = require("bcrypt-nodejs");
 
 // methods required as per the assignment
 userModel_project.createUser = createUser;
@@ -67,7 +68,15 @@ function findUserByUsername(username) {
 }
 
 function findUserByCredentials(username, password) {
-    return userModel_project.findOne({username: username, password: password});
+     return userModel_project
+        .findOne({username: username})
+        .then(function (user) {
+            if(user && bcrypt.compareSync(password, user.password)) {
+                return user;
+            } else {
+                return null;
+            }
+        });
 }
 
 function updateUser(userId, newUser) {

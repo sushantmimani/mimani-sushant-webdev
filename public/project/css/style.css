@@ -4,7 +4,9 @@ select.form-control {
     margin-bottom: 5px;
 }
 
-
+.header-text {
+    color: whitesmoke;
+}
 .wd-search-padding {
     padding-top: 10px;
 }
@@ -126,4 +128,8 @@ select.form-control {
 .btn-toolbar,
 .wbdv-photo-padding {
     padding-bottom: 5px;
+}
+
+.btn {
+    margin-top: 5px;
 }

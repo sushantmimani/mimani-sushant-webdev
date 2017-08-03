@@ -8,10 +8,10 @@
         .module('WebDevProject')
         .controller('profileController', profileController);
 
-    function profileController ($location, $routeParams, userService_project ) {
+    function profileController ($location, $routeParams, userService, currentUser ) {
 
         var model = this;
-        var userId = $routeParams['userId'];
+        var userId = currentUser._id;
         model.updateUser = updateUser;
         model.deleteUser = deleteUser;
 
