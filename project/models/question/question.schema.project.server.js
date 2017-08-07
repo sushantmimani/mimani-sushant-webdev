@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
 
-var userSchema_project = mongoose.Schema({
+var questionSchema = mongoose.Schema({
     username: {type: String, unique: true},
     password: String,
     firstName: String,
@@ -19,6 +19,6 @@ var userSchema_project = mongoose.Schema({
         id:    String,
         token: String
     }
-}, {collection: "user"});
+}, {collection: "question"});
 
-module.exports = userSchema_project;
+module.exports = questionSchema;

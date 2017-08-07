@@ -133,3 +133,11 @@ select.form-control {
 .btn {
     margin-top: 5px;
 }
+
+.wd-footer {
+    background-color: whitesmoke;
+}
+
+.wd-text-align {
+    text-align: left;
+}

@@ -8,24 +8,13 @@
         .module('WebDevProject')
         .controller('profileController', profileController);
 
-    function profileController ($location, $routeParams, userService, currentUser ) {
+    function profileController ($location, userService, currentUser ) {
 
         var model = this;
-        var userId = currentUser._id;
+        model.user = currentUser;
         model.updateUser = updateUser;
         model.deleteUser = deleteUser;
 
-        function init() {
-
-            userService
-                .findUserById(userId)
-                .then(renderUser);
-
-            function renderUser(user) {
-                model.user = user;
-            }
-        }
-        init();
 
         function updateUser(userDetails) {
             userService

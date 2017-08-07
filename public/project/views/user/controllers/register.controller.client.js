@@ -30,11 +30,11 @@
                             password: password
                         };
                         userService
-                            .createUser(user)
+                            .register(user)
                             .then(redirectToProfile)
 
                         function redirectToProfile(user) {
-                            $location.url('/profile');
+                            $location.url('/search');
 
                         }
                     }

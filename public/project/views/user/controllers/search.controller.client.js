@@ -6,14 +6,23 @@
 (function () {
     angular
         .module('WebDevProject')
-        .controller('searchController', searchController);
+        .controller('searchController', searchController, );
 
-    function searchController($http, $sce) {
+    function searchController($http, $sce, currentUser, $location, userService) {
 
         var model = this;
-
+        model.user = currentUser;
         model.searchGoogle = searchGoogle;
         model.trustThisContent = trustThisContent;
+
+        model.logout = logout;
+
+        function logout() {
+            userService.logout()
+                .then(function (response) {
+                    $location.url('/login');
+                })
+        }
 
 
         function searchGoogle(text) {

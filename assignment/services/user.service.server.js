@@ -42,7 +42,6 @@ function checkLoggedIn (req, res) {
 function register(req, res) {
     var user = req.body;
     user.password = bcrypt.hashSync(user.password);
-    console.log(user);
     userModel
         .createUser(user)
         .then(function (user) {
@@ -215,7 +214,6 @@ function updateUser(req, res) {
 function createUser(req, res) {
     var user = req.body;
     user.password = bcrypt.hashSync(user.password);
-    console.log(user);
     userModel
         .createUser(user)
         .then(function (user) {

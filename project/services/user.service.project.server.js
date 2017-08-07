@@ -24,7 +24,7 @@ app.delete ('/api/user/:userId', deleteUser);
 
 app.post ('/api/project/user', createUser);
 app.post  ('/api/project/logout', logout);
-app.post  ('/api//project/register', register);
+app.post  ('/api/project/register', register);
 app.post ('/api/project/login', passport_project.authenticate('localproject'), login);
 
 
@@ -122,7 +122,6 @@ app.get ('/project/auth/facebook/callback',
 
 
 function localStrategy(username, password, done) {
-    console.log(username, password);
     userModel
         .findUserByCredentials(username, password)
         .then(
@@ -215,7 +214,6 @@ function updateUser(req, res) {
 function createUser(req, res) {
     var user = req.body;
     user.password = bcrypt.hashSync(user.password);
-    console.log(user);
     userModel
         .createUser(user)
         .then(function (user) {
