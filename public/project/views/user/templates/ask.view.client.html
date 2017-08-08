@@ -1,0 +1,40 @@
+<div ng-style="{'background-image':'url(../../../../../project/assets/img/ask.jpg)','background-repeat': 'no-repeat',
+ 'height':'800px' ,'background-size': '100% 800px' }">
+
+    <div ng-include="'./views/common/header.view.client.html'">
+    </div>
+
+    <div class="container-fluid">
+        <h1 class="header-text">Ask a new question</h1>
+
+
+        <label for="title" class="header-text">Title</label>
+
+        <input id="title"
+               ng-model="question.title"
+               class="form-control"
+               placeholder="Title"/>
+
+
+        <label for="description" class="header-text">Description</label>
+        <div class="form-group">
+    <textarea class="form-control size" id="description"
+              ng-model="question.description"
+              placeholder="Enter question description">
+                                    </textarea>
+
+            <label for="category" class="header-text"> Select Category: </label><br>
+            <select ng-model="question.category">
+                <option id="category" ng-repeat="category in model.categories">{{category}}</option>
+            </select> </div>
+
+        <a ng-click="model.createQuestion(question)"
+           class="btn  btn-primary">Ask</a>
+
+        <a href="#!/read"
+           class="btn  btn-danger">Cancel</a>
+
+    </div>
+</div>
+</div>
+

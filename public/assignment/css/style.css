@@ -124,3 +124,8 @@ select.form-control {
 .wbdv-photo-padding {
     padding-bottom: 5px;
 }
+
+select[multiple].wd-multiselect {
+    width: 75px;
+    height:50px;
+}

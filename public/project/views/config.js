@@ -40,6 +40,14 @@
                     currentUser: checkLoggedIn
                 }
             })
+            .when('/ask', {
+                templateUrl: './views/user/templates/ask.view.client.html',
+                controller: 'askController',
+                controllerAs: 'model',
+                resolve: {
+                    currentUser: checkLoggedIn
+                }
+            })
     }
 
     function checkLoggedIn ($q,userService, $location) {

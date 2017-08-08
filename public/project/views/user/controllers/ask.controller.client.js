@@ -6,29 +6,27 @@
 (function () {
     angular
         .module('WebDevProject')
-        .controller('readController', readController, );
+        .controller('askController', askController, );
 
-    function readController($http, $sce, currentUser, $location, userService, questionService) {
+    function askController(currentUser, $location, userService, questionService) {
 
         var model = this;
         model.user = currentUser;
+        model.categories = ["Books", "Music", "Health","Education", "Business","History","Travel","Design"]
         model.searchGoogle = searchGoogle;
         model.trustThisContent = trustThisContent;
         model.logout = logout;
+        model.createQuestion = createQuestion
 
 
-
-        function init() {
+        function createQuestion(question) {
             questionService
-                .getQuestions()
-                .then(displayQuestions)
-            function displayQuestions(questions) {
-                model.questions = questions;
-            }
+                .createQuestion(model.user._id, question)
+                .then(function (response) {
+                    $location.url('/read');
+                })
+
         }
-
-
-        init();
 
         function logout() {
             userService.logout()
@@ -36,7 +34,6 @@
                     $location.url('/login');
                 })
         }
-
 
         function searchGoogle(text) {
             $http.get("https://www.googleapis.com/customsearch/" +
@@ -48,10 +45,11 @@
 
 
 
-    function trustThisContent(html) {
-        // diligence to scrub any unsafe content
-        return $sce.trustAsHtml(html);
-    }
+        function trustThisContent(html) {
+            // diligence to scrub any unsafe content
+            return $sce.trustAsHtml(html);
         }
+
+    }
 
 })();
