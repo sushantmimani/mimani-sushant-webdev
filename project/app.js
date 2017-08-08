@@ -7,9 +7,10 @@ var mongoose = require('mongoose');
 mongoose.Promise = require('q').Promise;
 
 require('./services/user.service.project.server');
+require('./services/question.service.project.server')
 
 
-var connectionString = 'mongodb://127.0.0.1:27017/webdev_project'; // for local
+var connectionString = 'mongodb://127.0.0.1:27017/webdev'; // for local
 if(process.env.MLAB_USERNAME_WEBDEV) { // check if running remotely
     var username = process.env.MLAB_USERNAME_WEBDEV; // get from environment
     var password = process.env.MLAB_PASSWORD_WEBDEV;

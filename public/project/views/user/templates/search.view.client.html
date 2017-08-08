@@ -1,45 +1,7 @@
-<nav class=" navbar navbar-inverse">
-    <div class="container">
-        <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header">
-            <a class="navbar-brand" href="">Ask-n-Answer</a>
-        </div>
-
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <ul class="nav navbar-nav">
-                <li class="active"><a href="#">Ask a question </a></li>
-                <li><a href="">Link2</a></li>
-
-            </ul>
-            <ul class="nav navbar-nav navbar-right">
-                <li class="dropdown">
-                    <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{model.user.username}} <span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="#!/profile">Profile</a></li>
-                        <li><a href="">My Questions</a></li>
-                        <li><a href="" ng-click="model.logout()">Logout</a></li>
-                    </ul>
-                </li>
-            </ul>
-        </div><!-- /.navbar-collapse -->
-    </div><!-- /.container-fluid -->
-</nav>
-
-
-
 <div class="container-fluid">
-<div class="input-group">
-    <input ng-model="searchText"
-           type="text"
-           class="form-control"
-           placeholder="Google powered search on Quora.com">
-    <span class="input-group-btn">
-            <a ng-click="model.searchGoogle(searchText)"
-               class="btn btn-default" type="button" style="margin-left: 5px">
-                <span class="fa fa-search"></span>
-            </a>
-        </span>
+
+<div ng-include="'./views/common/header.view.client.html'">
+
 </div>
 
 <div ng-show="model.result">

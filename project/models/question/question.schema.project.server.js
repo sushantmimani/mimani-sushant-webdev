@@ -1,24 +1,13 @@
 var mongoose = require('mongoose');
 
-var questionSchema = mongoose.Schema({
-    username: {type: String, unique: true},
-    password: String,
-    firstName: String,
-    lastName: String,
-    email: String,
-    phone: String,
-    credits: Number,
-    gender: String,
+var questionSchema_project = mongoose.Schema({
+    user: {type: mongoose.Schema.Types.ObjectId, ref: "UserModel_project", required:true},
+    title: String,
     createdDate: {type: Date, default: Date.now},
-    expertUser: Boolean,
-    google:   {
-        id:    String,
-        token: String
-    },
-    facebook:   {
-        id:    String,
-        token: String
-    }
+    updatedDate: {type: Date, default: Date.now},
+    category: [{type: mongoose.Schema.Types.ObjectId, ref: "categoryModel"}],
+    isAnon: Boolean,
+    description: String
 }, {collection: "question"});
 
-module.exports = questionSchema;
+module.exports = questionSchema_project;

@@ -21,11 +21,11 @@
                 if (found !== null) {
                     $location.url('/search');
                 } else {
-                    model.message = "Username " + user.username + " not found, please try again";
+                    model.message = "Incorrect username/password. Please try again.";
                 }
             }
             function handleError(error) {
-                model.message = "Username " + user.username + " not found, please try again";
+                model.message = "Incorrect username/password. Please try again.";
 
             }
         }

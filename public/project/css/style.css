@@ -141,3 +141,12 @@ select.form-control {
 .wd-text-align {
     text-align: left;
 }
+
+input.form-control.my-2 {
+    margin-left: 75px;
+}
+
+textarea.size {
+    width:570px;
+    height: 65px;
+}

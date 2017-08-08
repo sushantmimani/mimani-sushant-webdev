@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
 var userSchema_project = require('./user.schema.project.server');
-var userModel_project = mongoose.model('userModel_project', userSchema_project);
+var userModel_project = mongoose.model('UserModel_project', userSchema_project);
 var bcrypt = require("bcrypt-nodejs");
 
 // methods required as per the assignment
