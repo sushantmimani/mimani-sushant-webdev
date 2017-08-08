@@ -6,16 +6,30 @@
 (function () {
     angular
         .module('WebDevProject')
-        .controller('searchController', searchController, );
+        .controller('readController', readController, );
 
-    function searchController($http, $sce, currentUser, $location, userService) {
+    function readController($http, $sce, currentUser, $location, userService, readService) {
 
         var model = this;
         model.user = currentUser;
         model.searchGoogle = searchGoogle;
         model.trustThisContent = trustThisContent;
-
         model.logout = logout;
+
+
+
+        function init() {
+            readService
+                .getQuestions()
+                .then(displayQuestions)
+            function displayQuestions(questions) {
+                console.log(questions);
+                model.questions = questions;
+            }
+        }
+
+
+        init();
 
         function logout() {
             userService.logout()

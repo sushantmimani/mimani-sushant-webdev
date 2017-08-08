@@ -4,13 +4,20 @@
 
 </div>
 
+    <ul>
+        <li class="wd-text-align" ng-repeat="question in model.questions">
+            {{question}}
+        </li>
+    </ul>
+
 <div ng-show="model.result">
 
       <h3 class="header-text">Results</h3>
     <ul>
         <li class="wd-text-align" ng-repeat="result in model.result">
+
             <a href="{{result.link}}" target="_blank">{{result.link}}</a>
-            <div ng-bind-html="model.trustThisContent(result.htmlSnippet)"></div>
+            <p ng-bind-html="model.trustThisContent(result.htmlSnippet)"></p>
         </li>
     </ul>
 

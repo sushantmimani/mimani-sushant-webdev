@@ -55,7 +55,7 @@ app.get ('/project/auth/google', passport_project.authenticate('googleproject', 
 
 app.get ('/project/auth/google/callback',
     passport_project.authenticate('googleproject', {
-        successRedirect: '/project/index.html#!/search',
+        successRedirect: '/project/index.html#!/read',
         failureRedirect: '/project/index.html#!/login'
     }));
 
@@ -113,7 +113,7 @@ var facebookConfig = {
 app.get ('/project/auth/facebook', passport_project.authenticate('facebookproject', { scope : 'email' }));
 app.get ('/project/auth/facebook/callback',
     passport_project.authenticate('facebookproject', {
-        successRedirect: '/project/index.html#!/search',
+        successRedirect: '/project/index.html#!/read',
         failureRedirect: '/project/index.html#!/login'
     }), function(req, res){
         res.send(200);

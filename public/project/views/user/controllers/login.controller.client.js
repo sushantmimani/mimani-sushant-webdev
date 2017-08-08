@@ -19,7 +19,7 @@
 
             function login(found) {
                 if (found !== null) {
-                    $location.url('/search');
+                    $location.url('/read');
                 } else {
                     model.message = "Incorrect username/password. Please try again.";
                 }

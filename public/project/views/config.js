@@ -32,9 +32,9 @@
                 controller: 'registerController',
                 controllerAs: 'model'
             })
-            .when('/search', {
-                templateUrl: 'views/user/templates/search.view.client.html',
-                controller: 'searchController',
+            .when('/read', {
+                templateUrl: './views/user/templates/read.view.client.html',
+                controller: 'readController',
                 controllerAs: 'model',
                 resolve: {
                     currentUser: checkLoggedIn

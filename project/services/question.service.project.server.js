@@ -6,6 +6,7 @@ var app = require('../../express');
 var questionModel_project = require('../models/question/question.model.project.server');
 
 app.post ('/api/project/question', createQuestion);
+app.get ('/api/project/question', getQuestions);
 
 function createQuestion(req,res) {
     var question = req.body;
@@ -17,3 +18,11 @@ function createQuestion(req,res) {
             res.send(err);
         });
 }
+
+    function getQuestions(req, res) {
+        questionModel_project
+            .getAllQuestions()
+            .then(function (questions) {
+                res.send(questions);
+            })
+    }
