@@ -33,7 +33,7 @@
                 controllerAs: 'model'
             })
             .when('/read', {
-                templateUrl: './views/user/templates/read.view.client.html',
+                templateUrl: 'views/question/templates/question-list.view.client.html',
                 controller: 'readController',
                 controllerAs: 'model',
                 resolve: {
@@ -41,8 +41,16 @@
                 }
             })
             .when('/ask', {
-                templateUrl: './views/user/templates/ask.view.client.html',
+                templateUrl: 'views/question/templates/question-new.view.client.html',
                 controller: 'askController',
+                controllerAs: 'model',
+                resolve: {
+                    currentUser: checkLoggedIn
+                }
+            })
+            .when('/answer', {
+                templateUrl: 'views/answer/templates/answer.view.client.html',
+                controller: 'answerController',
                 controllerAs: 'model',
                 resolve: {
                     currentUser: checkLoggedIn

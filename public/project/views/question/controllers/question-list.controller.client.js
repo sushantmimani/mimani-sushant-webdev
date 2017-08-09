@@ -29,7 +29,6 @@
             questionService
                 .submitAnswer(answer)
                 .then(function (response) {
-                    console.log(response);
                 })
         }
 
@@ -45,6 +44,11 @@
                 .getQuestions()
                 .then(displayQuestions)
             function displayQuestions(questions) {
+                for(var index in questions){
+                    if(questions[index].answer.length==0){
+                        questions.splice(index, 1)
+                    }
+                }
                 model.questions = questions;
             }
         }

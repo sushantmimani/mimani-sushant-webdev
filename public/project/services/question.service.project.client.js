@@ -11,20 +11,12 @@
 
         var api = {
             getQuestions: getQuestions,
-            createQuestion: createQuestion,
-            submitAnswer: submitAnswer
+            createQuestion: createQuestion
+
         };
 
         return api;
 
-        function submitAnswer (answer) {
-            var url = '/api/project/answer';
-            return $http.post(url, answer)
-                .then(function (response) {
-                    return response.data;
-                })
-
-        }
         function createQuestion(userId, question) {
             question.user = userId;
             var url = '/api/project/question';
@@ -42,5 +34,5 @@
                 })
 
         }
-           }
+    }
 })();

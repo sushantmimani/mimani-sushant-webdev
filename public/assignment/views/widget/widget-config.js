@@ -34,7 +34,7 @@
                 }
             })
             .when('/profile/website/:websiteId/page/:pageId/widget/:widgetId/search', {
-                templateUrl: 'views/widget/templates/widget-flickr-read.view.client.html',
+                templateUrl: 'views/widget/templates/widget-flickr-question-list.view.client.html',
                 controller: 'FlickrImageSearchController',
                 controllerAs: 'model',
                 resolve: {
