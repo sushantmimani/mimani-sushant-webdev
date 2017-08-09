@@ -1,25 +1,23 @@
 <div class="container-fluid">
 
-<div ng-include="'./views/common/header.view.client.html'">
+    <div ng-include="'./views/common/header.view.client.html'">
 
-</div>
+    </div>
 
-    <ul>
-        <li class="wd-text-align" ng-repeat="question in model.questions">
-            {{question}}
-        </li>
-    </ul>
-
-<div ng-show="model.result">
-
-      <h3 class="header-text">Results</h3>
-    <ul>
-        <li class="wd-text-align" ng-repeat="result in model.result">
-
-            <a href="{{result.link}}" target="_blank">{{result.link}}</a>
-            <p ng-bind-html="model.trustThisContent(result.htmlSnippet)"></p>
-        </li>
-    </ul>
-
-  </div>
+    <div class="row content" >
+        <h1 class="header-text" ><strong>RECENT QUESTIONS</strong></h1>
+        <hr>
+        <div ng-repeat="question in model.questions" class="col-sm-12">
+            <h2 class="header-text"><strong>{{question.title}}</strong></h2>
+            <h5><span class="glyphicon glyphicon-time"></span> Post by {{question.user}} at <span> {{question.updatedDate | date:"MM/dd/yyyy 'at' h:mma"}}</span></h5>
+            <p>{{question.description}}</p>
+            <h5 ng-if="!question.toShow"><span class="btn btn-info" ng-click="question.toShow=true" >Answer</span></h5>
+            <div ng-if="question.toShow">
+                <textarea id="description"rows="5" class="form-control" ng-model="model.answerText" placeholder="Write your answer"></textarea>
+                <h5><span class="btn btn-success" ng-click="model.submitAnswer(question._id,model.answerText);question.toShow=false;model.answerText=''" >Answer</span></h5>
+                <h5><span class="btn btn-danger" ng-click="question.toShow=false;model.answerText='' " >Cancel</span></h5>
+            </div>
+            <hr>
+        </div>
+    </div>
 </div>

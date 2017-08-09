@@ -10,7 +10,6 @@ app.get ('/api/project/question', getQuestions);
 
 function createQuestion(req,res) {
     var question = req.body;
-    console.log(question);
     questionModel_project
         .createQuestion(question)
         .then(function (question) {

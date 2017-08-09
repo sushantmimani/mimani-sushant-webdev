@@ -15,10 +15,32 @@
         model.searchGoogle = searchGoogle;
         model.trustThisContent = trustThisContent;
         model.logout = logout;
+        model.answer = answer;
+        model.submitAnswer = submitAnswer;
+
+        function submitAnswer(questionId,ans) {
+            console.log(questionId);
+            var answer = {
+                "question": questionId,
+                "answerText" : model.answerText,
+                "user": currentUser._id
+        }
+            console.log(answer);
+            questionService
+                .submitAnswer(answer)
+                .then(function (response) {
+                    console.log(response);
+                })
+        }
+
+        function answer() {
+            model.toAnswer = true;
+        }
 
 
 
         function init() {
+            model.toAnswer = false;
             questionService
                 .getQuestions()
                 .then(displayQuestions)

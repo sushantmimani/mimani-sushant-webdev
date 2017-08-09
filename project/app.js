@@ -8,6 +8,7 @@ mongoose.Promise = require('q').Promise;
 
 require('./services/user.service.project.server');
 require('./services/question.service.project.server')
+require('./services/answer.service.project.server')
 
 
 var connectionString = 'mongodb://127.0.0.1:27017/webdev'; // for local

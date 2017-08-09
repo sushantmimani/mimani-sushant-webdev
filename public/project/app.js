@@ -4,5 +4,5 @@
 
 (function () {
     angular
-        .module('WebDevProject', ['ngRoute', 'ngSanitize']);
+        .module('WebDevProject', ['ngRoute', 'textAngular']);
 })();
