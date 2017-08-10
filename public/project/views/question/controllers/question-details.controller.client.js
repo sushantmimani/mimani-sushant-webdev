@@ -6,12 +6,13 @@
 (function () {
     angular
         .module('WebDevProject')
-        .controller('readController', readController, );
+        .controller('questionDetailsController', questionDetailsController, );
 
-    function readController($http, $sce, currentUser, $location, userService, questionService, answerService) {
+    function questionDetailsController($http, $sce, currentUser, $location, $routeParams, questionService, answerService) {
 
         var model = this;
         model.user = currentUser;
+        model.qId = $routeParams["qId"];
         model.searchGoogle = searchGoogle;
         model.trustThisContent = trustThisContent;
         model.logout = logout;
@@ -22,10 +23,6 @@
             answer.upVotes+=1;
             answerService
                 .updateAnswer(answer)
-                .then(function (response) {
-
-                    console.log(answer.user);
-                })
 
         }
 
@@ -36,24 +33,17 @@
 
         }
 
+
+
         function init() {
-            var finalQuestions = [];
             questionService
-                .getQuestions()
-                .then(displayQuestions)
-            function displayQuestions(questions) {
-                for(var index in questions){
-                    if(questions[index].answer.length>0){
-                        finalQuestions.push(questions[index]);
-                    }
-                }
-                model.questions = finalQuestions;
-            }
+                .getQuestionById(model.qId)
+                .then(function (question) {
+                    model.question = question;
+                })
         }
 
-
         init();
-
         function logout() {
             userService.logout()
                 .then(function (response) {

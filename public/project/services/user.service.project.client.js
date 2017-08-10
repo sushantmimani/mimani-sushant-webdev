@@ -17,11 +17,20 @@
             login: login,
             checkLoggedIn: checkLoggedIn,
             logout: logout,
-            register: register
+            register: register,
+            populateCategories: populateCategories
 
         };
 
         return api;
+
+        function populateCategories(user) {
+            var url = '/api/project/user/populateCategories';
+            return $http.post(url, user)
+                .then(function (response) {
+                    return response.data;
+                })
+        }
 
         function logout() {
             var url = '/api/project/logout';

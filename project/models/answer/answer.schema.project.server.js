@@ -7,7 +7,8 @@ var answerSchema_project = mongoose.Schema({
     updatedDate: {type: Date, default: Date.now},
     isAnon: Boolean,
     question: {type: mongoose.Schema.Types.ObjectId, ref: "QuestionModel_project", required:true},
-    upvotes: {type:Number,default:0},
+    upVotes: {type:Number,default:0},
+    downVotes: {type:Number,default:0},
 }, {collection: "answer"});
 
 module.exports = answerSchema_project;

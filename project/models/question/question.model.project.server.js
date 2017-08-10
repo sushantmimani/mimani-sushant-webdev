@@ -11,7 +11,7 @@ questionModel_project.getQuestionByUser = getQuestionByUser;
 questionModel_project.getAllQuestions = getAllQuestions;
 questionModel_project.updateQuestion = updateQuestion;
 questionModel_project.deleteQuestion = deleteQuestion;
-questionModel_project.findQuestionById = findQuestionById;
+questionModel_project.getQuestionById = getQuestionById;
 questionModel_project.addAnswerForQuestion = addAnswerForQuestion;
 
 module.exports = questionModel_project;
@@ -27,9 +27,11 @@ function addAnswerForQuestion(answer) {
 
 }
 
-function findQuestionById(questionId) {
+function getQuestionById(questionId) {
     return questionModel_project
-        .findById(questionId);
+        .findById(questionId)
+        .populate('answer')
+        .exec()
 }
 
 function createQuestion (question) {

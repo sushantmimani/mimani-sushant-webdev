@@ -12,8 +12,7 @@ userModel_project.updateUser = updateUser;
 userModel_project.deleteUser = deleteUser;
 userModel_project.findUserByGoogleId = findUserByGoogleId;
 userModel_project.findUserByFacebookId = findUserByFacebookId;
-
-
+userModel_project.populateCategories = populateCategories;
 
 //additional methods
 userModel_project.findAllUsers = findAllUsers;
@@ -21,6 +20,13 @@ userModel_project.addWebsite = addWebsite;
 userModel_project.deleteWebsite = deleteWebsite;
 
 module.exports = userModel_project;
+
+function populateCategories(user) {
+    return userModel_project
+        .findById(user._id)
+        .populate('category')
+        .exec()
+}
 
 function findUserByFacebookId(facebookId) {
     return userModel_project.findOne({'facebook.id': facebookId});

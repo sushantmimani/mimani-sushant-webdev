@@ -30,6 +30,13 @@
                 <option id="category" ng-repeat="category in model.categories" value="{{category._id}}">{{category.type}}</option>
             </select> </div>
 
+        <form   id="anonymous" >
+            <label class="header-text">Ask Anonymously:
+                <input type="checkbox" ng-model="question.isAnon">
+            </label>
+        </form>
+
+
         <a ng-click="model.createQuestion(question)"
            class="btn  btn-primary">Ask</a>
 

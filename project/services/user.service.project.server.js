@@ -21,6 +21,7 @@ app.get ('/api/project/checkLoggedIn', checkLoggedIn);
 
 app.put  ('/api/project/user/:userId', updateUser);
 app.delete ('/api/project/user/:userId', deleteUser);
+app.post ('/api/project/user/populateCategories', populateCategories)
 
 app.post ('/api/project/user', createUser);
 app.post  ('/api/project/logout', logout);
@@ -29,6 +30,14 @@ app.post ('/api/project/login', passport_project.authenticate('localproject'), l
 
 
 
+function populateCategories(req, res) {
+    var user = req.body;
+    userModel_project
+        .populateCategories(user)
+        .then(function (response) {
+            res.send(response);
+        })
+}
 function checkLoggedIn (req, res) {
     if(req.isAuthenticated()) {
         res.json(req.user);

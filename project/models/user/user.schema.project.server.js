@@ -19,7 +19,8 @@ var userSchema_project = mongoose.Schema({
         id:    String,
         token: String
     },
-    category: [{type: mongoose.Schema.Types.ObjectId, ref: "CategoryModel_Project"}],
+    category: [{type: mongoose.Schema.Types.ObjectId, ref: "CategoryModel_project"}],
+    votedAnswers:[{type: mongoose.Schema.Types.ObjectId, ref: "AnswerModel_project"}],
 
 }, {collection: "user"});
 

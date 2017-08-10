@@ -11,11 +11,20 @@
 
         var api = {
             getQuestions: getQuestions,
-            createQuestion: createQuestion
+            createQuestion: createQuestion,
+            getQuestionById: getQuestionById
 
         };
 
         return api;
+
+        function getQuestionById(qId) {
+            var url = '/api/project/questionDetails/'+qId;
+            return $http.get(url)
+                .then(function (response) {
+                    return response.data;
+                })
+        }
 
         function createQuestion(userId, question) {
             question.user = userId;

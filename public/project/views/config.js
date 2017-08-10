@@ -19,7 +19,7 @@
                 controller: 'loginController',
                 controllerAs: 'model'
             })
-            .when('/profile', {
+            .when('/user', {
                 templateUrl: 'views/user/templates/profile.view.client.html',
                 controller: 'profileController',
                 controllerAs: 'model',
@@ -51,6 +51,14 @@
             .when('/answer', {
                 templateUrl: 'views/answer/templates/answer.view.client.html',
                 controller: 'answerController',
+                controllerAs: 'model',
+                resolve: {
+                    currentUser: checkLoggedIn
+                }
+            })
+            .when('/user/question/:qId', {
+                templateUrl: 'views/question/templates/question-details.view.client.html',
+                controller: 'questionDetailsController',
                 controllerAs: 'model',
                 resolve: {
                     currentUser: checkLoggedIn
