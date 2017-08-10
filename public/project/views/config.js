@@ -10,7 +10,9 @@
     function configuration($routeProvider) {
         $routeProvider
             .when('/', {
-                templateUrl: 'views/user/templates/login.view.client.html'
+                templateUrl: 'views/user/templates/login.view.client.html',
+                controller: 'loginController',
+                controllerAs: 'model'
             })
             .when('/login', {
                 templateUrl: 'views/user/templates/login.view.client.html',
@@ -30,9 +32,25 @@
                 controller: 'registerController',
                 controllerAs: 'model'
             })
-            .when('/search', {
-                templateUrl: 'views/user/templates/search.view.client.html',
-                controller: 'searchController',
+            .when('/read', {
+                templateUrl: 'views/question/templates/question-list.view.client.html',
+                controller: 'readController',
+                controllerAs: 'model',
+                resolve: {
+                    currentUser: checkLoggedIn
+                }
+            })
+            .when('/ask', {
+                templateUrl: 'views/question/templates/question-new.view.client.html',
+                controller: 'askController',
+                controllerAs: 'model',
+                resolve: {
+                    currentUser: checkLoggedIn
+                }
+            })
+            .when('/answer', {
+                templateUrl: 'views/answer/templates/answer.view.client.html',
+                controller: 'answerController',
                 controllerAs: 'model',
                 resolve: {
                     currentUser: checkLoggedIn

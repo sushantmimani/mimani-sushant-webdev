@@ -1,0 +1,36 @@
+<div class="container-fluid">
+    <div ng-include="'./views/common/header.view.client.html'"></div>
+    <div >
+        <h1 class="header-text" ><strong>RECENT QUESTIONS</strong></h1>
+        <hr>
+
+
+        <div ng-repeat="question in model.questions" class="col-sm-12">
+        <div class="row">
+            <div class="col-sm-3">
+                <div class="well">
+                    <h5><span class="glyphicon glyphicon-time"></span> Post by {{question.user.username}} at <span> {{question.updatedDate | date:"MM/dd/yyyy 'at' h:mma"}}</span></h5>
+                </div>
+            </div>
+            <div class="col-sm-9">
+                <div class="well">
+                    <h1><strong>{{question.title}}</strong></h1>
+                    <p>{{question.description}}</p>
+                    <div ng-show="question.answer">
+                    <div class="well" ng-repeat="answer in question.answer">
+                    {{answer.answerText}}
+
+                        <span class="label label-info pull-right">{{answer.upvotes}}</span>
+                        <button type="button" class="btn-success pull-right" ng-click="model.upvoteAnswer(answer)">
+                            <span class="glyphicon glyphicon-thumbs-up"></span> UpVote
+                        </button>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+
+
+    </div>
+</div>

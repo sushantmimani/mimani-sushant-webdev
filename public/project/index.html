@@ -9,15 +9,23 @@
     <script src="../assignment/vendor/angular/angular.min.js"></script>
     <script src="../assignment/vendor/angular/angular-route.min.js"></script>
 
+    <script src="../assignment/vendor/js/textAngular-rangy.min.js"></script>
+    <script src="../assignment/vendor/js/textAngular-sanitize.min.js"></script>
+    <script src="../assignment/vendor/js/textAngular.min.js"></script>
     <script src="app.js"></script>
 
     <!-- user -->
     <script src="views/user/controllers/login.controller.client.js"></script>
     <script src="views/user/controllers/profile.controller.client.js"></script>
     <script src="views/user/controllers/register.controller.client.js"></script>
-    <script src="views/user/controllers/search.controller.client.js"></script>
+    <script src="views/question/controllers/question-list.controller.client.js"></script>
+    <script src="views/question/controllers/question-new.controller.client.js"></script>
+    <script src="views/answer/controllers/answer.controller.client.js"></script>
     <script src="services/user.service.project.client.js"></script>
-    <script src="views/user/user-config.js"></script>
+    <script src="services/answer.service.project.client.js"></script>
+    <script src="services/question.service.project.client.js"></script>
+    <!--<script src="services/ask.service.project.client.js"></script>-->
+    <script src="views/config.js"></script>
 
 
     <meta charset="utf-8">
@@ -33,21 +41,21 @@
     <!-- Bootstrap core CSS -->
     <link href="../assignment/vendor/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Bootstrap theme -->
-    <!--<link href="vendor/bootstrap/dist/css/bootstrap-theme.min.css" rel="stylesheet">-->
+    <!--<link href="../assignment/vendor/bootstrap/dist/css/bootstrap-theme.min.css" rel="stylesheet">-->
     <link href="css/style.css" rel="stylesheet"/>
     <link href="css/bootstrap-social.css" rel="stylesheet"/>
+    <link href="../assignment/css/textAngular.css" rel="stylesheet"/>
     <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
-    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:400,100,300,500">
-    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="assets/font-awesome/css/font-awesome.min.css">
+    <!--<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:400,100,300,500">-->
+    <!--<link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">-->
     <link rel="stylesheet" href="assets/css/form-elements.css">
     <link rel="stylesheet" href="assets/css/style.css">
 
-    <!-- Custom styles for this template -->
-    <!--<link href="vendor/bootstrap/theme.css" rel="stylesheet">-->
+
 </head>
 
-<body>
+<body ng-style="{'background-image':'url(../../../../../project/assets/img/backgrounds/1.jpg)','background-repeat': 'repeat',
+ 'height':'800px' ,'background-size': '100% 800px' }">
 
 <div ng-view></div>
 
@@ -60,9 +68,9 @@
 <!--<script src="../../assets/js/docs.min.js"></script>-->
 
 <!-- Javascript -->
-<script src="assets/js/jquery-1.11.1.min.js"></script>
+<!--<script src="assets/js/jquery-1.11.1.min.js"></script>-->
 <script src="assets/bootstrap/js/bootstrap.min.js"></script>
-<script src="assets/js/jquery.backstretch.min.js"></script>
-<script src="assets/js/scripts.js"></script>
+<!--<script src="assets/js/jquery.backstretch.min.js"></script>-->
+<!--<script src="assets/js/scripts.js"></script>-->
 </body>
 </html>

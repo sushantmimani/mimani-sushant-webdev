@@ -8,28 +8,26 @@
         .module('WebDevProject')
         .controller('profileController', profileController);
 
-    function profileController ($location, $routeParams, userService, currentUser ) {
+    function profileController ($location, userService, currentUser, $http ) {
 
         var model = this;
-        var userId = currentUser._id;
+        model.user = currentUser;
         model.updateUser = updateUser;
         model.deleteUser = deleteUser;
 
+
         function init() {
-
-            userService
-                .findUserById(userId)
-                .then(renderUser);
-
-            function renderUser(user) {
-                model.user = user;
-            }
+            $http.get('/api/project/category')
+                .then(function (response) {
+                    model.categories = response.data;
+                })
         }
+
         init();
 
         function updateUser(userDetails) {
             userService
-                .updateUser(userId, userDetails)
+                .updateUser(currentUser._id, userDetails)
                 .then(function () {
                     model.message = "User updated successfully"
                 });

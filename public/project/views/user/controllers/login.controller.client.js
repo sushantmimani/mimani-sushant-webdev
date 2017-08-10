@@ -19,13 +19,13 @@
 
             function login(found) {
                 if (found !== null) {
-                    $location.url('/search');
+                    $location.url('/read');
                 } else {
-                    model.message = "Username " + user.username + " not found, please try again";
+                    model.message = "Incorrect username/password. Please try again.";
                 }
             }
             function handleError(error) {
-                model.message = "Username " + user.username + " not found, please try again";
+                model.message = "Incorrect username/password. Please try again.";
 
             }
         }

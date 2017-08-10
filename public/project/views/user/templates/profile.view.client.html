@@ -1,6 +1,6 @@
 
 <div class="container-fluid">
-
+    <div ng-include="'./views/common/header.view.client.html'"></div>
     <div ng-show="model.message" class="alert alert-success">
         {{model.message}}
     </div>
@@ -17,21 +17,6 @@
            ng-model="model.user.email"
            placeholder="email@domain.com"/>
 
-    <!--<label for="password">Password</label>-->
-
-    <!--<input id="password"-->
-           <!--type="password"-->
-           <!--class="form-control"-->
-           <!--placeholder="password"/>-->
-
-    <!--<label for="password2">Verify Password</label>-->
-
-    <!--<input id="password2"-->
-           <!--type="password"-->
-           <!--class="form-control"-->
-           <!--placeholder="verify password"-->
-           <!--/>-->
-
     <label for="fname">First Name</label>
 
     <input id="fname"
@@ -46,23 +31,28 @@
            placeholder="Last Name"
            ng-model="model.user.lastName"/>
 
-    <label for="lname">Phone</label>
+    <label for="phone">Phone</label>
+
     <input id="phone"
            class="form-control"
            placeholder="Phone Number"
            ng-model="model.user.phone"/>
 
-    <a href="#!/user/{{model.user._id}}/website"
-       class="btn btn-block btn-primary">Websites</a>
+    <div class="form-group">
+        <label for="newCategories">Update Categories</label>
+        <select multiple class="form-control" id="newCategories" ng-options="category.type for category in model.categories" ng-model="model.user.category">
+
+        </select>
+    </div>
 
     <a ng-click="model.updateUser(model.user)"
-       class="btn btn-block btn-success">Update</a>
+       class="btn  btn-success">Update</a>
 
     <a ng-click="model.deleteUser(model.user)"
-       class="btn btn-block btn-info">Delete</a>
+       class="btn  btn-info">Delete</a>
 
     <a href="#!/login"
-       class="btn btn-block btn-danger">Logout</a>
+       class="btn  btn-danger">Logout</a>
 
 
 </div>

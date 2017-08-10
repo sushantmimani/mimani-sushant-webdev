@@ -133,3 +133,23 @@ select.form-control {
 .btn {
     margin-top: 5px;
 }
+
+.wd-footer {
+    background-color: whitesmoke;
+}
+
+.wd-text-align {
+    text-align: left;
+}
+
+input.form-control.my-2 {
+    margin-left: 75px;
+}
+
+.size{
+    height: 65px;
+}
+
+textarea.form-control.wd-form-height {
+    height: 34px;
+}

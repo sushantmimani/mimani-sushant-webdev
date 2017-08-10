@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
 
 var userSchema_project = mongoose.Schema({
-    username: {type: String, unique: true},
+    username: {type: String, unique: true, required:true},
     password: String,
     firstName: String,
     lastName: String,
@@ -18,7 +18,9 @@ var userSchema_project = mongoose.Schema({
     facebook:   {
         id:    String,
         token: String
-    }
+    },
+    category: [{type: mongoose.Schema.Types.ObjectId, ref: "CategoryModel_Project"}],
+
 }, {collection: "user"});
 
 module.exports = userSchema_project;

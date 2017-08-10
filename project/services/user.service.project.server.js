@@ -3,7 +3,7 @@
  */
 
 var app = require('../../express');
-var userModel = require('../models/user/user.model.project.server');
+var userModel_project = require('../models/user/user.model.project.server');
 var passport_project = require('passport');
 app.use(passport_project.initialize());
 app.use(passport_project.session());
@@ -19,12 +19,12 @@ passport_project.deserializeUser(deserializeUser);
 app.get ('/api/project/username',findUserByUsername);
 app.get ('/api/project/checkLoggedIn', checkLoggedIn);
 
-app.put  ('/api/user/:userId', updateUser);
-app.delete ('/api/user/:userId', deleteUser);
+app.put  ('/api/project/user/:userId', updateUser);
+app.delete ('/api/project/user/:userId', deleteUser);
 
 app.post ('/api/project/user', createUser);
 app.post  ('/api/project/logout', logout);
-app.post  ('/api//project/register', register);
+app.post  ('/api/project/register', register);
 app.post ('/api/project/login', passport_project.authenticate('localproject'), login);
 
 
@@ -40,7 +40,7 @@ function checkLoggedIn (req, res) {
 function register(req, res) {
     var user = req.body;
     user.password = bcrypt.hashSync(user.password);
-    userModel
+    userModel_project
         .createUser(user)
         .then(function (user) {
             req.login(user, function (status) {
@@ -55,7 +55,7 @@ app.get ('/project/auth/google', passport_project.authenticate('googleproject', 
 
 app.get ('/project/auth/google/callback',
     passport_project.authenticate('googleproject', {
-        successRedirect: '/project/index.html#!/search',
+        successRedirect: '/project/index.html#!/read',
         failureRedirect: '/project/index.html#!/login'
     }));
 
@@ -67,7 +67,7 @@ var googleConfig = {
 
 function googleStrategy(token, refreshToken, profile, done) {
 
-    userModel
+    userModel_project
         .findUserByGoogleId(profile.id)
         .then(
             function(user) {
@@ -87,7 +87,7 @@ function googleStrategy(token, refreshToken, profile, done) {
                         }
                     };
 
-                    return userModel.createUser(newGoogleUser)
+                    return userModel_project.createUser(newGoogleUser)
 
                 }
             },
@@ -113,7 +113,7 @@ var facebookConfig = {
 app.get ('/project/auth/facebook', passport_project.authenticate('facebookproject', { scope : 'email' }));
 app.get ('/project/auth/facebook/callback',
     passport_project.authenticate('facebookproject', {
-        successRedirect: '/project/index.html#!/search',
+        successRedirect: '/project/index.html#!/read',
         failureRedirect: '/project/index.html#!/login'
     }), function(req, res){
         res.send(200);
@@ -122,8 +122,7 @@ app.get ('/project/auth/facebook/callback',
 
 
 function localStrategy(username, password, done) {
-    console.log(username, password);
-    userModel
+    userModel_project
         .findUserByCredentials(username, password)
         .then(
             function(user) {
@@ -156,7 +155,7 @@ passport_project.use('facebookproject',new FacebookStrategy(facebookConfig, face
 
 
 function facebookStrategy(token, refreshToken, profile, done) {
-    userModel
+    userModel_project
         .findUserByFacebookId(profile.id)
         .then(
             function(user) {
@@ -174,7 +173,7 @@ function facebookStrategy(token, refreshToken, profile, done) {
                             token: token
                         }
                     };
-                    return userModel.createUser(newFacebookUser);
+                    return userModel_project.createUser(newFacebookUser);
                 }
             },
             function(err) {
@@ -196,7 +195,7 @@ function facebookStrategy(token, refreshToken, profile, done) {
 
 function deleteUser(req, res) {
     var userId = req.params.userId;
-    userModel
+    userModel_project
         .deleteUser(userId)
         .then(function (status) {
             res.send(status);
@@ -205,7 +204,7 @@ function deleteUser(req, res) {
 
 function updateUser(req, res) {
     var user = req.body;
-    userModel
+    userModel_project
         .updateUser(req.params.userId, user)
         .then(function (status) {
             res.send(status);
@@ -215,8 +214,7 @@ function updateUser(req, res) {
 function createUser(req, res) {
     var user = req.body;
     user.password = bcrypt.hashSync(user.password);
-    console.log(user);
-    userModel
+    userModel_project
         .createUser(user)
         .then(function (user) {
             res.json(user);
@@ -227,7 +225,7 @@ function createUser(req, res) {
 
 function findUserById(req, res) {
     var userId = req.params.userId;
-    userModel
+    userModel_project
         .findUserById(userId)
         .then(function (user){
             res.json(user);
@@ -237,7 +235,7 @@ function findUserById(req, res) {
 function findUserByCredentials(req,res) {
     var username = req.query.username;
     var password = req.query.password;
-    userModel
+    userModel_project
         .findUserByCredentials(username, password)
         .then(function (user) {
             if(user){
@@ -250,10 +248,10 @@ function findUserByCredentials(req,res) {
 }
 
 function findUserByUsername(req,res) {
-    var username = req.query.username;
-    userModel.findUserByUsername(username)
+    var user = JSON.parse(req.query.username);
+    userModel_project.findUserByUsername(user)
         .then(function (user) {
-            if (user) {
+            if (user.length!=0) {
                 res.json(user);
             }
             else {
@@ -267,7 +265,7 @@ function serializeUser(user, done) {
 }
 
 function deserializeUser(user, done) {
-    userModel
+    userModel_project
         .findUserById(user._id)
         .then(
             function (user) {
