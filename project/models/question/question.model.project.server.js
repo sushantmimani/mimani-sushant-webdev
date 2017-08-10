@@ -45,7 +45,9 @@ function getAllQuestions() {
     return questionModel_project
         .find()
         .populate('answer')
+        .populate('user')
         .exec()
+
 }
 
 function updateQuestion(questionId, question) {

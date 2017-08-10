@@ -20,7 +20,7 @@
                 "question": questionId,
                 "answerText" : model.answerText,
                 "user": currentUser._id
-        }
+            }
             answerService
                 .submitAnswer(answer)
                 .then(function (response) {
@@ -36,22 +36,26 @@
 
 
         function init() {
-            console.log("Inside init");
+            var finalQuestions = [];
             model.toAnswer = false;
             questionService
                 .getQuestions()
                 .then(displayQuestions)
             function displayQuestions(questions) {
                 for (var index in questions) {
+                    var flag = false;
                     var answers = questions[index].answer
                     for (var a_index in answers) {
                         if (answers[a_index].user == currentUser._id) {
-                            questions.splice(index,1)
+                            flag = true;
                         }
                     }
+
+                    if(flag ==false)
+                        finalQuestions.push(questions[index]);
                 }
 
-                model.questions = questions;
+                model.questions = finalQuestions;
             }
         }
 
@@ -60,6 +64,6 @@
         init();
 
 
-        }
+    }
 
 })();

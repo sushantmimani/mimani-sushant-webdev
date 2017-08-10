@@ -8,7 +8,7 @@
         .module('WebDevProject')
         .controller('profileController', profileController);
 
-    function profileController ($location, userService, currentUser ) {
+    function profileController ($location, userService, currentUser, $http ) {
 
         var model = this;
         model.user = currentUser;
@@ -16,9 +16,18 @@
         model.deleteUser = deleteUser;
 
 
+        function init() {
+            $http.get('/api/project/category')
+                .then(function (response) {
+                    model.categories = response.data;
+                })
+        }
+
+        init();
+
         function updateUser(userDetails) {
             userService
-                .updateUser(userId, userDetails)
+                .updateUser(currentUser._id, userDetails)
                 .then(function () {
                     model.message = "User updated successfully"
                 });

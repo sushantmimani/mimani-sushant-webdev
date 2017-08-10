@@ -18,7 +18,9 @@ var userSchema_project = mongoose.Schema({
     facebook:   {
         id:    String,
         token: String
-    }
+    },
+    category: [{type: mongoose.Schema.Types.ObjectId, ref: "CategoryModel_Project"}],
+
 }, {collection: "user"});
 
 module.exports = userSchema_project;

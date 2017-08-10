@@ -150,3 +150,6 @@ input.form-control.my-2 {
     height: 65px;
 }
 
+textarea.form-control.wd-form-height {
+    height: 34px;
+}

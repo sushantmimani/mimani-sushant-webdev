@@ -63,8 +63,8 @@ function findAllUsers() {
     return userModel_project.find();
 }
 
-function findUserByUsername(username) {
-    return userModel_project.findOne({username: username});
+function findUserByUsername(user) {
+    return userModel_project.find({$or: [{username: user.username}, {email:user.email}]});
 }
 
 function findUserByCredentials(username, password) {

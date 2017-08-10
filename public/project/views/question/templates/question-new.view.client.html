@@ -18,14 +18,16 @@
 
         <label for="description" class="header-text">Description</label>
         <div class="form-group">
-    <textarea class="form-control size" id="description"
+    <textarea class="form-control"
+              id="description"
+              style="height: 90px"
               ng-model="question.description"
               placeholder="Enter question description">
-                                    </textarea>
+        </textarea>
 
             <label for="category" class="header-text"> Select Category: </label><br>
             <select ng-model="question.category">
-                <option id="category" ng-repeat="category in model.categories">{{category}}</option>
+                <option id="category" ng-repeat="category in model.categories" value="{{category._id}}">{{category.type}}</option>
             </select> </div>
 
         <a ng-click="model.createQuestion(question)"

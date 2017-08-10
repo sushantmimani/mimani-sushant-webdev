@@ -11,30 +11,27 @@
         model.registerUser = registerUser;
 
         // implementation
-        function registerUser(username, password, password2) {
+        function registerUser(newUser) {
             userService
-                .findUserByUsername(username)
+                .findUserByUsername(newUser)
                 .then(login)
 
             function login(found) {
 
                 if(found !== 'available') {
-                    model.error = "Username is not available";
+                    model.error = "Username and/or Email is already registered";
                 } else {
-                    if(password !== password2) {
+                    if(newUser.password !== newUser.password2) {
                         model.error = "Passwords must match";
                         return;
                     } else {
-                        var user = {
-                            username: username,
-                            password: password
-                        };
+                        delete newUser.password2;
                         userService
                             .register(user)
                             .then(redirectToProfile)
 
                         function redirectToProfile(user) {
-                            $location.url('/search');
+                            $location.url('/read');
 
                         }
                     }

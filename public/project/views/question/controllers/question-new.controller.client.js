@@ -8,16 +8,25 @@
         .module('WebDevProject')
         .controller('askController', askController, );
 
-    function askController(currentUser, $location, userService, questionService) {
+    function askController(currentUser, $location, userService, questionService, $http) {
 
         var model = this;
         model.user = currentUser;
-        model.categories = ["Books", "Music", "Health","Education", "Business","History","Travel","Design"]
         model.searchGoogle = searchGoogle;
         model.trustThisContent = trustThisContent;
         model.logout = logout;
         model.createQuestion = createQuestion
 
+
+        function init() {
+            $http.get('/api/project/category')
+                .then(function (response) {
+                    model.categories = response.data;
+                    console.log(model.categories);
+                })
+        }
+
+        init();
 
         function createQuestion(question) {
             questionService
