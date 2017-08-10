@@ -22,7 +22,6 @@
             $http.get('/api/project/category')
                 .then(function (response) {
                     model.categories = response.data;
-                    console.log(model.categories);
                 })
         }
 

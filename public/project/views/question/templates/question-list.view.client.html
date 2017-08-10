@@ -19,6 +19,11 @@
                     <div ng-show="question.answer">
                     <div class="well" ng-repeat="answer in question.answer">
                     {{answer.answerText}}
+
+                        <span class="label label-info pull-right">{{answer.upvotes}}</span>
+                        <button type="button" class="btn-success pull-right" ng-click="model.upvoteAnswer(answer)">
+                            <span class="glyphicon glyphicon-thumbs-up"></span> UpVote
+                        </button>
                     </div>
                     </div>
                 </div>

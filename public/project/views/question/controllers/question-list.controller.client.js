@@ -8,13 +8,21 @@
         .module('WebDevProject')
         .controller('readController', readController, );
 
-    function readController($http, $sce, currentUser, $location, userService, questionService) {
+    function readController($http, $sce, currentUser, $location, userService, questionService, answerService) {
 
         var model = this;
         model.user = currentUser;
         model.searchGoogle = searchGoogle;
         model.trustThisContent = trustThisContent;
         model.logout = logout;
+        model.upvoteAnswer = upvoteAnswer;
+
+        function upvoteAnswer(answer) {
+            answer.upvotes+=1;
+            answerService
+                .updateAnswer(answer)
+
+        }
 
 
 

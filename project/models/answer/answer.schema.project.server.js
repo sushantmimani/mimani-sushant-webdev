@@ -5,9 +5,9 @@ var answerSchema_project = mongoose.Schema({
     answerText: String,
     createdDate: {type: Date, default: Date.now},
     updatedDate: {type: Date, default: Date.now},
-    // category: {type: mongoose.Schema.Types.ObjectId, ref: "categoryModel"},
     isAnon: Boolean,
     question: {type: mongoose.Schema.Types.ObjectId, ref: "QuestionModel_project", required:true},
+    upvotes: {type:Number,default:0},
 }, {collection: "answer"});
 
 module.exports = answerSchema_project;

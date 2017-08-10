@@ -7,8 +7,18 @@ var answerModel_project = require('../models/answer/answer.model.project.server'
 var questionModel_project = require('../models/question/question.model.project.server');
 
 app.post ('/api/project/answer', submitAnswer);
+app.put ('/api/project/answer', updateAnswer);
 
 
+
+function updateAnswer(req, res) {
+    var answer = req.body;
+    answerModel_project
+        .updateAnswer(answer)
+        .then(function (response) {
+            res.send(response);
+        })
+}
 function submitAnswer(req,res) {
     var answer = req.body;
     answerModel_project
