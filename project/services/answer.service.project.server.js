@@ -8,8 +8,18 @@ var questionModel_project = require('../models/question/question.model.project.s
 
 app.post ('/api/project/answer', submitAnswer);
 app.put ('/api/project/answer', updateAnswer);
+app.get ('/api/project/answer/:userId', getAllAnswersForUser)
 
 
+
+function getAllAnswersForUser(req, res) {
+    var userId = req.params.userId;
+    answerModel_project
+        .getAnswerByUser(userId)
+        .then(function (answers) {
+            res.send(answers);
+        })
+}
 
 function updateAnswer(req, res) {
     var answer = req.body;

@@ -8,7 +8,7 @@
         <div ng-repeat="question in model.questions" class="col-sm-12">
         <div class="row">
             <div class="col-sm-3">
-                <div ng-if="question.isAnon" class="well">
+                <div ng-if="question.isAnon" class="well wd-overflow">
                     <h5><span class="glyphicon glyphicon-time"></span> Post by Anonymous at <span> {{question.updatedDate | date:"MM/dd/yyyy 'at' h:mma"}}</span></h5>
                 </div>
                 <div ng-if="!question.isAnon"class="well">

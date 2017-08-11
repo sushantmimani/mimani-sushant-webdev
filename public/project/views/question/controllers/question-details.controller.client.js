@@ -44,6 +44,7 @@
         }
 
         init();
+
         function logout() {
             userService.logout()
                 .then(function (response) {

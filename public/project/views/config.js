@@ -64,6 +64,14 @@
                     currentUser: checkLoggedIn
                 }
             })
+            .when('/content', {
+                templateUrl: 'views/user/templates/user-content.view.client.html',
+                controller: 'userContentController',
+                controllerAs: 'model',
+                resolve: {
+                    currentUser: checkLoggedIn
+                }
+            })
     }
 
     function checkLoggedIn ($q,userService, $location) {

@@ -18,11 +18,30 @@
             checkLoggedIn: checkLoggedIn,
             logout: logout,
             register: register,
-            populateCategories: populateCategories
+            populateCategories: populateCategories,
+            getAllQuestionsForUser: getAllQuestionsForUser,
+            getAllAnswersForUser:getAllAnswersForUser
 
         };
 
         return api;
+
+        function getAllQuestionsForUser(userId) {
+            var url = '/api/project/question/'+userId;
+            return $http.get(url)
+                .then(function (response) {
+                    return response.data;
+                })
+
+        }
+
+        function getAllAnswersForUser(userId) {
+            var url = '/api/project/answer/'+userId;
+            return $http.get(url)
+                .then(function (response) {
+                    return response.data;
+                })
+        }
 
         function populateCategories(user) {
             var url = '/api/project/user/populateCategories';

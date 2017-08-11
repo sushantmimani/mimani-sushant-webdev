@@ -31,6 +31,7 @@ function getQuestionById(questionId) {
     return questionModel_project
         .findById(questionId)
         .populate('answer')
+        .populate('user')
         .exec()
 }
 
@@ -40,7 +41,10 @@ function createQuestion (question) {
 }
 
 function  getQuestionByUser(userId) {
-    return questionModel_project.find({user:userId});
+    return questionModel_project
+        .find({user:userId})
+        .populate('answer')
+        .exec()
 }
 
 function getAllQuestions() {

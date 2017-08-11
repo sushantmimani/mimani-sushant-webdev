@@ -8,6 +8,16 @@ var questionModel_project = require('../models/question/question.model.project.s
 app.post ('/api/project/question', createQuestion);
 app.get ('/api/project/question', getQuestions);
 app.get ('/api/project/questionDetails/:qId', getQuestionById);
+app.get ('/api/project/question/:userId', getAllQuestionsForUser)
+
+function getAllQuestionsForUser(req, res) {
+    var userId = req.params.userId;
+    questionModel_project
+        .getQuestionByUser(userId)
+        .then(function (questions) {
+            res.send(questions);
+        })
+}
 
 function getQuestionById(req, res) {
     var qId = req.params.qId

@@ -8,6 +8,7 @@ var answerModel_project = mongoose.model('AnswerModel_project', answerSchema_pro
 
 answerModel_project.submitAnswer = submitAnswer;
 answerModel_project.updateAnswer = updateAnswer;
+answerModel_project.getAnswerByUser = getAnswerByUser;
 
 
 module.exports = answerModel_project;
@@ -20,4 +21,11 @@ function submitAnswer (answer) {
 
 function updateAnswer(answer) {
     return answerModel_project.update({_id:answer._id},{$set:answer})
+}
+
+function  getAnswerByUser(userId) {
+    return answerModel_project
+        .find({user:userId})
+        .populate('question')
+        .exec()
 }

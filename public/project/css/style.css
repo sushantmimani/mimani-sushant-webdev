@@ -154,3 +154,23 @@ input.form-control.my-2 {
 textarea.form-control.wd-form-height {
     height: 34px;
 }
+
+
+
+/* text recolor */
+.wd-usercontent.h1, .wd-usercontent.p, .wd-usercontent.a {
+    color: #4DC9C9 !important;
+}
+
+/* button recolor */
+.nav-pills > li.active > a, .btn-primary {
+    background-color: #6C6C6C !important;
+// feeling like it's a rounded corners kind of day
+border-color: #6C6C6C !important;
+    border-radius: 25px;
+}
+
+.wd-overflow {
+    overflow: auto;
+}
+
