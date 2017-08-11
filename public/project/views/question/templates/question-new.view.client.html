@@ -1,36 +1,41 @@
 <div ng-style="{'background-image':'url(../../../../../project/assets/img/ask.jpg)','background-repeat': 'no-repeat',
  'height':'800px' ,'background-size': '100% 800px' }">
+    <div class="container-fluid">
+
 
     <div ng-include="'./views/common/header.view.client.html'">
     </div>
 
-    <div class="container-fluid">
+
         <h1 class="header-text">Ask a new question</h1>
 
 
-        <label for="title" class="header-text">Title</label>
-
-        <input id="title"
-               ng-model="question.title"
-               class="form-control"
-               placeholder="Title"/>
-
-
-        <label for="description" class="header-text">Description</label>
         <div class="form-group">
-    <textarea class="form-control"
-              id="description"
-              style="height: 90px"
-              ng-model="question.description"
-              placeholder="Enter question description">
-        </textarea>
+            <label class="col-sm-2 control-label">Title</label>
+            <div class="col-sm-10">
+                <input ng-model="question.title" type="text" class="form-control" placeholder="Title">
+            </div>
+        </div>
 
-            <label for="category" class="header-text"> Select Category: </label><br>
-            <select ng-model="question.category">
-                <option id="category" ng-repeat="category in model.categories" value="{{category._id}}">{{category.type}}</option>
-            </select> </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">Description</label>
+            <div class="col-sm-10">
+                <textarea rows="7" ng-model="question.description" type="text" class="form-control" placeholder="Enter question description"></textarea>
+            </div>
+        </div>
 
-        <form   id="anonymous" >
+        <div class="form-group">
+            <label class="col-sm-2 control-label">Category</label>
+            <div class="col-sm-1">
+                <select ng-model="question.category">
+                    <option  ng-repeat="category in model.categories" value="{{category._id}}">{{category.type}}</option>
+                </select>
+            </div>
+        </div>
+
+
+
+        <form class="pull-right">
             <label class="header-text">Ask Anonymously:
                 <input type="checkbox" ng-model="question.isAnon">
             </label>
@@ -38,7 +43,7 @@
 
 
         <a ng-click="model.createQuestion(question)"
-           class="btn  btn-primary">Ask</a>
+           class="btn  btn-success">Ask</a>
 
         <a href="#!/read"
            class="btn  btn-danger">Cancel</a>
