@@ -14,7 +14,7 @@
                 <li><a href="#!/answer"><span class="fa fa-pencil"> Answer</span></a></li>
             </ul>
 
-                <form class="form-inline  nav navbar-nav  ">
+                <form ng-show="currentUser" class="form-inline  nav navbar-nav  ">
                     <input class="form-control my-2"
                            type="text"
                            placeholder="Search Quora"
@@ -26,7 +26,7 @@
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="#!/ask"><span class="glyphicon glyphicon-question-sign"></span> Ask a Question</a></li>
-                <li class="dropdown">
+                <li ng-show="model.user" class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="" ><span class="glyphicon glyphicon-user"></span> {{model.user.username}}<span class="caret"></span></a>
                 <ul class="dropdown-menu">
                     <li><a href="#!/user">Profile</a></li>
@@ -34,6 +34,8 @@
                     <li><a href="" ng-click="model.logout()">Logout</a></li>
                 </ul>
                 </li>
+                <li ng-show="!model.user"><a href="#!/register"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+                <li ng-show="!model.user"><a href="#!/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
             </ul>
         </div>
     </div>

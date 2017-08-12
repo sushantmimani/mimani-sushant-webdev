@@ -1,10 +1,8 @@
 <div class="container-fluid">
     <div ng-include="'./views/common/header.view.client.html'"></div>
-    <div >
+    <div class="row content" >
         <h1 class="header-text" ><strong>RECENT QUESTIONS</strong></h1>
         <hr>
-
-
         <div ng-repeat="question in model.questions" class="col-sm-12">
         <div class="row">
             <div class="col-sm-3">
@@ -15,15 +13,18 @@
                     <h5><span class="glyphicon glyphicon-time"></span> Post by {{question.user.username}} at <span> {{question.updatedDate | date:"MM/dd/yyyy 'at' h:mma"}}</span></h5>
                 </div>
             </div>
+
             <div class="col-sm-9">
+
                 <div class="well">
                     <h1><strong><a href="#!/user/question/{{question._id}}" >{{question.title}}</a></strong></h1>
-                    <p>{{question.description}}</p>
+                    <p><h3>{{question.description}}</h3></p>
+
                     <div ng-show="question.answer">
                     <div class="well" >
                     {{question.answer[0].answerText}}
 
-                        <a href="" class="btn btn-danger pull-right" ng-click="model.downvoteAnswer(question.answer[0])">
+                        <a href="" class="btn btn-danger pull-right " ng-click="model.downvoteAnswer(question.answer[0])">
                             <span class="glyphicon glyphicon-thumbs-down">&nbsp{{question.answer[0].downVotes}} </span>
                         </a>
 

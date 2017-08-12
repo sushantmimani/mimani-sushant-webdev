@@ -12,6 +12,7 @@
             </ul>
         </div>
         <div class="col-md-8">
+
             <div class="well">
                 <div ng-show="model.isSet(1)">
                     <h1>My Questions page</h1>
@@ -19,7 +20,47 @@
                         <a href="#!/user/question/{{question._id}}">
                             {{question.description}}
                         </a>
+                        <div>
+                        <a href="" class="btn btn-success"><span class="glyphicon glyphicon-pencil pull-right"
+                        ng-click="model.editQuestion(question)">
+                        </span></a>
+                        <a href="" class="btn btn-danger"><span class="glyphicon glyphicon-remove-circle pull-right"
+                              ng-click="model.deleteQuestion(question._id)">
+                        </span></a>
+                        </div>
+
+                        <div ng-if="question.toEdit">
+                                <label class="control-label pull-left">Title</label>
+                                <div>
+                                    <input ng-model="question.title" type="text" class="form-control" placeholder="Title">
+                                </div>
+                            <label class="control-label pull-left">Description</label>
+                            <div>
+                                <input ng-model="question.description" type="text" class="form-control" placeholder="Title">
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Category</label>
+                                <div class="col-sm-1">
+                                    <select ng-model="question.category">
+                                        <option  ng-repeat="category in model.categories" value="{{category._id}}">{{category.type}}</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <form class="pull-right">
+                                <label >Ask Anonymously:
+                                    <input type="checkbox" ng-model="question.isAnon">
+                                </label>
+                            </form>
+                            <br/>
+                            <a href="" class="btn btn-success pull-right"ng-click="model.updateQuestion(question)">Save</a>
+                            <br/>
+                            </div></div>
                     </div>
+                </div>
+
+
+
 
                 </div>
                 <div ng-show="model.isSet(2)">

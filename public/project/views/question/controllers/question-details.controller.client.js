@@ -20,16 +20,26 @@
         model.downvoteAnswer = downvoteAnswer;
 
         function upvoteAnswer(answer) {
-            answer.upVotes+=1;
-            answerService
-                .updateAnswer(answer)
-
+            if(answer.user===currentUser._id){
+                alert("Cannot upvote own answer");
+            }
+            else {
+                answer.upVotes+=1;
+                answerService
+                    .updateAnswer(answer)
+            }
         }
 
         function downvoteAnswer(answer) {
-            answer.downVotes+=1;
-            answerService
-                .updateAnswer(answer)
+            if(answer.user===currentUser._id){
+                alert("Cannot downvote own answer");
+            }
+            else {
+                answer.downVotes+=1;
+                answerService
+                    .updateAnswer(answer)
+            }
+
 
         }
 

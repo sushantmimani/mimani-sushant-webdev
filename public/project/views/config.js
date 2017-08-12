@@ -72,6 +72,11 @@
                     currentUser: checkLoggedIn
                 }
             })
+            .when('/explore', {
+                templateUrl: 'views/question/templates/question-list.view.client.html',
+                controller: 'exploreController',
+                controllerAs: 'model',
+            })
     }
 
     function checkLoggedIn ($q,userService, $location) {

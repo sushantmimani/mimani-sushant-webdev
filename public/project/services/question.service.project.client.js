@@ -12,12 +12,29 @@
         var api = {
             getQuestions: getQuestions,
             createQuestion: createQuestion,
-            getQuestionById: getQuestionById
+            getQuestionById: getQuestionById,
+            deleteQuestion:deleteQuestion,
+            updateQuestion: updateQuestion
 
         };
 
         return api;
 
+
+        function updateQuestion(question) {
+            var url = '/api/project/question';
+            return $http.put(url,question)
+                .then(function (response) {
+                    return response.data;
+                })
+        }
+        function deleteQuestion(qId) {
+            var url = '/api/project/question/'+qId;
+            return $http.delete(url)
+                .then(function (response) {
+                    return response.data;
+                })
+        }
         function getQuestionById(qId) {
             var url = '/api/project/questionDetails/'+qId;
             return $http.get(url)

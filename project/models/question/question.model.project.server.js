@@ -58,7 +58,7 @@ function getAllQuestions() {
 
 function updateQuestion(questionId, question) {
     delete question.createdDate;
-    question.updatedDate = Date.now;
+    question.updatedDate = Date.now();
     return questionModel_project.update({_id:questionId}, {$set:question});
 }
 

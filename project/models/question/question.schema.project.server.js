@@ -7,7 +7,7 @@ var questionSchema_project = mongoose.Schema({
     createdDate: {type: Date, default: Date.now},
     updatedDate: {type: Date, default: Date.now},
     category: {type: mongoose.Schema.Types.ObjectId, ref: "CategoryModel_Project"},
-    isAnon: Boolean,
+    isAnon: {type:Boolean,default:false},
     description: String
 }, {collection: "question"});
 

@@ -8,7 +8,27 @@ var questionModel_project = require('../models/question/question.model.project.s
 app.post ('/api/project/question', createQuestion);
 app.get ('/api/project/question', getQuestions);
 app.get ('/api/project/questionDetails/:qId', getQuestionById);
+app.delete ('/api/project/question/:qId', deleteQuestion);
 app.get ('/api/project/question/:userId', getAllQuestionsForUser)
+app.put ('/api/project/question', updateQuestion);
+
+
+function updateQuestion(req, res) {
+    var question = req.body;
+    questionModel_project
+        .updateQuestion(question._id, question)
+        .then(function (response) {
+            res.send(response);
+        })
+}
+function deleteQuestion(req, res) {
+    var qId = req.params.qId;
+    questionModel_project
+        .deleteQuestion(qId)
+        .then(function (response) {
+            res.send(response);
+        })
+}
 
 function getAllQuestionsForUser(req, res) {
     var userId = req.params.userId;

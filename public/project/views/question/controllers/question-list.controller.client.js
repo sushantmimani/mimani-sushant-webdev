@@ -19,21 +19,38 @@
         model.downvoteAnswer = downvoteAnswer;
 
         function upvoteAnswer(answer) {
-            answer.upVotes+=1;
-            answerService
-                .updateAnswer(answer)
-                .then(function (response) {
-
-                    console.log(answer.user);
-                })
+            if(answer.user===currentUser._id){
+                alert("Cannot upvote own answer");
+            }
+            else if(answer.upvotedBy.indexOf(currentUser._id) >=0) {
+                answer.upVoted = true;
+                alert("Already Upvoted");
+            }
+            else{
+                answer.upVotes+=1;
+                answer.upvotedBy.push(currentUser._id);
+                answerService
+                    .updateAnswer(answer)
+                    .then(function (response) {
+                        answer.upVoted = true;
+                    })
+            }
 
         }
 
         function downvoteAnswer(answer) {
-            answer.downVotes+=1;
-            answerService
-                .updateAnswer(answer)
-
+            if(answer.user===currentUser._id){
+                alert("Cannot downvote own answer");
+            }
+            else if(answer.downvotedBy.indexOf(currentUser._id) >=0) {
+                alert("Already downvoted");
+            }
+            else {
+                answer.downVotes+=1;
+                answer.downvotedBy.push(currentUser._id);
+                answerService
+                    .updateAnswer(answer)
+            }
         }
 
         function init() {

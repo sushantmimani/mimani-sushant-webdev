@@ -8,24 +8,47 @@
         .module('WebDevProject')
         .controller('userContentController', userContentController);
 
-    function userContentController ($location, userService, currentUser, $http ) {
+    function userContentController ($location, userService, currentUser, $http, questionService, answerService ) {
 
         var model = this;
+        model.toEdit = false;
         model.user = currentUser;
         model.logout = logout;
         model.searchGoogle = searchGoogle;
         model.trustThisContent = trustThisContent;
+        model.deleteQuestion = deleteQuestion;
+        model.editQuestion = editQuestion;
+        model.updateQuestion = updateQuestion;
+
+        function updateQuestion(question) {
+            questionService
+                .updateQuestion(question)
+                .then(function (response) {
+                    init();
+                })
+        }
+
+        function editQuestion(question) {
+            question.toEdit = !model.toEdit;
+            model.toEdit = !model.toEdit;
+        }
+
+        function deleteQuestion(qId) {
+            questionService
+                .deleteQuestion(qId)
+                .then(function (response) {
+                    init();
+                    console.log(response);
+                })
+        }
 
         model.tab = 1;
 
         model.setTab = function(newTab){
-            console.log("in setTab");
             model.tab = newTab;
         };
 
         model.isSet = function(tabNum){
-            console.log(model.tab === tabNum)
-            console.log("in isSet");
             return model.tab === tabNum;
         };
 
@@ -54,6 +77,11 @@
 
 
         function init() {
+
+            $http.get('/api/project/category')
+                .then(function (response) {
+                    model.categories = response.data;
+                })
             userService
                 .getAllQuestionsForUser(model.user._id)
                 .then(function (questions) {
