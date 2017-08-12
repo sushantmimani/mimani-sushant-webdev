@@ -33,12 +33,18 @@
             model.toEdit = !model.toEdit;
         }
 
-        function deleteQuestion(qId) {
+        function deleteQuestion(question) {
+            var answers = question.answer;
+            if(answers.length>0){
+                for(var index in answers){
+                    answerService
+                        .deleteAnswer(answers[index]._id)
+                }
+            }
             questionService
-                .deleteQuestion(qId)
+                .deleteQuestion(question._id)
                 .then(function (response) {
                     init();
-                    console.log(response);
                 })
         }
 

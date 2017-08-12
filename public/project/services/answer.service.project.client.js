@@ -11,10 +11,19 @@
 
         var api = {
             submitAnswer: submitAnswer,
-            updateAnswer: updateAnswer
+            updateAnswer: updateAnswer,
+            deleteAnswer: deleteAnswer
         };
 
         return api;
+
+        function deleteAnswer(answerId) {
+            var url = '/api/project/answer/'+answerId;
+            return $http.delete(url)
+                .then(function (response) {
+                    return response.data;
+                })
+        }
 
         function updateAnswer(answer) {
             var url = '/api/project/answer';

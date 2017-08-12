@@ -9,8 +9,17 @@ var questionModel_project = require('../models/question/question.model.project.s
 app.post ('/api/project/answer', submitAnswer);
 app.put ('/api/project/answer', updateAnswer);
 app.get ('/api/project/answer/:userId', getAllAnswersForUser)
+app.delete ('/api/project/answer/:answerId', deleteAnswer)
 
 
+function deleteAnswer(req, res) {
+    var answerId = req.params.answerId;
+    answerModel_project
+        .deleteAnswer(answerId)
+        .then(function (response) {
+            res.send(response);
+        })
+}
 
 function getAllAnswersForUser(req, res) {
     var userId = req.params.userId;

@@ -9,10 +9,14 @@ var answerModel_project = mongoose.model('AnswerModel_project', answerSchema_pro
 answerModel_project.submitAnswer = submitAnswer;
 answerModel_project.updateAnswer = updateAnswer;
 answerModel_project.getAnswerByUser = getAnswerByUser;
+answerModel_project.deleteAnswer = deleteAnswer;
 
 
 module.exports = answerModel_project;
 
+function deleteAnswer(answerId) {
+    return answerModel_project.remove({_id:answerId})
+}
 
 function submitAnswer (answer) {
     return answerModel_project.create(answer);
