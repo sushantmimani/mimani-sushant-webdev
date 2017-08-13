@@ -14,6 +14,7 @@
         model.questionToEdit = false;
         model.editCat = false;
         model.addCat = false;
+        model.addUser = false;
         model.answerToEdit = false;
         model.user = currentUser;
         model.logout = logout;
@@ -23,7 +24,35 @@
         model.editCategory = editCategory;
         model.updateCategory = updateCategory;
         model.createCategory = createCategory;
+        model.deleteUser= deleteUser;
+        model.createUser = createUser;
 
+        function createUser(user) {
+            if(user != undefined && user.hasOwnProperty('firstName') && user.hasOwnProperty('lastName')
+                && user.hasOwnProperty('username') && user.hasOwnProperty('password')
+                && user.hasOwnProperty('password2')){
+                userService
+                    .createUser(user)
+                    .then(function (response) {
+                        getUserList();
+                        model.addUser = false;
+                        model.message = "User created!";
+
+                    })
+            }
+
+            else
+               model.error = "All fields are madatory!";
+        }
+
+
+        function deleteUser(user) {
+            userService
+                .deleteUser(user._id)
+                .then(function (response) {
+                    getUserList();
+                })
+        }
         function createCategory(newCategory) {
             var category = {
                 type: newCategory
@@ -32,7 +61,7 @@
                 .createCategory(category)
                 .then(function (response) {
                     model.addCat = false;
-                    init();
+                    getCategoryList();
                 })
         }
 
@@ -54,7 +83,7 @@
             categoryService
                 .deleteCategory(category)
                 .then(function (response) {
-                    init();
+                    getCategoryList();
                 })
         }
 
@@ -96,24 +125,35 @@
             return $sce.trustAsHtml(html);
         }
 
-
-        function init() {
-
+        function getCategoryList() {
             $http.get('/api/project/category')
                 .then(function (response) {
                     model.categories = response.data;
                 })
+        }
+
+        function getUserList() {
             userService
                 .getUsers()
                 .then(function (users) {
                     model.users = users;
                 })
+        }
 
+        function getQuestionList() {
             questionService
                 .getQuestions()
                 .then(function (questions) {
                     model.questions = questions;
                 })
+        }
+
+        function init() {
+
+            getCategoryList();
+            getUserList();
+            getQuestionList();
+
 
         }
 
