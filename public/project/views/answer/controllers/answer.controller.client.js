@@ -42,6 +42,11 @@
         }
 
         function submitAnswer(questionId) {
+            if(model.answerText =="" || model.answerText==undefined){
+                model.error = "Answer cannot be blank!"
+                return;
+            }
+
             var answer = {
                 "question": questionId,
                 "answerText" : model.answerText,

@@ -10,7 +10,8 @@ var userSchema_project = mongoose.Schema({
     credits: Number,
     gender: String,
     createdDate: {type: Date, default: Date.now},
-    expertUser: Boolean,
+    isExpertUser: Boolean,
+    isAdmin: Boolean,
     google:   {
         id:    String,
         token: String

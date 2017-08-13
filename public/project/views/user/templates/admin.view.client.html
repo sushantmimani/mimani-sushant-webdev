@@ -1,0 +1,136 @@
+<div class="container-fluid">
+    <div ng-include="'./views/common/header.view.client.html'"></div>
+
+
+    <div class="container-fluid">
+        <div class="row content">
+            <div class="col-sm-2 sidenav hidden-xs">
+                <ul class="nav nav-pills nav-stacked">
+                    <li ng-class="{ active: model.isSet(1) }">
+                        <a href ng-click="model.setTab(1)">Manage Users</a>
+                    </li>
+                    <li ng-class="{ active: model.isSet(2) }">
+                        <a href ng-click="model.setTab(2)">Manage Questions</a>
+                    </li>
+                    <li ng-class="{ active: model.isSet(3) }">
+                        <a href ng-click="model.setTab(3)">Manage Categories</a>
+                    </li>
+                </ul><br>
+            </div>
+
+            <div class="col-sm-10">
+                <div class="row">
+                    <div class="col-sm-3">
+                        <div class="well">
+                            <h4>Users</h4>
+                            <p>1 Million</p>
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="well">
+                            <h4>Pages</h4>
+                            <p>100 Million</p>
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="well">
+                            <h4>Sessions</h4>
+                            <p>10 Million</p>
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="well">
+                            <h4>Bounce</h4>
+                            <p>30%</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-12">
+
+                    <div class="well">
+                        <div ng-show="model.isSet(1)">
+                            {{model.users}}
+                        </div>
+                        <div ng-show="model.isSet(2)">
+                        {{model.questions}}
+                        </div>
+                        <div ng-show="model.isSet(3)">
+                            <table ng-if="!model.editCat && !model.addCat" class="table table-responsive table-striped">
+                                <thead>
+                                <tr>
+                                    <td><strong>#</strong></td>
+                                    <td><strong>Category Id</strong></td>
+                                    <td><strong>Category</strong></td>
+                                    <td><strong>Actions</strong></td>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr ng-repeat="category in model.categories track by $index">
+                                    <td>{{$index+1}}</td>
+                                    <td>{{category._id}}</td>
+                                    <td>{{category.type}}</td>
+                                    <td> <span class="glyphicon glyphicon-edit" ng-click="model.editCategory(category)">  </span>   <span class="glyphicon glyphicon-remove-circle" ng-click="model.deleteCategory(category)"></span> </td>
+                                </tr>
+                                <tr>
+                                    <td>Add a new Category</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td><span class="glyphicon glyphicon-plus" ng-click="model.addCat=true"></span></td>
+                                </tr>
+                                </tbody>
+                            </table>
+
+                            <div ng-if="model.editCat">
+                                <form role="form" class="form-horizontal">
+                                    <div class="form-group">
+                                        <div class="row">
+                                        <label class="col-sm-2 control-label">Category Id</label>
+                                        <div class="col-sm-5">
+                                            <input ng-model="model.categoryToEdit._id" type="text" class="form-control" readonly>
+                                        </div>
+                                        </div>
+                                        <div class="row">
+                                        <label class="col-sm-2 control-label">Category Type</label>
+                                        <div class="col-sm-5">
+                                            <input ng-model="model.categoryToEdit.type" type="text" class="form-control">
+                                        </div>
+                                        </div>
+
+
+                                        <a ng-click="model.editCat=false"
+                                           class="btn  btn-danger pull-right">Cancel</a>
+                                <a ng-click="model.updateCategory(model.categoryToEdit)"
+                                   class="btn  btn-success pull-right">Update</a>
+                                    </div>
+
+                                </form>
+                            </div>
+                            <div ng-if="model.addCat">
+                                <form role="form" class="form-horizontal">
+                                    <div class="form-group">
+                                        <div class="row">
+                                            <label class="col-sm-2 control-label">Category Type</label>
+                                            <div class="col-sm-5">
+                                                <input ng-model="newCategory" type="text" class="form-control">
+                                            </div>
+                                        </div>
+
+
+                                        <a ng-click="model.addCat=false"
+                                           class="btn  btn-danger pull-right">Cancel</a>
+                                        <a ng-click="model.createCategory(newCategory)"
+                                           class="btn  btn-success pull-right">Create</a>
+                                    </div>
+
+                                </form>
+                            </div>
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

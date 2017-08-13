@@ -27,7 +27,7 @@ function updateCategory(category) {
     return categoryModel_project.update({_id:category._id}, {$set:category});
 }
 
-function deleteCategory(category) {
-    return categoryModel_project.remove({_id:category._id});
+function deleteCategory(categoryId) {
+    return categoryModel_project.remove({_id:categoryId});
 }
 

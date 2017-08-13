@@ -14,15 +14,17 @@
                     </div>
                 </div>
                 <div class="col-sm-9">
+                    <div ng-show="model.error">
+                        <div class="alert alert-danger">{{model.error}}</div>
+                    </div>
                     <div class="well">
                         <h1><strong>{{question.title}}</strong></h1>
-                        <p>{{question.description}}</p>
+                        <h3><p>{{question.description}}</p></h3>
                         <h5 ng-if="!question.toShow"><span class="btn btn-info" ng-click="question.toShow=true" >Answer</span></h5>
                         <div ng-if="question.toShow">
                         <textarea id="description"rows="5" class="form-control" ng-model="model.answerText" placeholder="Write your answer"></textarea>
                         <h5><span class="btn btn-success" ng-click="model.submitAnswer(question._id);question.toShow=false;model.answerText=''" >Answer</span> <span class="btn btn-danger" ng-click="question.toShow=false;model.answerText='' " >Cancel</span></h5>
                         </div>
-                        <hr>
                         </div>
                     </div>
                 </div>

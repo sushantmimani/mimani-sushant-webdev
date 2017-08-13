@@ -1,6 +1,6 @@
 <div class="container-fluid">
     <div ng-include="'./views/common/header.view.client.html'"></div>
-    <div class="row content" >
+    <div ng-if="!model.displayResult" class="row content" >
         <h1 class="header-text" ><strong>RECENT QUESTIONS</strong></h1>
         <hr>
         <div ng-repeat="question in model.questions" class="col-sm-12">
@@ -43,5 +43,20 @@
         </div>
 
 
+    </div>
+    <div ng-if="model.displayResult" class="row content">
+    <div ng-show="model.result">
+
+
+        <h1 class="header-text"><strong>Results</strong><h5><a href="" ng-click="model.displayResult=false">Back to Read</a></h5></h1>
+
+        <ul>
+            <li class="wd-text-align" ng-repeat="result in model.result">
+
+                <a href="{{result.link}}" target="_blank">{{result.link}}</a>
+                <p ng-bind-html="model.trustThisContent(result.htmlSnippet)"></p>
+            </li>
+        </ul>
+    </div>
     </div>
 </div>

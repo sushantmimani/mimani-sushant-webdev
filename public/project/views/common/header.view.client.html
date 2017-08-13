@@ -6,7 +6,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">Ask-n-Answer</a>
+            <a class="navbar-brand" href="#!/read">Ask-n-Answer</a>
         </div>
         <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav">
@@ -14,13 +14,13 @@
                 <li><a href="#!/answer"><span class="fa fa-pencil"> Answer</span></a></li>
             </ul>
 
-                <form ng-show="currentUser" class="form-inline  nav navbar-nav  ">
-                    <input class="form-control my-2"
+                <form ng-show="model.user" class="form-inline  nav navbar-nav  ">
+                    <input class="form-control my-2 "
                            type="text"
-                           placeholder="Search Quora"
+                           placeholder="Search on quora.com"
                            ng-model="searchText">
                     <a ng-click="model.searchGoogle(searchText)"
-                       class="btn  btn-success">Search</a>
+                       class="btn  btn-success ">Search</a>
 
                 </form>
             </ul>
@@ -31,7 +31,9 @@
                 <ul class="dropdown-menu">
                     <li><a href="#!/user">Profile</a></li>
                     <li><a href="#!/content">My Content</a></li>
+                    <li ng-if="model.user.isAdmin"><a href="#!/admin">Admin Dashboard</a></li>
                     <li><a href="" ng-click="model.logout()">Logout</a></li>
+
                 </ul>
                 </li>
                 <li ng-show="!model.user"><a href="#!/register"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>

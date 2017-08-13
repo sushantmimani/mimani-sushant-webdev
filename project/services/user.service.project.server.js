@@ -27,8 +27,16 @@ app.post ('/api/project/user', createUser);
 app.post  ('/api/project/logout', logout);
 app.post  ('/api/project/register', register);
 app.post ('/api/project/login', passport_project.authenticate('localproject'), login);
+app.get ('/api/project/users', getUsers)
 
 
+function getUsers(req, res) {
+    userModel_project
+        .findAllUsers()
+        .then(function (resp) {
+            res.send(resp);
+        })
+}
 
 function populateCategories(req, res) {
     var user = req.body;
@@ -130,7 +138,7 @@ app.get ('/project/auth/facebook/callback',
 
 
 
-function localStrategy(username, password, done) {
+function    localStrategy(username, password, done) {
     userModel_project
         .findUserByCredentials(username, password)
         .then(

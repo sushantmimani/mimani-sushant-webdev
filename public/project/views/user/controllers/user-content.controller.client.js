@@ -11,7 +11,8 @@
     function userContentController ($location, userService, currentUser, $http, questionService, answerService ) {
 
         var model = this;
-        model.toEdit = false;
+        model.questionToEdit = false;
+        model.answerToEdit = false;
         model.user = currentUser;
         model.logout = logout;
         model.searchGoogle = searchGoogle;
@@ -19,6 +20,49 @@
         model.deleteQuestion = deleteQuestion;
         model.editQuestion = editQuestion;
         model.updateQuestion = updateQuestion;
+        model.editAnswer = editAnswer;
+        model.updateAnswer = updateAnswer;
+        model.deleteAnswer = deleteAnswer;
+
+
+        model.tab = 1;
+
+        model.setTab = function(newTab){
+            model.tab = newTab;
+        };
+
+        model.isSet = function(tabNum){
+            return model.tab === tabNum;
+        };
+
+
+        function deleteAnswer(answer) {
+            var question = answer.question;
+            for (var index in question.answer) {
+                if (question.answer[index] == answer._id) {
+                    question.answer.splice(index, 1)
+                }
+            }
+            questionService
+                .updateQuestion(question)
+                .then(function () {
+                    answerService
+                        .deleteAnswer(answer._id)
+                        .then(function (response) {
+                            init();
+
+                })
+            })
+        }
+
+
+        function updateAnswer(answer) {
+            answerService
+                .updateAnswer(answer)
+                .then(function (response) {
+                    init();
+                });
+        }
 
         function updateQuestion(question) {
             questionService
@@ -29,8 +73,13 @@
         }
 
         function editQuestion(question) {
-            question.toEdit = !model.toEdit;
-            model.toEdit = !model.toEdit;
+            question.toEdit = !model.questionToEdit;
+            model.questionToEdit = !model.questionToEdit;
+        }
+
+        function editAnswer(answer) {
+            answer.toEdit = !model.answerToEdit;
+            model.answerToEdit = !model.answerToEdit;
         }
 
         function deleteQuestion(question) {
@@ -48,15 +97,6 @@
                 })
         }
 
-        model.tab = 1;
-
-        model.setTab = function(newTab){
-            model.tab = newTab;
-        };
-
-        model.isSet = function(tabNum){
-            return model.tab === tabNum;
-        };
 
         function logout() {
             userService.logout()
@@ -71,6 +111,7 @@
                 "v1?key=AIzaSyAxBWB1Vm6eIWK9VMYfQPr6ADuFwe4nRWE&cx=008911214601422826019:tjb4-7clba4&q="+text)
                 .then(function (resp) {
                     model.result = resp.data.items;
+                    console.log(model.result);
                 })
         }
 

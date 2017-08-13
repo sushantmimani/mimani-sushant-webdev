@@ -77,6 +77,14 @@
                 controller: 'exploreController',
                 controllerAs: 'model',
             })
+            .when('/admin', {
+                templateUrl: 'views/user/templates/admin.view.client.html',
+                controller: 'adminController',
+                controllerAs: 'model',
+                resolve: {
+                    currentUser: checkLoggedIn
+                }
+            })
     }
 
     function checkLoggedIn ($q,userService, $location) {

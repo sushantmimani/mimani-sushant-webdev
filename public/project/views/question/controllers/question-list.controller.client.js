@@ -65,6 +65,7 @@
                     }
                 }
                 model.questions = finalQuestions;
+                model.displayResult = false;
             }
         }
 
@@ -80,6 +81,7 @@
 
 
         function searchGoogle(text) {
+            model.displayResult = true;
             $http.get("https://www.googleapis.com/customsearch/" +
                 "v1?key=AIzaSyAxBWB1Vm6eIWK9VMYfQPr6ADuFwe4nRWE&cx=008911214601422826019:tjb4-7clba4&q="+text)
                 .then(function (resp) {

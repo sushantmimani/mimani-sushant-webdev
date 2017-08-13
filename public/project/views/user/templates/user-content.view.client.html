@@ -20,14 +20,13 @@
                         <a href="#!/user/question/{{question._id}}">
                             {{question.description}}
                         </a>
-                        <div>
-                        <button  class="btn btn-success"><span class="glyphicon glyphicon-pencil pull-right"
+
+                        <button  class="btn btn-success pull-right"><span class="glyphicon glyphicon-pencil pull-right"
                         ng-click="model.editQuestion(question)">
                         </span></button>
-                        <button class="btn btn-danger"><span class="glyphicon glyphicon-remove-circle pull-right"
+                        <button class="btn btn-danger pull-right"><span class="glyphicon glyphicon-remove-circle pull-right"
                               ng-click="model.deleteQuestion(question)">
                         </span></button>
-                        </div>
 
                         <div ng-if="question.toEdit">
                                 <label class="control-label pull-left">Title</label>
@@ -66,7 +65,20 @@
                         </a>
                             <div class="well-sm">
                                 {{answer.answerText}}
+                                <button  class="btn btn-success pull-right"><span class="glyphicon glyphicon-pencil pull-right"
+                                                                       ng-click="model.editAnswer(answer)"></span></button>
+                                <button class="btn btn-danger pull-right"><span class="glyphicon glyphicon-remove-circle pull-right"
+                                                                     ng-click="model.deleteAnswer(answer)"></span></button>
                             </div>
+                        <div ng-if="answer.toEdit">
+                            <label class="control-label pull-left">Answer</label>
+                            <div>
+                                <input ng-model="answer.answerText" type="text" class="form-control" placeholder="Title">
+                            </div>
+                            <br/>
+                            <button  class="btn btn-success pull-right"ng-click="model.updateAnswer(answer)">Save</button>
+                            <br/>
+                        </div></div>
 
                     </div>
                 </div>

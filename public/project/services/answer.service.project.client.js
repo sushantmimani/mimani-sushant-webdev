@@ -12,7 +12,7 @@
         var api = {
             submitAnswer: submitAnswer,
             updateAnswer: updateAnswer,
-            deleteAnswer: deleteAnswer
+            deleteAnswer: deleteAnswer,
         };
 
         return api;

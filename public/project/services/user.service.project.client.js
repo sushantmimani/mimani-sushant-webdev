@@ -20,11 +20,20 @@
             register: register,
             populateCategories: populateCategories,
             getAllQuestionsForUser: getAllQuestionsForUser,
-            getAllAnswersForUser:getAllAnswersForUser
+            getAllAnswersForUser:getAllAnswersForUser,
+            getUsers: getUsers
 
         };
 
         return api;
+
+        function getUsers() {
+            var url = '/api/project/users';
+            return $http.get(url)
+                .then(function (response) {
+                    return response.data;
+                })
+        }
 
         function getAllQuestionsForUser(userId) {
             var url = '/api/project/question/'+userId;
