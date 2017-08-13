@@ -3,7 +3,7 @@
 
 
     <div class="container-fluid">
-        <div class="row content">
+        <div ng-if="!model.displayResult" class="row content">
             <div class="col-sm-2 sidenav hidden-xs">
                 <ul class="nav nav-pills nav-stacked">
                     <li ng-class="{ active: model.isSet(1) }">
@@ -15,7 +15,8 @@
                     <li ng-class="{ active: model.isSet(3) }">
                         <a href ng-click="model.setTab(3)">Manage Categories</a>
                     </li>
-                </ul><br>
+                </ul>
+                <br>
             </div>
 
             <div class="col-sm-10">
@@ -23,25 +24,25 @@
                     <div class="col-sm-3">
                         <div class="well">
                             <h4>Users</h4>
-                            <p>1 Million</p>
+                            <p>{{model.userCount}}</p>
                         </div>
                     </div>
                     <div class="col-sm-3">
                         <div class="well">
-                            <h4>Pages</h4>
-                            <p>100 Million</p>
+                            <h4>Questions</h4>
+                            <p>{{model.questionCount}}</p>
                         </div>
                     </div>
                     <div class="col-sm-3">
                         <div class="well">
-                            <h4>Sessions</h4>
-                            <p>10 Million</p>
+                            <h4>Categories</h4>
+                            <p>{{model.categoryCount}}</p>
                         </div>
                     </div>
                     <div class="col-sm-3">
                         <div class="well">
-                            <h4>Bounce</h4>
-                            <p>30%</p>
+                            <h4>Answers</h4>
+                            <p>{{model.answerCount}}</p>
                         </div>
                     </div>
                 </div>
@@ -49,7 +50,8 @@
 
                     <div class="well">
                         <div ng-show="model.isSet(1)">
-                            <table ng-if="!model.addUser" class="table table-responsive table-striped">
+                            <table ng-if="!model.addUser && !model.editUser"
+                                   class="table table-responsive table-striped">
                                 <thead>
                                 <tr>
                                     <td><strong>#</strong></td>
@@ -67,7 +69,10 @@
                                     <td>{{user.lastName}}</td>
                                     <td>{{user.username}}</td>
                                     <td>{{user.email}}</td>
-                                    <td> <span class="glyphicon glyphicon-edit" ng-click="model.editCategory(category)">  </span>   <span class="glyphicon glyphicon-remove-circle" ng-click="model.deleteUser(user)"></span> </td>
+                                    <td><span class="glyphicon glyphicon-edit"
+                                              ng-click="model.updateUser(user)">  </span> <span
+                                            class="glyphicon glyphicon-remove-circle"
+                                            ng-click="model.deleteUser(user)"></span></td>
                                 </tr>
                                 <tr>
                                     <td>Add a new User</td>
@@ -75,7 +80,8 @@
                                     <td></td>
                                     <td></td>
                                     <td></td>
-                                    <td><span class="glyphicon glyphicon-plus" ng-click="model.addUser=!model.addUser"></span></td>
+                                    <td><span class="glyphicon glyphicon-plus"
+                                              ng-click="model.addUser=!model.addUser"></span></td>
                                 </tr>
                                 </tbody>
                             </table>
@@ -89,14 +95,15 @@
                                 <div ng-show="model.error">
                                     <div class="alert alert-danger">
                                         {{model.error}}
-                                </div>
+                                    </div>
                                 </div>
                                 <form role="form" class="form-horizontal">
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label">First Name</label>
                                         <div class="col-sm-5">
 
-                                            <input ng-model="user.firstName" type="text" class="form-control" placeholder="First Name">
+                                            <input ng-model="user.firstName" type="text" class="form-control"
+                                                   placeholder="First Name">
                                         </div>
                                     </div>
 
@@ -104,7 +111,8 @@
                                         <label class="col-sm-2 control-label">Last Name</label>
                                         <div class="col-sm-5">
 
-                                            <input ng-model="user.lastName" type="text" class="form-control" placeholder="Last Name">
+                                            <input ng-model="user.lastName" type="text" class="form-control"
+                                                   placeholder="Last Name">
                                         </div>
                                     </div>
 
@@ -112,28 +120,32 @@
                                         <label class="col-sm-2 control-label">Username</label>
                                         <div class="col-sm-5">
 
-                                            <input ng-model="user.username" type="text" class="form-control" placeholder="Username">
+                                            <input ng-model="user.username" type="text" class="form-control"
+                                                   placeholder="Username">
                                         </div>
                                     </div>
 
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label">Email</label>
                                         <div class="col-sm-5">
-                                            <input ng-model="user.email" type="email" class="form-control" placeholder="email@domain.com">
+                                            <input ng-model="user.email" type="email" class="form-control"
+                                                   placeholder="email@domain.com">
                                         </div>
                                     </div>
 
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label">Password</label>
                                         <div class="col-sm-5">
-                                            <input ng-model="user.password" type="password" class="form-control" placeholder="Password">
+                                            <input ng-model="user.password" type="password" class="form-control"
+                                                   placeholder="Password">
                                         </div>
                                     </div>
 
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label">Verify Password</label>
                                         <div class="col-sm-5">
-                                            <input ng-model="user.password2" type="password" class="form-control" placeholder="Verify Password">
+                                            <input ng-model="user.password2" type="password" class="form-control"
+                                                   placeholder="Verify Password">
                                         </div>
                                     </div>
 
@@ -146,87 +158,204 @@
                                 </form>
 
 
-                        </div>
-                        <div ng-show="model.isSet(2)">
-                        {{model.questions}}
-                        </div>
-                        <div ng-show="model.isSet(3)">
-                            <table ng-if="!model.editCat && !model.addCat" class="table table-responsive table-striped">
-                                <thead>
-                                <tr>
-                                    <td><strong>#</strong></td>
-                                    <td><strong>Category Id</strong></td>
-                                    <td><strong>Category</strong></td>
-                                    <td><strong>Actions</strong></td>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <tr ng-repeat="category in model.categories track by $index">
-                                    <td>{{$index+1}}</td>
-                                    <td>{{category._id}}</td>
-                                    <td>{{category.type}}</td>
-                                    <td> <span class="glyphicon glyphicon-edit" ng-click="model.editCategory(category)">  </span>   <span class="glyphicon glyphicon-remove-circle" ng-click="model.deleteCategory(category)"></span> </td>
-                                </tr>
-                                <tr>
-                                    <td>Add a new Category</td>
-                                    <td></td>
-                                    <td></td>
-                                    <td><span class="glyphicon glyphicon-plus" ng-click="model.addCat=true"></span></td>
-                                </tr>
-                                </tbody>
-                            </table>
-
-                            <div ng-if="model.editCat">
-                                <form role="form" class="form-horizontal">
-                                    <div class="form-group">
-                                        <div class="row">
-                                        <label class="col-sm-2 control-label">Category Id</label>
-                                        <div class="col-sm-5">
-                                            <input ng-model="model.categoryToEdit._id" type="text" class="form-control" readonly>
-                                        </div>
-                                        </div>
-                                        <div class="row">
-                                        <label class="col-sm-2 control-label">Category Type</label>
-                                        <div class="col-sm-5">
-                                            <input ng-model="model.categoryToEdit.type" type="text" class="form-control">
-                                        </div>
-                                        </div>
-
-
-                                        <a ng-click="model.editCat=false"
-                                           class="btn  btn-danger pull-right">Cancel</a>
-                                <a ng-click="model.updateCategory(model.categoryToEdit)"
-                                   class="btn  btn-success pull-right">Update</a>
-                                    </div>
-
-                                </form>
                             </div>
-                            <div ng-if="model.addCat">
+                            <div ng-if="model.editUser">
                                 <form role="form" class="form-horizontal">
                                     <div class="form-group">
-                                        <div class="row">
-                                            <label class="col-sm-2 control-label">Category Type</label>
-                                            <div class="col-sm-5">
-                                                <input ng-model="newCategory" type="text" class="form-control">
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">Username</label>
+                                            <div class="col-sm-10">
+                                                <input ng-model="model.userToEdit.username" type="text"
+                                                       class="form-control" readonly>
                                             </div>
                                         </div>
 
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">Email</label>
+                                            <div class="col-sm-10">
+                                                <input ng-model="model.userToEdit.email" type="email"
+                                                       class="form-control">
+                                            </div>
+                                        </div>
 
-                                        <a ng-click="model.addCat=false"
-                                           class="btn  btn-danger pull-right">Cancel</a>
-                                        <a ng-click="model.createCategory(newCategory)"
-                                           class="btn  btn-success pull-right">Create</a>
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">First Name</label>
+                                            <div class="col-sm-10">
+                                                <input ng-model="model.userToEdit.firstName" type="text"
+                                                       class="form-control">
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">Last Name</label>
+                                            <div class="col-sm-10">
+                                                <input ng-model="model.userToEdit.lastName" type="text"
+                                                       class="form-control">
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">Phone</label>
+                                            <div class="col-sm-10">
+                                                <input ng-model="model.userToEdit.phone" type="text"
+                                                       class="form-control">
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">Expert User</label>
+                                            <div class="col-sm-1">
+                                            <input type="checkbox" ng-model="model.userToEdit.isExpertUser">
+
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">Admin</label>
+                                            <div class="col-sm-1">
+                                                <input type="checkbox" ng-model="model.userToEdit.isAdmin">
+
+                                            </div>
+                                        </div>
                                     </div>
 
+                                    <div class="form-group">
+                                    <a ng-click="model.editUser=false"
+                                       class="btn  btn-danger pull-right">Cancel</a>
+                                    <a ng-click="model.updateUserNew(model.userToEdit)"
+                                       class="btn  btn-success pull-right">Update</a>
+                                    </div>
                                 </form>
                             </div>
-                            </div>
-                            </div>
+
+                            </form>
+                        </div>
+                    </div>
+                    <div ng-show="model.isSet(2)">
+                        <table class="table table-responsive table-striped">
+                            <thead>
+                            <tr>
+                                <td><strong>#</strong></td>
+                                <td><strong>Question</strong></td>
+                                <td><strong>Asked By</strong></td>
+                                <td><strong>Category</strong></td>
+                                <td><strong>Anonymous</strong></td>
+                                <td><strong>Answers</strong></td>
+                                <td><strong>Actions</strong></td>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat="question in model.questions track by $index">
+                                <td><a href="#!/user/question/{{question._id}}">{{$index+1}}</a></td>
+                                <td>{{question.title}}</td>
+                                <td>{{question.user.firstName}} {{question.user.lastName}}</td>
+                                <td>{{question.category}}</td>
+                                <td>{{question.isAnon}}</td>
+                                <td>{{question.answer.length}}</td>
+                                <td><span class="glyphicon glyphicon-remove-circle"
+                                          ng-click="model.deleteQuestion(question)"></span></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div ng-show="model.isSet(3)">
+                        <table ng-if="!model.editCat && !model.addCat" class="table table-responsive table-striped">
+                            <thead>
+                            <tr>
+                                <td><strong>#</strong></td>
+                                <td><strong>Category Id</strong></td>
+                                <td><strong>Category</strong></td>
+                                <td><strong>Actions</strong></td>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat="category in model.categories track by $index">
+                                <td>{{$index+1}}</td>
+                                <td>{{category._id}}</td>
+                                <td>{{category.type}}</td>
+                                <td><span class="glyphicon glyphicon-edit"
+                                          ng-click="model.editCategory(category)">  </span> <span
+                                        class="glyphicon glyphicon-remove-circle"
+                                        ng-click="model.deleteCategory(category)"></span></td>
+                            </tr>
+                            <tr>
+                                <td>Add a new Category</td>
+                                <td></td>
+                                <td></td>
+                                <td><span class="glyphicon glyphicon-plus" ng-click="model.addCat=true"></span></td>
+                            </tr>
+                            </tbody>
+                        </table>
+
+                        <div ng-if="model.editCat">
+                            <form role="form" class="form-horizontal">
+                                <div class="form-group">
+                                    <div class="row">
+                                        <label class="col-sm-2 control-label">Category Id</label>
+                                        <div class="col-sm-5">
+                                            <input ng-model="model.categoryToEdit._id" type="text" class="form-control"
+                                                   readonly>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <label class="col-sm-2 control-label">Category Type</label>
+                                        <div class="col-sm-5">
+                                            <input ng-model="model.categoryToEdit.type" type="text"
+                                                   class="form-control">
+                                        </div>
+                                    </div>
+
+
+                                    <a ng-click="model.editCat=false"
+                                       class="btn  btn-danger pull-right">Cancel</a>
+                                    <a ng-click="model.updateCategory(model.categoryToEdit)"
+                                       class="btn  btn-success pull-right">Update</a>
+                                </div>
+
+                            </form>
+                        </div>
+                        <div ng-if="model.addCat">
+                            <form role="form" class="form-horizontal">
+                                <div class="form-group">
+                                    <div class="row">
+                                        <label class="col-sm-2 control-label">Category Type</label>
+                                        <div class="col-sm-5">
+                                            <input ng-model="newCategory" type="text" class="form-control">
+                                        </div>
+                                    </div>
+
+
+                                    <a ng-click="model.addCat=false"
+                                       class="btn  btn-danger pull-right">Cancel</a>
+                                    <a ng-click="model.createCategory(newCategory)"
+                                       class="btn  btn-success pull-right">Create</a>
+                                </div>
+
+                            </form>
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
     </div>
+
+</div>
+<div ng-if="model.displayResult" class="row content">
+    <div ng-show="model.result">
+
+
+        <h1 class="header-text"><strong>Results</strong><h5><a href="" ng-click="model.displayResult=false">Back to
+            Dashboard</a></h5></h1>
+
+        <ul>
+            <li class="wd-text-align" ng-repeat="result in model.result">
+
+                <a href="{{result.link}}" target="_blank">{{result.link}}</a>
+                <p ng-bind-html="model.trustThisContent(result.htmlSnippet)"></p>
+            </li>
+        </ul>
+    </div>
+</div>
+</div>
+</div>
 </div>

@@ -1,6 +1,6 @@
 <div class="container-fluid">
     <div ng-include="'./views/common/header.view.client.html'"></div>
-    <div >
+    <div ng-if="!model.displayResult" class="row content">
         <h1 class="header-text" ><strong>{{model.question.title}}</strong></h1>
         <hr>
 
@@ -57,9 +57,9 @@
                             <br/>
                         </div></div>
 
-                        <div ng-repeat="answer in model.question.answer">
-                            <div class="well" >
-                                {{answer.answerText}}<span ng-if="model.user.isExpertUser||model.user.isAdmin " class="dropdown pull-right">
+                    <div ng-repeat="answer in model.question.answer">
+                        <div class="well" >
+                            {{answer.answerText}}<span ng-if="model.user.isExpertUser||model.user.isAdmin " class="dropdown pull-right">
                             <label class="label label-warning dropdown-toggle" data-toggle="dropdown">...
                                 </label>
                             <ul class="dropdown-menu pull-right">
@@ -68,34 +68,49 @@
                             </ul>
                             </span>
 
-                                <a href="" class="btn btn-danger pull-right" ng-click="model.downvoteAnswer(answer)">
-                                    <span class="glyphicon glyphicon-thumbs-down">&nbsp{{answer.downVotes}} </span>
-                                </a>
+                            <a href="" class="btn btn-danger pull-right" ng-click="model.downvoteAnswer(answer)">
+                                <span class="glyphicon glyphicon-thumbs-down">&nbsp{{answer.downVotes}} </span>
+                            </a>
 
 
-                                <a href="" class="btn btn-success pull-right" ng-click="model.upvoteAnswer(answer)">
-                                    <span class="glyphicon glyphicon-thumbs-up ">&nbsp{{answer.upVotes}}</span>
-                                </a>
+                            <a href="" class="btn btn-success pull-right" ng-click="model.upvoteAnswer(answer)">
+                                <span class="glyphicon glyphicon-thumbs-up ">&nbsp{{answer.upVotes}}</span>
+                            </a>
 
-                                <div ng-if="answer.toEdit">
-                                    <label class="control-label pull-left">Answer</label>
-                                    <div>
-                                        <input ng-model="answer.answerText" type="text" class="form-control" placeholder="Title">
-                                    </div>
-                                    <br/>
-                                    <button  class="btn btn-danger pull-right"ng-click="model.editAnswer(answer)">Cancel</button>
-                                    <button  class="btn btn-success pull-right"ng-click="model.updateAnswer(answer)">Save</button>
-                                    <br/>
-                                </div></div>
+                            <div ng-if="answer.toEdit">
+                                <label class="control-label pull-left">Answer</label>
+                                <div>
+                                    <input ng-model="answer.answerText" type="text" class="form-control" placeholder="Title">
+                                </div>
+                                <br/>
+                                <button  class="btn btn-danger pull-right"ng-click="model.editAnswer(answer)">Cancel</button>
+                                <button  class="btn btn-success pull-right"ng-click="model.updateAnswer(answer)">Save</button>
+                                <br/>
+                            </div></div>
 
 
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>
         </div>
-
-
     </div>
+    <div ng-if="model.displayResult" class="row content">
+        <div ng-show="model.result">
+
+
+            <h1 class="header-text"><strong>Results</strong><h5><a href="" ng-click="model.displayResult=false">Back to Question</a></h5></h1>
+
+            <ul>
+                <li class="wd-text-align" ng-repeat="result in model.result">
+
+                    <a href="{{result.link}}" target="_blank">{{result.link}}</a>
+                    <p ng-bind-html="model.trustThisContent(result.htmlSnippet)"></p>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+
+
 </div>
+

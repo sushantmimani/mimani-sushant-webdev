@@ -8,7 +8,7 @@
         .module('WebDevProject')
         .controller('askController', askController, );
 
-    function askController(currentUser, $location, userService, questionService, $http) {
+    function askController(currentUser, $location, $sce, userService, questionService, $http) {
 
         var model = this;
         model.user = currentUser;
@@ -44,6 +44,7 @@
         }
 
         function searchGoogle(text) {
+            model.displayResult = true;
             $http.get("https://www.googleapis.com/customsearch/" +
                 "v1?key=AIzaSyAxBWB1Vm6eIWK9VMYfQPr6ADuFwe4nRWE&cx=008911214601422826019:tjb4-7clba4&q="+text)
                 .then(function (resp) {

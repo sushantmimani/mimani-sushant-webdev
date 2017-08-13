@@ -8,7 +8,7 @@
         .module('WebDevProject')
         .controller('userContentController', userContentController);
 
-    function userContentController ($location, userService, currentUser, $http, questionService, answerService ) {
+    function userContentController ($sce, $location, userService, currentUser, $http, questionService, answerService ) {
 
         var model = this;
         model.questionToEdit = false;
@@ -107,11 +107,11 @@
 
 
         function searchGoogle(text) {
+            model.displayResult = true;
             $http.get("https://www.googleapis.com/customsearch/" +
                 "v1?key=AIzaSyAxBWB1Vm6eIWK9VMYfQPr6ADuFwe4nRWE&cx=008911214601422826019:tjb4-7clba4&q="+text)
                 .then(function (resp) {
                     model.result = resp.data.items;
-                    console.log(model.result);
                 })
         }
 

@@ -13,9 +13,18 @@
             submitAnswer: submitAnswer,
             updateAnswer: updateAnswer,
             deleteAnswer: deleteAnswer,
+            getCount: getCount
         };
 
         return api;
+
+        function getCount() {
+            var url = '/api/project/answerCount';
+            return $http.get(url)
+                .then(function (response) {
+                    return response.data;
+                })
+        }
 
         function deleteAnswer(answerId) {
             var url = '/api/project/answer/'+answerId;

@@ -8,13 +8,14 @@
         .module('WebDevProject')
         .controller('adminController', adminController);
 
-    function adminController ($location, userService, currentUser, $http, questionService, categoryService) {
+    function adminController ($sce, $location, userService, currentUser, $http, questionService, categoryService, answerService) {
 
         var model = this;
         model.questionToEdit = false;
         model.editCat = false;
         model.addCat = false;
         model.addUser = false;
+        model.editUser = false;
         model.answerToEdit = false;
         model.user = currentUser;
         model.logout = logout;
@@ -26,6 +27,33 @@
         model.createCategory = createCategory;
         model.deleteUser= deleteUser;
         model.createUser = createUser;
+        model.deleteQuestion = deleteQuestion;
+        model.updateUser = updateUser;
+        model.updateUserNew = updateUserNew;
+
+        function updateUserNew(user) {
+            userService
+                .updateUser(user._id, user)
+                .then(function (resp) {
+                    getUserList();
+                    model.editUser = false;
+                })
+        }
+
+        function deleteQuestion(question) {
+            var answers = question.answer;
+            if(answers.length>0){
+                for(var index in answers){
+                    answerService
+                        .deleteAnswer(answers[index]._id)
+                }
+            }
+            questionService
+                .deleteQuestion(question._id)
+                .then(function (response) {
+                    getQuestionList();
+                })
+        }
 
         function createUser(user) {
             if(user != undefined && user.hasOwnProperty('firstName') && user.hasOwnProperty('lastName')
@@ -79,7 +107,13 @@
             model.editCat = !model.editCat;
         }
 
+        function updateUser(user) {
+            model.userToEdit = user;
+            model.editUser = !model.editUser;
+        }
+
         function deleteCategory(category) {
+
             categoryService
                 .deleteCategory(category)
                 .then(function (response) {
@@ -110,11 +144,11 @@
 
 
         function searchGoogle(text) {
+            model.displayResult = true;
             $http.get("https://www.googleapis.com/customsearch/" +
                 "v1?key=AIzaSyAxBWB1Vm6eIWK9VMYfQPr6ADuFwe4nRWE&cx=008911214601422826019:tjb4-7clba4&q="+text)
                 .then(function (resp) {
                     model.result = resp.data.items;
-                    console.log(model.result);
                 })
         }
 
@@ -129,6 +163,7 @@
             $http.get('/api/project/category')
                 .then(function (response) {
                     model.categories = response.data;
+                    model.categoryCount = model.categories.length;
                 })
         }
 
@@ -137,6 +172,8 @@
                 .getUsers()
                 .then(function (users) {
                     model.users = users;
+                    model.userCount = model.users.length;
+
                 })
         }
 
@@ -145,6 +182,15 @@
                 .getQuestions()
                 .then(function (questions) {
                     model.questions = questions;
+                    model.questionCount = model.questions.length;
+                })
+        }
+
+        function getAnswerCount() {
+            answerService
+                .getCount()
+                .then(function (count) {
+                    model.answerCount = count;
                 })
         }
 
@@ -153,6 +199,7 @@
             getCategoryList();
             getUserList();
             getQuestionList();
+            getAnswerCount();
 
 
         }

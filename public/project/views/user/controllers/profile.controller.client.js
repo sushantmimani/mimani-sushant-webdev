@@ -53,11 +53,6 @@
                             model.categories[index].value = false;
                     }
                 });
-            // userService
-            //     .populateCategories(model.user)
-            //     .then(function (user) {
-            //         model.user = user;
-            //     })
         }
 
         init();

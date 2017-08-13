@@ -1,6 +1,6 @@
 <div class=" wd-usercontent container-fluid">
     <div ng-include="'./views/common/header.view.client.html'"></div>
-    <div class="row">
+    <div ng-if="!model.displayResult" class="row">
         <div class="col-md-2">
             <ul class="nav nav-pills nav-stacked">
                 <li ng-class="{ active: model.isSet(1) }">
@@ -84,5 +84,21 @@
                 </div>
             </div>
         </div>
+    <div ng-if="model.displayResult" class="row content">
+        <div ng-show="model.result">
+
+
+            <h1 class="header-text"><strong>Results</strong><h5><a href="" ng-click="model.displayResult=false">Back to My Content</a></h5></h1>
+
+            <ul>
+                <li class="wd-text-align" ng-repeat="result in model.result">
+
+                    <a href="{{result.link}}" target="_blank">{{result.link}}</a>
+                    <p ng-bind-html="model.trustThisContent(result.htmlSnippet)"></p>
+                </li>
+            </ul>
+        </div>
+    </div>
+
     </div>
 </div>
