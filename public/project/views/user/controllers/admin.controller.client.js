@@ -182,6 +182,7 @@
                 .getQuestions()
                 .then(function (questions) {
                     model.questions = questions;
+                    console.log(model.questions)
                     model.questionCount = model.questions.length;
                 })
         }

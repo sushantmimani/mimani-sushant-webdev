@@ -60,7 +60,7 @@
                 .then(displayQuestions)
             function displayQuestions(questions) {
                 for(var index in questions){
-                    if(model.user.category.indexOf(questions[index].category)>=0){
+                    if(model.user.category.indexOf(questions[index].category._id)>=0){
                         finalQuestions.push(questions[index]);
                     }
                 }

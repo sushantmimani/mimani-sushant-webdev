@@ -30,6 +30,7 @@ function addAnswerForQuestion(answer) {
 function getQuestionById(questionId) {
     return questionModel_project
         .findById(questionId)
+        .populate('category')
         .populate('answer')
         .populate('user')
         .exec()
@@ -50,6 +51,7 @@ function  getQuestionByUser(userId) {
 function getAllQuestions() {
     return questionModel_project
         .find()
+        .populate('category')
         .populate('answer')
         .populate('user')
         .exec()
