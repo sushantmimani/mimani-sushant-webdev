@@ -26,6 +26,16 @@
                                 <li><a href="" ng-click="model.deleteQuestion(model.question)">Delete</a></li>
                             </ul>
                             </span></strong></h3>
+                        <h5 ng-if="!model.question.toShow"><span class="btn btn-info" ng-click="model.question.toShow=true" >Answer</span></h5>
+                        <div ng-if="model.question.toShow">
+                            <textarea id="description"rows="5" class="form-control" ng-model="answer.answerText" placeholder="Write your answer"></textarea>
+                            <form class="pull-right">
+                                <label class="header-text">Answer Anonymously:
+                                    <input type="checkbox" ng-model="answer.isAnon">
+                                </label>
+                            </form>
+                            <h5><span class="btn btn-success" ng-click="model.submitAnswer(model.question._id, answer);model.question.toShow=false;" >Answer</span> <span class="btn btn-danger" ng-click="model.question.toShow=false" >Cancel</span></h5>
+                        </div>
 
                         <div ng-if="model.question.toEdit">
 

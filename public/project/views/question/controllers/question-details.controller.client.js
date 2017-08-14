@@ -26,6 +26,7 @@
         model.deleteQuestion = deleteQuestion;
         model.editQuestion = editQuestion;
         model.updateQuestion = updateQuestion;
+        model.submitAnswer = submitAnswer;
 
         function updateQuestion(question) {
             questionService
@@ -124,6 +125,26 @@
 
         }
 
+
+        function submitAnswer(questionId, answer) {
+            if(answer== null || answer ==undefined || answer.answerText =="" || answer.answerText==undefined){
+                model.error = "Answer cannot be blank!"
+                return;
+            }
+
+            var submittedAnswer = {
+                "question": questionId,
+                "answerText" : answer.answerText,
+                "user": currentUser._id,
+                "isAnon": answer.isAnon
+            }
+            answerService
+                .submitAnswer(submittedAnswer)
+                .then(function (response) {
+                    init();
+
+                })
+        }
 
 
         function init() {

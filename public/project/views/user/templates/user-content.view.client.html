@@ -17,17 +17,19 @@
                 <div ng-show="model.isSet(1)">
                     <h1>My Questions page</h1>
                     <div class="well" ng-repeat="question in model.questions">
+                        <div class="row">
                         <a href="#!/user/question/{{question._id}}">
                             {{question.description}}
                         </a>
-
+                        </div>
+                        <div class="row">
                         <button  class="btn btn-success pull-right"><span class="glyphicon glyphicon-pencil pull-right"
                         ng-click="model.editQuestion(question)">
                         </span></button>
                         <button class="btn btn-danger pull-right"><span class="glyphicon glyphicon-remove-circle pull-right"
                               ng-click="model.deleteQuestion(question)">
                         </span></button>
-
+                        </div>
                         <div ng-if="question.toEdit">
                                 <label class="control-label pull-left">Title</label>
                                 <div>
@@ -60,10 +62,12 @@
                 <div ng-show="model.isSet(2)">
                     <h1>My Answers Page</h1>
                     <div class="well" ng-repeat="answer in model.answers">
+                        <div class="row">
                         <a href="#!/user/question/{{answer.question._id}}">
                             {{answer.question.description}}
                         </a>
-                            <div class="well-sm">
+                        </div>
+                            <div class="row">
                                 {{answer.answerText}}
                                 <button  class="btn btn-success pull-right"><span class="glyphicon glyphicon-pencil pull-right"
                                                                        ng-click="model.editAnswer(answer)"></span></button>
