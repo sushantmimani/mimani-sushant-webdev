@@ -17,7 +17,7 @@
                 </div>
                 <div class="col-sm-9">
                     <div class="well">
-                        <h1><strong>{{model.question.description}}
+                        <h3><strong>{{model.question.description}}
                             <span ng-if="model.user.isAdmin" class="dropdown pull-right">
                             <label class="label dropdown-toggle" data-toggle="dropdown">...
                                 </label>
@@ -25,7 +25,7 @@
                                 <li><a href="" ng-click="model.editQuestion(model.question)">Edit</a></li>
                                 <li><a href="" ng-click="model.deleteQuestion(model.question)">Delete</a></li>
                             </ul>
-                            </span></strong></h1>
+                            </span></strong></h3>
 
                         <div ng-if="model.question.toEdit">
 
@@ -35,12 +35,12 @@
                             </div>
                             <label class="control-label pull-left">Description</label>
                             <div>
-                                <input ng-model="model.question.description" type="text" class="form-control" placeholder="Description">
+                                <textarea ng-model="model.question.description" rows="5" class="form-control" placeholder="Description"></textarea>
                             </div>
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Category</label>
                                 <div class="col-sm-1">
-                                    <select ng-model="question.category">
+                                    <select ng-model="model.question.category">
                                         <option  ng-repeat="category in model.categories" value="{{category._id}}">{{category.type}}</option>
                                     </select>
                                 </div>
@@ -48,7 +48,7 @@
 
                             <form class="pull-right">
                                 <label >Ask Anonymously:
-                                    <input type="checkbox" ng-model="question.isAnon">
+                                    <input type="checkbox" ng-model="model.question.isAnon">
                                 </label>
                             </form>
                             <br/>
@@ -59,6 +59,7 @@
 
                     <div ng-repeat="answer in model.question.answer">
                         <div class="well" >
+                            <div class="row">
                             {{answer.answerText}}<span ng-if="model.user.isExpertUser||model.user.isAdmin " class="dropdown pull-right">
                             <label class="label label-warning dropdown-toggle" data-toggle="dropdown">...
                                 </label>
@@ -76,11 +77,18 @@
                             <a href="" class="btn btn-success pull-right" ng-click="model.upvoteAnswer(answer)">
                                 <span class="glyphicon glyphicon-thumbs-up ">&nbsp{{answer.upVotes}}</span>
                             </a>
+                            </div>
+
+                            <!--<div class="row">-->
+
+                            <!--<span ng-if="answer.isAnon"class="label label-info pull-left"> Answered by Anonymous</span>-->
+                            <!--<span ng-if="!answer.isAnon"class="label label-info pull-left"> Answered by {{answer.user}}</span>-->
+                            <!--</div>-->
 
                             <div ng-if="answer.toEdit">
                                 <label class="control-label pull-left">Answer</label>
                                 <div>
-                                    <input ng-model="answer.answerText" type="text" class="form-control" placeholder="Title">
+                                    <textarea ng-model="answer.answerText" rows="5" class="form-control" placeholder="Title"></textarea>
                                 </div>
                                 <br/>
                                 <button  class="btn btn-danger pull-right"ng-click="model.editAnswer(answer)">Cancel</button>

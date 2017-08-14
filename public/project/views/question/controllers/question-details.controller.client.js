@@ -132,6 +132,8 @@
                 .then(function (question) {
                     model.question = question;
                 })
+            userService
+                .getUs
 
             $http.get('/api/project/category')
                 .then(function (response) {

@@ -22,7 +22,9 @@
 
                     <div ng-show="question.answer">
                     <div class="well" >
+                        <div class="row">
                     {{question.answer[0].answerText}}
+
 
                         <a href="" class="btn btn-danger pull-right " ng-click="model.downvoteAnswer(question.answer[0])">
                             <span class="glyphicon glyphicon-thumbs-down">&nbsp{{question.answer[0].downVotes}} </span>
@@ -32,9 +34,11 @@
                         <a href="" class="btn btn-success pull-right" ng-click="model.upvoteAnswer(question.answer[0])">
                             <span class="glyphicon glyphicon-thumbs-up ">&nbsp{{question.answer[0].upVotes}}</span>
                         </a>
-
-
-
+                    </div>
+                        <!--<div class="row">-->
+                        <!--<span ng-if="question.answer[0].isAnon"class="label label-info pull-left"> Answered by Anonymous</span>-->
+                        <!--<span ng-if="!question.answer[0].isAnon"class="label label-info pull-left"> Answered by {{question.answer[0].user}}</span>-->
+                        <!--</div>-->
                     </div>
                     </div>
                 </div>

@@ -73,7 +73,7 @@
                         <div ng-if="answer.toEdit">
                             <label class="control-label pull-left">Answer</label>
                             <div>
-                                <input ng-model="answer.answerText" type="text" class="form-control" placeholder="Title">
+                                <textarea ng-model="answer.answerText" rows="5" class="form-control" placeholder="Title"></textarea>
                             </div>
                             <br/>
                             <button  class="btn btn-success pull-right"ng-click="model.updateAnswer(answer)">Save</button>

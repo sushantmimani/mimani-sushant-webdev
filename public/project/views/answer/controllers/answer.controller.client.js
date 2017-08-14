@@ -42,22 +42,23 @@
             return $sce.trustAsHtml(html);
         }
 
-        function submitAnswer(questionId) {
-            if(model.answerText =="" || model.answerText==undefined){
+        function submitAnswer(questionId, answer) {
+            if(answer.answerText =="" || answer.answerText==undefined){
                 model.error = "Answer cannot be blank!"
                 return;
             }
 
-            var answer = {
+            var submittedAnswer = {
                 "question": questionId,
-                "answerText" : model.answerText,
-                "user": currentUser._id
+                "answerText" : answer.answerText,
+                "user": currentUser._id,
+                "isAnon": answer.isAnon
             }
             answerService
-                .submitAnswer(answer)
+                .submitAnswer(submittedAnswer)
                 .then(function (response) {
                     init();
-                    $location.url('/answer')
+                    $location.url('/read')
                 })
         }
 
