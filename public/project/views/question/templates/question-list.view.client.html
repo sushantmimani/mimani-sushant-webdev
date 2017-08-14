@@ -20,7 +20,7 @@
                     <h1><strong><a href="#!/user/question/{{question._id}}" >{{question.title}}</a></strong></h1>
                     <p><h3>{{question.description}}</h3></p>
 
-                    <div ng-show="question.answer">
+                    <div ng-if="question.answer.length>0">
                     <div class="well" >
                         <div class="row">
                     {{question.answer[0].answerText}}
