@@ -266,6 +266,7 @@ function findUserByCredentials(req,res) {
 
 function findUserByUsername(req,res) {
     var user = JSON.parse(req.query.username);
+    console.log(user);
     userModel_project.findUserByUsername(user)
         .then(function (user) {
             if (user.length!=0) {

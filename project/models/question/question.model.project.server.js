@@ -13,9 +13,13 @@ questionModel_project.updateQuestion = updateQuestion;
 questionModel_project.deleteQuestion = deleteQuestion;
 questionModel_project.getQuestionById = getQuestionById;
 questionModel_project.addAnswerForQuestion = addAnswerForQuestion;
+questionModel_project.deleteQuestionForUser = deleteQuestionForUser
 
 module.exports = questionModel_project;
 
+function deleteQuestionForUser(userId) {
+    return questionModel_project.remove({user:userId})
+}
 
 function addAnswerForQuestion(answer) {
     return questionModel_project

@@ -13,10 +13,20 @@
             submitAnswer: submitAnswer,
             updateAnswer: updateAnswer,
             deleteAnswer: deleteAnswer,
-            getCount: getCount
+            getCount: getCount,
+            deleteAnswerforUser :deleteAnswerforUser
         };
 
         return api;
+
+        function deleteAnswerforUser(userId) {
+
+            var url = '/api/project/answerbyuser/'+userId;
+            return $http.delete(url)
+                .then(function (response) {
+                    return response.data;
+                })
+        }
 
         function getCount() {
             var url = '/api/project/answerCount';

@@ -60,9 +60,12 @@
                 .then(displayQuestions)
             function displayQuestions(questions) {
                 for(var index in questions){
+                    if(!questions[index].hasOwnProperty('category'))
+                        finalQuestions.push(questions[index]);
+                    else{
                     if(model.user.category.indexOf(questions[index].category._id)>=0){
                         finalQuestions.push(questions[index]);
-                    }
+                    }}
                 }
                 model.questions = finalQuestions;
                 model.displayResult = false;

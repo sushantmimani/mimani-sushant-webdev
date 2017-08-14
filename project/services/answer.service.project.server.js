@@ -11,6 +11,16 @@ app.put ('/api/project/answer', updateAnswer);
 app.get ('/api/project/answer/:userId', getAllAnswersForUser);
 app.delete ('/api/project/answer/:answerId', deleteAnswer);
 app.get ('/api/project/answerCount', getCount);
+app.delete ('/api/project/answerbyuser/:userId', deleteAnswerforUser)
+
+function deleteAnswerforUser(req, res) {
+    var userId = req.params.userId;
+    answerModel_project
+        .deleteAnswerForUser(userId)
+        .then(function (response) {
+            res.send(response);
+        })
+}
 
 function getCount(req, res) {
     answerModel_project

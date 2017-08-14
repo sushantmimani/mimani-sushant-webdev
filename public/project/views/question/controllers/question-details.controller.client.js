@@ -61,7 +61,6 @@
             questionService
                 .getQuestionById(answer.question)
                 .then(function (question) {
-                    console.log(question);
                     for (var index in question.answer) {
                         if (question.answer[index]._id == answer._id) {
                             question.answer.splice(index, 1)

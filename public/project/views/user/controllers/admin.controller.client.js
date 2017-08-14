@@ -56,17 +56,35 @@
         }
 
         function createUser(user) {
-            if(user != undefined && user.hasOwnProperty('firstName') && user.hasOwnProperty('lastName')
+            if (user != undefined && user.hasOwnProperty('firstName') && user.hasOwnProperty('lastName')
                 && user.hasOwnProperty('username') && user.hasOwnProperty('password')
-                && user.hasOwnProperty('password2')){
+                && user.hasOwnProperty('password2')) {
                 userService
-                    .createUser(user)
-                    .then(function (response) {
-                        getUserList();
-                        model.addUser = false;
-                        model.message = "User created!";
+                    .findUserByUsername(user)
+                    .then(login)
 
-                    })
+                function login(found) {
+                    if (found !== 'available') {
+                        model.error = "Username and/or Email is already registered";
+                    } else {
+                        if (user.password !== user.password2) {
+                            model.error = "Passwords must match";
+                            return;
+                        } else {
+                            var newUser = user;
+                            delete newUser.password2;
+                            userService
+                                .register(newUser)
+                                .then(redirectToProfile)
+
+                            function redirectToProfile(user) {
+                                getUserList();
+                                model.addUser = false;
+                                model.message = "User created!";
+                            }
+                        }
+                    }
+                }
             }
 
             else
@@ -75,6 +93,16 @@
 
 
         function deleteUser(user) {
+            questionService
+                .deleteQuestionforUser(user._id)
+                .then(function (response) {
+                    getQuestionList();
+                })
+            answerService
+                .deleteAnswerforUser(user._id)
+                .then(function (response) {
+                    getAnswerCount();
+                })
             userService
                 .deleteUser(user._id)
                 .then(function (response) {
@@ -182,7 +210,6 @@
                 .getQuestions()
                 .then(function (questions) {
                     model.questions = questions;
-                    console.log(model.questions)
                     model.questionCount = model.questions.length;
                 })
         }

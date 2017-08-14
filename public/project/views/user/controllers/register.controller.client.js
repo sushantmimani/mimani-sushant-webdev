@@ -26,7 +26,6 @@
                 .then(login)
 
             function login(found) {
-                console.log(found);
                 if (found !== 'available') {
                     model.error = "Username and/or Email is already registered";
                 } else {

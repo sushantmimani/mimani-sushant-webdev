@@ -11,10 +11,14 @@ answerModel_project.updateAnswer = updateAnswer;
 answerModel_project.getAnswerByUser = getAnswerByUser;
 answerModel_project.deleteAnswer = deleteAnswer;
 answerModel_project.getCount = getCount;
-
+answerModel_project.deleteAnswerForUser = deleteAnswerForUser
 
 module.exports = answerModel_project;
 
+
+function deleteAnswerForUser(userId) {
+    return answerModel_project.remove({user:userId});
+}
 function getCount() {
     return answerModel_project.count();
 }

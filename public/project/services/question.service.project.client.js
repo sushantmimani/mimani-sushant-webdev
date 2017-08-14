@@ -14,12 +14,21 @@
             createQuestion: createQuestion,
             getQuestionById: getQuestionById,
             deleteQuestion:deleteQuestion,
-            updateQuestion: updateQuestion
+            updateQuestion: updateQuestion,
+            deleteQuestionforUser: deleteQuestionforUser
 
         };
 
         return api;
 
+        function deleteQuestionforUser(userId) {
+
+            var url = '/api/project/questionbyuser/'+userId;
+            return $http.delete(url)
+                .then(function (response) {
+                    return response.data;
+                })
+        }
 
         function updateQuestion(question) {
             var url = '/api/project/question';

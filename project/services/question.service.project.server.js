@@ -11,8 +11,17 @@ app.get ('/api/project/questionDetails/:qId', getQuestionById);
 app.delete ('/api/project/question/:qId', deleteQuestion);
 app.get ('/api/project/question/:userId', getAllQuestionsForUser)
 app.put ('/api/project/question', updateQuestion);
+app.delete ('/api/project/questionbyuser/:userId', deleteQuestionforUser)
 
 
+function deleteQuestionforUser(req, res) {
+    var userId = req.params.userId;
+    questionModel_project
+        .deleteQuestionForUser(userId)
+        .then(function (response) {
+            res.send(response);
+        })
+}
 function updateQuestion(req, res) {
     var question = req.body;
     questionModel_project
